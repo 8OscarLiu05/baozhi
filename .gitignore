@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+*.log
+data/backups/
+data/uploads/
+data/server.pid
+data/server.url
