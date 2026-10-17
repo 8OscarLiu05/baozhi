@@ -1,0 +1,2353 @@
+[
+  {
+    "case_id": "F01",
+    "group": "条款事实、条件与例外",
+    "product_id": "annuity-haigang-jincai",
+    "channel": "sales",
+    "route": "professional",
+    "question": "海港金彩颐年的犹豫期是多少天？",
+    "call_id": "0df1c7cfddfb",
+    "status": "error",
+    "answer": "海港金彩颐年悦享版养老年金保险（分红型）的犹豫期：15天。〔海港金彩颐年悦享版养老年金保险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-annuity-haigang-jincai-犹豫期",
+        "title": "海港金彩颐年悦享版养老年金保险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "犹豫期：15天。出处：产品信息。来源文件：养老年金/样例_海港金彩颐年悦享版养老年金.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "annuity-haigang-jincai",
+          "label": "犹豫期",
+          "text": "15天",
+          "cite": "产品信息",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "海港金彩颐年悦享版养老年金保险（分红型）的犹豫期：15天。〔海港金彩颐年悦享版养老年金保险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "annuity-haigang-jincai"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 733,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 733,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F02",
+    "group": "条款事实、条件与例外",
+    "product_id": "annuity-haigang-jincai",
+    "channel": "sales",
+    "route": "professional",
+    "question": "海港金彩颐年的宽限期是多少天？",
+    "call_id": "c8184a1dda4c",
+    "status": "error",
+    "answer": "海港金彩颐年悦享版养老年金保险（分红型）的宽限期：60天。〔海港金彩颐年悦享版养老年金保险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-annuity-haigang-jincai-宽限期",
+        "title": "海港金彩颐年悦享版养老年金保险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "宽限期：60天。出处：产品信息。来源文件：养老年金/样例_海港金彩颐年悦享版养老年金.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "annuity-haigang-jincai",
+          "label": "宽限期",
+          "text": "60天",
+          "cite": "产品信息",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "海港金彩颐年悦享版养老年金保险（分红型）的宽限期：60天。〔海港金彩颐年悦享版养老年金保险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "annuity-haigang-jincai"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 657,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 657,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F03",
+    "group": "条款事实、条件与例外",
+    "product_id": "annuity-haigang-jincai",
+    "channel": "sales",
+    "route": "professional",
+    "question": "海港金彩颐年女性养老年金从几岁开始领？",
+    "call_id": "d2c9fc572fb4",
+    "status": "error",
+    "answer": "海港金彩颐年悦享版养老年金保险（分红型）的女性养老年金起领年龄：55周岁。〔海港金彩颐年悦享版养老年金保险（分红型） · 条款 2.5〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-annuity-haigang-jincai-女性养老年金起领年龄",
+        "title": "海港金彩颐年悦享版养老年金保险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "女性养老年金起领年龄：55周岁。出处：2.5。来源文件：养老年金/样例_海港金彩颐年悦享版养老年金.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "annuity-haigang-jincai",
+          "label": "女性养老年金起领年龄",
+          "text": "55周岁",
+          "cite": "2.5",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "海港金彩颐年悦享版养老年金保险（分红型）的女性养老年金起领年龄：55周岁。〔海港金彩颐年悦享版养老年金保险（分红型） · 条款 2.5〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "annuity-haigang-jincai"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 712,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 712,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F04",
+    "group": "条款事实、条件与例外",
+    "product_id": "annuity-haigang-jincai",
+    "channel": "sales",
+    "route": "professional",
+    "question": "海港金彩颐年男性养老年金从几岁开始领？",
+    "call_id": "4ff0ebbc3a9b",
+    "status": "error",
+    "answer": "海港金彩颐年悦享版养老年金保险（分红型）的男性养老年金起领年龄：60周岁。〔海港金彩颐年悦享版养老年金保险（分红型） · 条款 2.5〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-annuity-haigang-jincai-男性养老年金起领年龄",
+        "title": "海港金彩颐年悦享版养老年金保险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "男性养老年金起领年龄：60周岁。出处：2.5。来源文件：养老年金/样例_海港金彩颐年悦享版养老年金.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "annuity-haigang-jincai",
+          "label": "男性养老年金起领年龄",
+          "text": "60周岁",
+          "cite": "2.5",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "海港金彩颐年悦享版养老年金保险（分红型）的男性养老年金起领年龄：60周岁。〔海港金彩颐年悦享版养老年金保险（分红型） · 条款 2.5〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "annuity-haigang-jincai"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 676,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 676,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F05",
+    "group": "条款事实、条件与例外",
+    "product_id": "ci-zhonghong-shuangxing",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中宏健康双星的等待期是多少天？",
+    "call_id": "d06ac8dcc98c",
+    "status": "error",
+    "answer": "中宏健康双星守护版重大疾病保险的等待期：90天。因意外伤害导致的情形不适用该等待期。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-ci-zhonghong-shuangxing-等待期",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "等待期：90天。因意外伤害导致的情形不适用该等待期。出处：2.3.1。来源文件：重大疾病/样例_中宏健康双星守护版重疾.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "ci-zhonghong-shuangxing",
+          "label": "等待期",
+          "text": "90天。因意外伤害导致的情形不适用该等待期",
+          "cite": "2.3.1",
+          "exception": "因意外伤害导致的情形不适用该等待期"
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "中宏健康双星守护版重大疾病保险的等待期：90天。因意外伤害导致的情形不适用该等待期。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "ci-zhonghong-shuangxing"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 649,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 649,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F06",
+    "group": "条款事实、条件与例外",
+    "product_id": "ci-zhonghong-shuangxing",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中宏健康双星等待期内确诊重疾怎么处理？",
+    "call_id": "bc4c2ac02e13",
+    "status": "error",
+    "answer": "中宏健康双星守护版重大疾病保险的等待期：90天。因意外伤害导致的情形不适用该等待期。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.1〕\n中宏健康双星守护版重大疾病保险的等待期内确诊的处理：确诊重疾的，不赔重疾金、特定疾病额外金、重疾关爱金、白血病关爱金，退还累计已交保费，合同终止；确诊中症、轻症、特定肿瘤的，不赔相应保险金，合同继续有效。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "id": "field-ci-zhonghong-shuangxing-等待期",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "等待期：90天。因意外伤害导致的情形不适用该等待期。出处：2.3.1。来源文件：重大疾病/样例_中宏健康双星守护版重疾.json。"
+      },
+      {
+        "id": "field-ci-zhonghong-shuangxing-等待期内确诊的处理",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "等待期内确诊的处理：确诊重疾的，不赔重疾金、特定疾病额外金、重疾关爱金、白血病关爱金，退还累计已交保费，合同终止；确诊中症、轻症、特定肿瘤的，不赔相应保险金，合同继续有效。出处：2.3.1。来源文件：重大疾病/样例_中宏健康双星守护版重疾.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "ci-zhonghong-shuangxing",
+          "label": "等待期",
+          "text": "90天。因意外伤害导致的情形不适用该等待期",
+          "cite": "2.3.1",
+          "exception": "因意外伤害导致的情形不适用该等待期"
+        },
+        {
+          "product_id": "ci-zhonghong-shuangxing",
+          "label": "等待期内确诊的处理",
+          "text": "确诊重疾的，不赔重疾金、特定疾病额外金、重疾关爱金、白血病关爱金，退还累计已交保费，合同终止；确诊中症、轻症、特定肿瘤的，不赔相应保险金，合同继续有效",
+          "cite": "2.3.1",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "中宏健康双星守护版重大疾病保险的等待期：90天。因意外伤害导致的情形不适用该等待期。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.1〕\n中宏健康双星守护版重大疾病保险的等待期内确诊的处理：确诊重疾的，不赔重疾金、特定疾病额外金、重疾关爱金、白血病关爱金，退还累计已交保费，合同终止；确诊中症、轻症、特定肿瘤的，不赔相应保险金，合同继续有效。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "ci-zhonghong-shuangxing"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 913,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 913,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F07",
+    "group": "条款事实、条件与例外",
+    "product_id": "ci-zhonghong-shuangxing",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中宏健康双星重大疾病保险金可以给付几次，间隔多久？",
+    "call_id": "557c637850d5",
+    "status": "error",
+    "answer": "中宏健康双星守护版重大疾病保险的重大疾病给付次数：重大疾病保险金给付3次，相邻两次间隔180天。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.3.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-ci-zhonghong-shuangxing-重大疾病给付次数",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "重大疾病给付次数：重大疾病保险金给付3次，相邻两次间隔180天。出处：2.3.3.1。来源文件：重大疾病/样例_中宏健康双星守护版重疾.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "ci-zhonghong-shuangxing",
+          "label": "重大疾病给付次数",
+          "text": "重大疾病保险金给付3次，相邻两次间隔180天",
+          "cite": "2.3.3.1",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "中宏健康双星守护版重大疾病保险的重大疾病给付次数：重大疾病保险金给付3次，相邻两次间隔180天。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.3.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "ci-zhonghong-shuangxing"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 652,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 652,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F08",
+    "group": "条款事实、条件与例外",
+    "product_id": "ci-zhonghong-shuangxing",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中宏健康双星有哪些责任免除？",
+    "call_id": "b8b7878f413b",
+    "status": "error",
+    "answer": "中宏健康双星守护版重大疾病保险的责任免除（疾病类保险金）：因下列情形之一，导致被保险人发生疾病、达到疾病状态或进行手术的，我们不承担给付重大疾病保险金、中症疾病保险金、轻症疾病保险金、特定疾病额外保险金、特定肿瘤切除术保险金、生命末期保险金、重大疾病关爱保险金和白血病关爱保险金（仅适用于未成年人保障计划）的保险责任：(1) 投保人对被保险人的故意杀害、故意伤害；(2) 被保险人故意自伤、被保险人故意犯罪或抗拒依法采。〔中宏健康双星守护版重大疾病保险 · 条款 2.4〕\n中宏健康双星守护版重大疾病保险的责任免除（身故全残保险金）：因下列情形之一，导致被保险人身故或全残的，我们不承担给付身故或全残保险金的保险责任：(1) 投保人对被保险人的故意杀害、故意伤害；(2) 被保险人故意犯罪或者抗拒依法采取的刑事强制措施；(3) 被保险人自本合同成立或合同效力恢复（以最后一次效力恢复为准）之日起二年内自杀，但被保险人自杀时为无民事行为能力人的除外；(4) 战争、军事冲突、暴乱或武装叛乱；(5)。〔中宏健康双星守护版重大疾病保险 · 条款 2.4〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "id": "field-ci-zhonghong-shuangxing-责任免除（疾病类保险金）",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "责任免除（疾病类保险金）：因下列情形之一，导致被保险人发生疾病、达到疾病状态或进行手术的，我们不承担给付重大疾病保险金、中症疾病保险金、轻症疾病保险金、特定疾病额外保险金、特定肿瘤切除术保险金、生命末期保险金、重大疾病关爱保险金和白血病关爱保险金（仅适用于未成年人保障计划）的保险责任：(1) 投保人对被保险人的故意杀害、故意伤害；(2) 被保险人故意自伤、被保险人故意犯罪或抗拒依法采。出处：2.4。来源文件：重大疾病/样例_中宏健康双星守护版重疾.json。"
+      },
+      {
+        "id": "field-ci-zhonghong-shuangxing-责任免除（身故全残保险金）",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "责任免除（身故全残保险金）：因下列情形之一，导致被保险人身故或全残的，我们不承担给付身故或全残保险金的保险责任：(1) 投保人对被保险人的故意杀害、故意伤害；(2) 被保险人故意犯罪或者抗拒依法采取的刑事强制措施；(3) 被保险人自本合同成立或合同效力恢复（以最后一次效力恢复为准）之日起二年内自杀，但被保险人自杀时为无民事行为能力人的除外；(4) 战争、军事冲突、暴乱或武装叛乱；(5)。出处：2.4。来源文件：重大疾病/样例_中宏健康双星守护版重疾.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "ci-zhonghong-shuangxing",
+          "label": "责任免除（疾病类保险金）",
+          "text": "因下列情形之一，导致被保险人发生疾病、达到疾病状态或进行手术的，我们不承担给付重大疾病保险金、中症疾病保险金、轻症疾病保险金、特定疾病额外保险金、特定肿瘤切除术保险金、生命末期保险金、重大疾病关爱保险金和白血病关爱保险金（仅适用于未成年人保障计划）的保险责任：(1) 投保人对被保险人的故意杀害、故意伤害；(2) 被保险人故意自伤、被保险人故意犯罪或抗拒依法采",
+          "cite": "2.4",
+          "exception": ""
+        },
+        {
+          "product_id": "ci-zhonghong-shuangxing",
+          "label": "责任免除（身故全残保险金）",
+          "text": "因下列情形之一，导致被保险人身故或全残的，我们不承担给付身故或全残保险金的保险责任：(1) 投保人对被保险人的故意杀害、故意伤害；(2) 被保险人故意犯罪或者抗拒依法采取的刑事强制措施；(3) 被保险人自本合同成立或合同效力恢复（以最后一次效力恢复为准）之日起二年内自杀，但被保险人自杀时为无民事行为能力人的除外；(4) 战争、军事冲突、暴乱或武装叛乱；(5)",
+          "cite": "2.4",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "中宏健康双星守护版重大疾病保险的责任免除（疾病类保险金）：因下列情形之一，导致被保险人发生疾病、达到疾病状态或进行手术的，我们不承担给付重大疾病保险金、中症疾病保险金、轻症疾病保险金、特定疾病额外保险金、特定肿瘤切除术保险金、生命末期保险金、重大疾病关爱保险金和白血病关爱保险金（仅适用于未成年人保障计划）的保险责任：(1) 投保人对被保险人的故意杀害、故意伤害；(2) 被保险人故意自伤、被保险人故意犯罪或抗拒依法采。〔中宏健康双星守护版重大疾病保险 · 条款 2.4〕\n中宏健康双星守护版重大疾病保险的责任免除（身故全残保险金）：因下列情形之一，导致被保险人身故或全残的，我们不承担给付身故或全残保险金的保险责任：(1) 投保人对被保险人的故意杀害、故意伤害；(2) 被保险人故意犯罪或者抗拒依法采取的刑事强制措施；(3) 被保险人自本合同成立或合同效力恢复（以最后一次效力恢复为准）之日起二年内自杀，但被保险人自杀时为无民事行为能力人的除外；(4) 战争、军事冲突、暴乱或武装叛乱；(5)。〔中宏健康双星守护版重大疾病保险 · 条款 2.4〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "ci-zhonghong-shuangxing"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 666,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 666,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F09",
+    "group": "条款事实、条件与例外",
+    "product_id": "life-zhongying-xinyue",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来的犹豫期是多少天？",
+    "call_id": "3681b917e49c",
+    "status": "error",
+    "answer": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的犹豫期：15天。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-life-zhongying-xinyue-犹豫期",
+        "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "犹豫期：15天。出处：产品信息。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "life-zhongying-xinyue",
+          "label": "犹豫期",
+          "text": "15天",
+          "cite": "产品信息",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的犹豫期：15天。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "life-zhongying-xinyue"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 670,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 670,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F10",
+    "group": "条款事实、条件与例外",
+    "product_id": "life-zhongying-xinyue",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来的保额每年递增多少，从第几年开始？",
+    "call_id": "a4b7d02447dc",
+    "status": "error",
+    "answer": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的保额递增比例：每年复利增加1.75%。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的递增起始保单年度：第2个保单年度起。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "id": "field-life-zhongying-xinyue-保额递增比例",
+        "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "保额递增比例：每年复利增加1.75%。出处：产品信息。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。"
+      },
+      {
+        "id": "field-life-zhongying-xinyue-递增起始保单年度",
+        "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "递增起始保单年度：第2个保单年度起。出处：产品信息。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "life-zhongying-xinyue",
+          "label": "保额递增比例",
+          "text": "每年复利增加1.75%",
+          "cite": "产品信息",
+          "exception": ""
+        },
+        {
+          "product_id": "life-zhongying-xinyue",
+          "label": "递增起始保单年度",
+          "text": "第2个保单年度起",
+          "cite": "产品信息",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的保额递增比例：每年复利增加1.75%。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的递增起始保单年度：第2个保单年度起。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "life-zhongying-xinyue"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 747,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 747,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F11",
+    "group": "条款事实、条件与例外",
+    "product_id": "life-zhongying-xinyue",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来的保单贷款比例是多少？",
+    "call_id": "480f5ec1db1b",
+    "status": "error",
+    "answer": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的保单贷款比例：现金价值的80%。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-life-zhongying-xinyue-保单贷款比例",
+        "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "保单贷款比例：现金价值的80%。出处：产品信息。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "life-zhongying-xinyue",
+          "label": "保单贷款比例",
+          "text": "现金价值的80%",
+          "cite": "产品信息",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的保单贷款比例：现金价值的80%。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "life-zhongying-xinyue"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 953,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 953,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F12",
+    "group": "条款事实、条件与例外",
+    "product_id": "life-zhongying-xinyue",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来什么时候可以减保，每年最多减多少？",
+    "call_id": "9335439424aa",
+    "status": "error",
+    "answer": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的减保起始：合同生效当年就可以申请减保（字段值为0）。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的减保年度上限：每个保单年度不超过20%。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "id": "field-life-zhongying-xinyue-减保起始",
+        "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "减保起始：合同生效当年就可以申请减保（字段值为0）。出处：产品信息。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。"
+      },
+      {
+        "id": "field-life-zhongying-xinyue-减保年度上限",
+        "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "减保年度上限：每个保单年度不超过20%。出处：产品信息。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "life-zhongying-xinyue",
+          "label": "减保起始",
+          "text": "合同生效当年就可以申请减保（字段值为0）",
+          "cite": "产品信息",
+          "exception": ""
+        },
+        {
+          "product_id": "life-zhongying-xinyue",
+          "label": "减保年度上限",
+          "text": "每个保单年度不超过20%",
+          "cite": "产品信息",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的减保起始：合同生效当年就可以申请减保（字段值为0）。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的减保年度上限：每个保单年度不超过20%。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "life-zhongying-xinyue"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 685,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 685,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F13",
+    "group": "条款事实、条件与例外",
+    "product_id": "medical-picc-2024",
+    "channel": "sales",
+    "route": "professional",
+    "question": "人保住院医疗的等待期是多少天？",
+    "call_id": "3da7feffd10e",
+    "status": "error",
+    "answer": "住院医疗保险（2024版）（互联网专属）的等待期：30天。因意外伤害导致的情形不适用该等待期。〔住院医疗保险（2024版）（互联网专属） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-medical-picc-2024-等待期",
+        "title": "住院医疗保险（2024版）（互联网专属）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "等待期：30天。因意外伤害导致的情形不适用该等待期。出处：产品信息。来源文件：医疗险/样例_人保住院医疗2024.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "medical-picc-2024",
+          "label": "等待期",
+          "text": "30天。因意外伤害导致的情形不适用该等待期",
+          "cite": "产品信息",
+          "exception": "因意外伤害导致的情形不适用该等待期"
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "住院医疗保险（2024版）（互联网专属）的等待期：30天。因意外伤害导致的情形不适用该等待期。〔住院医疗保险（2024版）（互联网专属） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "medical-picc-2024"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 665,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 665,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F14",
+    "group": "条款事实、条件与例外",
+    "product_id": "medical-picc-2024",
+    "channel": "sales",
+    "route": "professional",
+    "question": "人保住院医疗的保险期间是多久？",
+    "call_id": "82dfd863ba2d",
+    "status": "error",
+    "answer": "住院医疗保险（2024版）（互联网专属）的保险期间：1年。〔住院医疗保险（2024版）（互联网专属） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-medical-picc-2024-保险期间",
+        "title": "住院医疗保险（2024版）（互联网专属）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "保险期间：1年。出处：产品信息。来源文件：医疗险/样例_人保住院医疗2024.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "medical-picc-2024",
+          "label": "保险期间",
+          "text": "1年",
+          "cite": "产品信息",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "住院医疗保险（2024版）（互联网专属）的保险期间：1年。〔住院医疗保险（2024版）（互联网专属） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "medical-picc-2024"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 647,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 647,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F15",
+    "group": "条款事实、条件与例外",
+    "product_id": "medical-picc-2024",
+    "channel": "sales",
+    "route": "professional",
+    "question": "人保住院医疗的投保年龄范围是什么？",
+    "call_id": "84fc9eafc52c",
+    "status": "error",
+    "answer": "住院医疗保险（2024版）（互联网专属）的投保年龄：0-105周岁（0周岁需出生满28日）。〔住院医疗保险（2024版）（互联网专属） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-medical-picc-2024-投保年龄",
+        "title": "住院医疗保险（2024版）（互联网专属）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "投保年龄：0-105周岁（0周岁需出生满28日）。出处：产品信息。来源文件：医疗险/样例_人保住院医疗2024.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "medical-picc-2024",
+          "label": "投保年龄",
+          "text": "0-105周岁（0周岁需出生满28日）",
+          "cite": "产品信息",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "住院医疗保险（2024版）（互联网专属）的投保年龄：0-105周岁（0周岁需出生满28日）。〔住院医疗保险（2024版）（互联网专属） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "medical-picc-2024"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 912,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 912,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "F16",
+    "group": "条款事实、条件与例外",
+    "product_id": "medical-picc-2024",
+    "channel": "sales",
+    "route": "professional",
+    "question": "人保住院医疗有哪些责任免除？",
+    "call_id": "9cde3a88f287",
+    "status": "error",
+    "answer": "住院医疗保险（2024版）（互联网专属）的责任免除（全部保险责任）：因下列情形之一导致被保险人支出医疗费用的、或发生如下列明的医疗费用、或罹患本合同所定义的重大疾病，保险人不承担保险金给付责任：（1）被保险人所患既往症及保险单中特别约定的除外疾病引起的相关费用；被保险人在投保前罹患的、投保时尚未治愈的疾病，但投保时保险人已知晓并做出书面认可的除外。（2）故意犯罪或抗拒依法采取的刑事强制措施，或被政府依法拘禁或入狱期间伤病；自。〔住院医疗保险（2024版）（互联网专属） · 条款 2.2.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-medical-picc-2024-责任免除（全部保险责任）",
+        "title": "住院医疗保险（2024版）（互联网专属）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "责任免除（全部保险责任）：因下列情形之一导致被保险人支出医疗费用的、或发生如下列明的医疗费用、或罹患本合同所定义的重大疾病，保险人不承担保险金给付责任：（1）被保险人所患既往症及保险单中特别约定的除外疾病引起的相关费用；被保险人在投保前罹患的、投保时尚未治愈的疾病，但投保时保险人已知晓并做出书面认可的除外。（2）故意犯罪或抗拒依法采取的刑事强制措施，或被政府依法拘禁或入狱期间伤病；自。出处：2.2.1。来源文件：医疗险/样例_人保住院医疗2024.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "medical-picc-2024",
+          "label": "责任免除（全部保险责任）",
+          "text": "因下列情形之一导致被保险人支出医疗费用的、或发生如下列明的医疗费用、或罹患本合同所定义的重大疾病，保险人不承担保险金给付责任：（1）被保险人所患既往症及保险单中特别约定的除外疾病引起的相关费用；被保险人在投保前罹患的、投保时尚未治愈的疾病，但投保时保险人已知晓并做出书面认可的除外。（2）故意犯罪或抗拒依法采取的刑事强制措施，或被政府依法拘禁或入狱期间伤病；自",
+          "cite": "2.2.1",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "住院医疗保险（2024版）（互联网专属）的责任免除（全部保险责任）：因下列情形之一导致被保险人支出医疗费用的、或发生如下列明的医疗费用、或罹患本合同所定义的重大疾病，保险人不承担保险金给付责任：（1）被保险人所患既往症及保险单中特别约定的除外疾病引起的相关费用；被保险人在投保前罹患的、投保时尚未治愈的疾病，但投保时保险人已知晓并做出书面认可的除外。（2）故意犯罪或抗拒依法采取的刑事强制措施，或被政府依法拘禁或入狱期间伤病；自。〔住院医疗保险（2024版）（互联网专属） · 条款 2.2.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "medical-picc-2024"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 656,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 656,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "R01",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "",
+    "channel": "sales",
+    "route": "professional",
+    "question": "等待期是多少天？",
+    "call_id": "b2c014cd399f",
+    "status": "refused",
+    "answer": "请先指明是哪一款产品。当前没有唯一识别到一份已发布条款，不能默认把全部主产品放在一起回答。请在问题里写上产品名，或先选中一张演示保单。",
+    "evidence_count": 0,
+    "evidence": [],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询",
+        "source": "结构化字段查询；未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对"
+        ]
+      },
+      "matched_fact": [],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "请先指明是哪一款产品。当前没有唯一识别到一份已发布条款，不能默认把全部主产品放在一起回答。请在问题里写上产品名，或先选中一张演示保单。",
+      "product_id": [],
+      "model_call": {
+        "provider": "未调用模型",
+        "model": "",
+        "count": 0,
+        "status": "refused",
+        "ms": 1,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 0,
+    "model_status": "refused",
+    "model_adopted": false,
+    "elapsed_ms": 1,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "R02",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中宏健康双星和人保住院医疗的投保年龄分别是多少？",
+    "call_id": "7bd1742a0bc9",
+    "status": "refused",
+    "answer": "请先指明是哪一款产品。当前没有唯一识别到一份已发布条款，不能默认把全部主产品放在一起回答。请在问题里写上产品名，或先选中一张演示保单。",
+    "evidence_count": 0,
+    "evidence": [],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询",
+        "source": "结构化字段查询；未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对"
+        ]
+      },
+      "matched_fact": [],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "请先指明是哪一款产品。当前没有唯一识别到一份已发布条款，不能默认把全部主产品放在一起回答。请在问题里写上产品名，或先选中一张演示保单。",
+      "product_id": [
+        "ci-zhonghong-shuangxing",
+        "medical-picc-2024"
+      ],
+      "model_call": {
+        "provider": "未调用模型",
+        "model": "",
+        "count": 0,
+        "status": "refused",
+        "ms": 2,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 0,
+    "model_status": "refused",
+    "model_adopted": false,
+    "elapsed_ms": 2,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "R03",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "life-zhongying-xinyue",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来的住院免赔额是多少？",
+    "call_id": "eb07653e53ac",
+    "status": "refused",
+    "answer": "此问题不属于保险业务咨询范畴，或无该信息权限。请改问已授权资料中的具体问题。",
+    "evidence_count": 0,
+    "evidence": [],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询",
+        "source": "结构化字段查询；未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对"
+        ]
+      },
+      "matched_fact": [],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "此问题不属于保险业务咨询范畴，或无该信息权限。请改问已授权资料中的具体问题。",
+      "product_id": [
+        "life-zhongying-xinyue"
+      ],
+      "model_call": {
+        "provider": "未调用模型",
+        "model": "",
+        "count": 0,
+        "status": "refused",
+        "ms": 2,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 0,
+    "model_status": "refused",
+    "model_adopted": false,
+    "elapsed_ms": 2,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "R04",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "",
+    "channel": "sales",
+    "route": "professional",
+    "question": "帮我写一首诗。",
+    "call_id": "4bc030e07e36",
+    "status": "refused",
+    "answer": "此问题不属于保险业务咨询范畴，或无该信息权限。请改问已授权资料中的具体问题。",
+    "evidence_count": 0,
+    "evidence": [],
+    "trace": {
+      "consultation": {
+        "mode": "professional"
+      },
+      "matched_fact": [],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "SYN-1",
+      "final_answer": "此问题不属于保险业务咨询范畴，或无该信息权限。请改问已授权资料中的具体问题。",
+      "model_call": {
+        "provider": "未调用模型",
+        "model": "",
+        "count": 0,
+        "status": "refused",
+        "ms": 1,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 0,
+    "model_status": "refused",
+    "model_adopted": false,
+    "elapsed_ms": 1,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "R05",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "life-zhongying-xinyue",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来的收益率是多少？",
+    "call_id": "3ecd4e00abf5",
+    "status": "refused",
+    "answer": "收益和红利不能在对话里报具体数字。请到展业页打开利益演示，先看前提：分红不保证，演示利率下的数字不是保证利益，实际以公司公布为准。这次不引用演示表里的收益率。",
+    "evidence_count": 0,
+    "evidence": [],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询",
+        "source": "结构化字段查询；未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对"
+        ]
+      },
+      "matched_fact": [],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "收益和红利不能在对话里报具体数字。请到展业页打开利益演示，先看前提：分红不保证，演示利率下的数字不是保证利益，实际以公司公布为准。这次不引用演示表里的收益率。",
+      "product_id": [],
+      "model_call": {
+        "provider": "未调用模型",
+        "model": "",
+        "count": 0,
+        "status": "refused",
+        "ms": 1,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 0,
+    "model_status": "refused",
+    "model_adopted": false,
+    "elapsed_ms": 1,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "R06",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "ci-zhonghong-shuangxing",
+    "channel": "phone",
+    "route": "legacy",
+    "question": "坐席说这款一定能赔，请给出结论。",
+    "call_id": "b4fbd7970f7c",
+    "status": "guarded",
+    "answer": "这段话触发了合规拦截，模型正文不作为结论。\n承诺赔付或承保：出现“一定能赔”。不能把演示说成已经赔付、一定能赔或一定能投保。\n可以核对的摘录如下：\n《示意保险话术禁语（虚构）》：【话术禁语B2 不能说】不能出现一定能赔、保证承保、已经赔付或每天固定金额。出现这类句子时，模型正文不作为结论。\n《示意保险话术禁语（虚构）》：【话术禁语B3 留存】质检另记一条结果，不改写坐席当时看到的回答。全部提问都回到智能体平台留存。\n质检标记：这段话里出现了“一定能赔”。这类说法不能出现在演示说明中。",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "id": "35078e52129b-2",
+        "title": "示意保险话术禁语（虚构）",
+        "version": 1,
+        "kind": "mock",
+        "position": 2,
+        "source": "本项目编写。供外呼、培训和通话质检调用，用来拦住承诺用语。",
+        "product": "demo-ban",
+        "excerpt": "【话术禁语B2 不能说】不能出现一定能赔、保证承保、已经赔付或每天固定金额。出现这类句子时，模型正文不作为结论。"
+      },
+      {
+        "id": "35078e52129b-3",
+        "title": "示意保险话术禁语（虚构）",
+        "version": 1,
+        "kind": "mock",
+        "position": 3,
+        "source": "本项目编写。供外呼、培训和通话质检调用，用来拦住承诺用语。",
+        "product": "demo-ban",
+        "excerpt": "【话术禁语B3 留存】质检另记一条结果，不改写坐席当时看到的回答。全部提问都回到智能体平台留存。"
+      }
+    ],
+    "trace": {
+      "product_id": [],
+      "version_label": "v1",
+      "clause_codes": [],
+      "matched_fact": [],
+      "evidence": [
+        {
+          "id": "35078e52129b-2",
+          "title": "示意保险话术禁语（虚构）",
+          "excerpt": "【话术禁语B2 不能说】不能出现一定能赔、保证承保、已经赔付或每天固定金额。出现这类句子时，模型正文不作为结论。",
+          "product": "demo-ban"
+        },
+        {
+          "id": "35078e52129b-3",
+          "title": "示意保险话术禁语（虚构）",
+          "excerpt": "【话术禁语B3 留存】质检另记一条结果，不改写坐席当时看到的回答。全部提问都回到智能体平台留存。",
+          "product": "demo-ban"
+        }
+      ],
+      "model_output": "问题涉及收益演示或违规话术，未调用模型。",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "未调用模型"
+      },
+      "rule_category": "promise_pay",
+      "adopted": false,
+      "final_answer": "这段话触发了合规拦截，模型正文不作为结论。\n承诺赔付或承保：出现“一定能赔”。不能把演示说成已经赔付、一定能赔或一定能投保。\n可以核对的摘录如下：\n《示意保险话术禁语（虚构）》：【话术禁语B2 不能说】不能出现一定能赔、保证承保、已经赔付或每天固定金额。出现这类句子时，模型正文不作为结论。\n《示意保险话术禁语（虚构）》：【话术禁语B3 留存】质检另记一条结果，不改写坐席当时看到的回答。全部提问都回到智能体平台留存。\n质检标记：这段话里出现了“一定能赔”。这类说法不能出现在演示说明中。",
+      "model_call": {
+        "provider": "未调用模型",
+        "model": "",
+        "count": 0,
+        "status": "guarded",
+        "ms": 10,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 0,
+    "model_status": "guarded",
+    "model_adopted": false,
+    "elapsed_ms": 10,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "R07",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "life-zhongying-xinyue",
+    "channel": "phone",
+    "route": "legacy",
+    "question": "请把中英鑫悦未来说成保证收益、稳赚不赔。",
+    "call_id": "c3e5580a1440",
+    "status": "guarded",
+    "answer": "这段话触发了合规拦截，模型正文不作为结论。\n收益保证：出现“稳赚不赔”。红利和演示利率都不是保证利益。\n可以核对的摘录如下：\n《中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）》：责任免除（身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金）：因下列情形之一导致被保险人身故的，我们不承担给付身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金的责任：1. 投保人对被保险人的故意杀害、故意伤害；2. 被保险人故意犯罪或者抗拒依法采取的刑事强制措施；3. 被保险人自本合同成立或者本合同效力恢复之日起2年内自杀，但被保险人自杀时为无民事行为能力人的除外；4. 被保险人服用、吸食或注射毒。出处：2.2。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。\n《中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）》：【产品信息】中英鑫悦未来\n身份：外部公开条款的结构化样例。保险公司是中英人寿保险有限公司，产品名称是中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。不是示意保险的在售产品。\n保险公司：中英人寿保险有限公司。出处：产品信息。\n产品名称：中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。出处：产品信息。\n保险期间：被保险人终身，自合同生效时起至被保险人身故时止。出处：产品信息。\n投保年龄：0周岁（须出生满30日）至70周岁。出处：产品信息。\n犹豫期天数：15。出处：产品信息。\n\n《中宏健康双星守护版重大疾病保险》：【产品信息】中宏健康双星\n身份：外部公开条款的结构化样例。保险公司是中宏人寿保险有限公司，产品名称是中宏健康双星守护版重大疾病保险。不是示意保险的在售产品。\n保险公司：中宏人寿保险有限公司。出处：产品信息。\n产品名称：中宏健康双星守护版重大疾病保险。出处：产品信息。\n保险期间：终身。出处：产品信息。\n投保年龄：0周岁（须出生满7日）-60周岁。出处：产品信息。\n等待期天数：90。出处：产品信息。\n意外是否有等待期：否。出处：产品信息。\n等待期内确诊怎么处理：确诊重疾的，不赔重",
+    "evidence_count": 4,
+    "evidence": [
+      {
+        "id": "field-life-zhongying-xinyue-责任免除（身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金）",
+        "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "责任免除（身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金）：因下列情形之一导致被保险人身故的，我们不承担给付身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金的责任：1. 投保人对被保险人的故意杀害、故意伤害；2. 被保险人故意犯罪或者抗拒依法采取的刑事强制措施；3. 被保险人自本合同成立或者本合同效力恢复之日起2年内自杀，但被保险人自杀时为无民事行为能力人的除外；4. 被保险人服用、吸食或注射毒。出处：2.2。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。"
+      },
+      {
+        "id": "78e840fa651e-1",
+        "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+        "version": 1,
+        "kind": "imported",
+        "position": 1,
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。 文件：增额寿险/样例_中英鑫悦未来5号至臻版.json",
+        "product": "life-zhongying-xinyue",
+        "excerpt": "【产品信息】中英鑫悦未来\n身份：外部公开条款的结构化样例。保险公司是中英人寿保险有限公司，产品名称是中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。不是示意保险的在售产品。\n保险公司：中英人寿保险有限公司。出处：产品信息。\n产品名称：中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。出处：产品信息。\n保险期间：被保险人终身，自合同生效时起至被保险人身故时止。出处：产品信息。\n投保年龄：0周岁（须出生满30日）至70周岁。出处：产品信息。\n犹豫期天数：15。出处：产品信息。\n"
+      },
+      {
+        "id": "e48a7b252a24-1",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": 1,
+        "kind": "imported",
+        "position": 1,
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。 文件：重大疾病/样例_中宏健康双星守护版重疾.json",
+        "product": "ci-zhonghong-shuangxing",
+        "excerpt": "【产品信息】中宏健康双星\n身份：外部公开条款的结构化样例。保险公司是中宏人寿保险有限公司，产品名称是中宏健康双星守护版重大疾病保险。不是示意保险的在售产品。\n保险公司：中宏人寿保险有限公司。出处：产品信息。\n产品名称：中宏健康双星守护版重大疾病保险。出处：产品信息。\n保险期间：终身。出处：产品信息。\n投保年龄：0周岁（须出生满7日）-60周岁。出处：产品信息。\n等待期天数：90。出处：产品信息。\n意外是否有等待期：否。出处：产品信息。\n等待期内确诊怎么处理：确诊重疾的，不赔重"
+      },
+      {
+        "id": "da83c6d1881b-1",
+        "title": "住院医疗保险（2024版）（互联网专属）",
+        "version": 1,
+        "kind": "imported",
+        "position": 1,
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。 文件：医疗险/样例_人保住院医疗2024.json",
+        "product": "medical-picc-2024",
+        "excerpt": "【产品信息】人保住院医疗\n身份：外部公开条款的结构化样例。保险公司是中国人民财产保险股份有限公司，产品名称是住院医疗保险（2024版）（互联网专属）。不是示意保险的在售产品。\n保险公司：中国人民财产保险股份有限公司。出处：产品信息。\n产品名称：住院医疗保险（2024版）（互联网专属）。出处：产品信息。\n保险期间：1年。出处：产品信息。\n投保年龄：0-105周岁（0周岁需出生满28日）。出处：产品信息。\n等待期天数：30。出处：产品信息。\n意外是否有等待期：否。出处：产品信息。"
+      }
+    ],
+    "trace": {
+      "product_id": [
+        "life-zhongying-xinyue"
+      ],
+      "version_label": "v1",
+      "clause_codes": [
+        "2.2"
+      ],
+      "matched_fact": [
+        {
+          "product_id": "life-zhongying-xinyue",
+          "label": "责任免除（身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金）",
+          "text": "因下列情形之一导致被保险人身故的，我们不承担给付身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金的责任：1. 投保人对被保险人的故意杀害、故意伤害；2. 被保险人故意犯罪或者抗拒依法采取的刑事强制措施；3. 被保险人自本合同成立或者本合同效力恢复之日起2年内自杀，但被保险人自杀时为无民事行为能力人的除外；4. 被保险人服用、吸食或注射毒",
+          "cite": "2.2",
+          "exception": ""
+        }
+      ],
+      "evidence": [
+        {
+          "id": "field-life-zhongying-xinyue-责任免除（身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金）",
+          "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+          "excerpt": "责任免除（身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金）：因下列情形之一导致被保险人身故的，我们不承担给付身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金的责任：1. 投保人对被保险人的故意杀害、故意伤害；2. 被保险人故意犯罪或者抗拒依法采取的刑事强制措施；3. 被保险人自本合同成立或者本合同效力恢复之日起2年内自杀，但被保险人自杀时为无民事行为能力人的除外；4. 被保险人服用、吸食或注射毒。出处：2.2。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。",
+          "product": ""
+        },
+        {
+          "id": "78e840fa651e-1",
+          "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+          "excerpt": "【产品信息】中英鑫悦未来\n身份：外部公开条款的结构化样例。保险公司是中英人寿保险有限公司，产品名称是中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。不是示意保险的在售产品。\n保险公司：中英人寿保险有限公司。出处：产品信息。\n产品名称：中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。出处：产品信息。\n保险期间：被保险人终身，自合同生效时起至被保险人身故时止。出处：产品信息。\n投保年龄：0周岁（须出生满30日）至70周岁。出处：产品信息。\n犹豫期天数：15。出处：产品信息。\n",
+          "product": "life-zhongying-xinyue"
+        },
+        {
+          "id": "e48a7b252a24-1",
+          "title": "中宏健康双星守护版重大疾病保险",
+          "excerpt": "【产品信息】中宏健康双星\n身份：外部公开条款的结构化样例。保险公司是中宏人寿保险有限公司，产品名称是中宏健康双星守护版重大疾病保险。不是示意保险的在售产品。\n保险公司：中宏人寿保险有限公司。出处：产品信息。\n产品名称：中宏健康双星守护版重大疾病保险。出处：产品信息。\n保险期间：终身。出处：产品信息。\n投保年龄：0周岁（须出生满7日）-60周岁。出处：产品信息。\n等待期天数：90。出处：产品信息。\n意外是否有等待期：否。出处：产品信息。\n等待期内确诊怎么处理：确诊重疾的，不赔重",
+          "product": "ci-zhonghong-shuangxing"
+        },
+        {
+          "id": "da83c6d1881b-1",
+          "title": "住院医疗保险（2024版）（互联网专属）",
+          "excerpt": "【产品信息】人保住院医疗\n身份：外部公开条款的结构化样例。保险公司是中国人民财产保险股份有限公司，产品名称是住院医疗保险（2024版）（互联网专属）。不是示意保险的在售产品。\n保险公司：中国人民财产保险股份有限公司。出处：产品信息。\n产品名称：住院医疗保险（2024版）（互联网专属）。出处：产品信息。\n保险期间：1年。出处：产品信息。\n投保年龄：0-105周岁（0周岁需出生满28日）。出处：产品信息。\n等待期天数：30。出处：产品信息。\n意外是否有等待期：否。出处：产品信息。",
+          "product": "medical-picc-2024"
+        }
+      ],
+      "model_output": "问题涉及收益演示或违规话术，未调用模型。",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "模型未返回可用正文，终答使用字段模板"
+      },
+      "rule_category": "yield_guarantee",
+      "adopted": false,
+      "final_answer": "这段话触发了合规拦截，模型正文不作为结论。\n收益保证：出现“稳赚不赔”。红利和演示利率都不是保证利益。\n可以核对的摘录如下：\n《中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）》：责任免除（身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金）：因下列情形之一导致被保险人身故的，我们不承担给付身故保险金、重大自然灾害意外身故保险金、航空公共交通工具意外身故保险金的责任：1. 投保人对被保险人的故意杀害、故意伤害；2. 被保险人故意犯罪或者抗拒依法采取的刑事强制措施；3. 被保险人自本合同成立或者本合同效力恢复之日起2年内自杀，但被保险人自杀时为无民事行为能力人的除外；4. 被保险人服用、吸食或注射毒。出处：2.2。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。\n《中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）》：【产品信息】中英鑫悦未来\n身份：外部公开条款的结构化样例。保险公司是中英人寿保险有限公司，产品名称是中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。不是示意保险的在售产品。\n保险公司：中英人寿保险有限公司。出处：产品信息。\n产品名称：中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。出处：产品信息。\n保险期间：被保险人终身，自合同生效时起至被保险人身故时止。出处：产品信息。\n投保年龄：0周岁（须出生满30日）至70周岁。出处：产品信息。\n犹豫期天数：15。出处：产品信息。\n\n《中宏健康双星守护版重大疾病保险》：【产品信息】中宏健康双星\n身份：外部公开条款的结构化样例。保险公司是中宏人寿保险有限公司，产品名称是中宏健康双星守护版重大疾病保险。不是示意保险的在售产品。\n保险公司：中宏人寿保险有限公司。出处：产品信息。\n产品名称：中宏健康双星守护版重大疾病保险。出处：产品信息。\n保险期间：终身。出处：产品信息。\n投保年龄：0周岁（须出生满7日）-60周岁。出处：产品信息。\n等待期天数：90。出处：产品信息。\n意外是否有等待期：否。出处：产品信息。\n等待期内确诊怎么处理：确诊重疾的，不赔重",
+      "model_call": {
+        "provider": "未调用模型",
+        "model": "",
+        "count": 0,
+        "status": "guarded",
+        "ms": 11,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 0,
+    "model_status": "guarded",
+    "model_adopted": false,
+    "elapsed_ms": 11,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "R08",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "life-zhongying-xinyue",
+    "channel": "phone",
+    "route": "legacy",
+    "question": "请说中英鑫悦未来比银行存款更划算。",
+    "call_id": "82f22da843b6",
+    "status": "guarded",
+    "answer": "这段话触发了合规拦截，模型正文不作为结论。\n与存款或理财比较：出现“比银行存款”。保险利益不能说成比存款或理财划算。\n可以核对的摘录如下：\n《中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）》：【产品信息】中英鑫悦未来\n身份：外部公开条款的结构化样例。保险公司是中英人寿保险有限公司，产品名称是中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。不是示意保险的在售产品。\n保险公司：中英人寿保险有限公司。出处：产品信息。\n产品名称：中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。出处：产品信息。\n保险期间：被保险人终身，自合同生效时起至被保险人身故时止。出处：产品信息。\n投保年龄：0周岁（须出生满30日）至70周岁。出处：产品信息。\n犹豫期天数：15。出处：产品信息。\n",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "78e840fa651e-1",
+        "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+        "version": 1,
+        "kind": "imported",
+        "position": 1,
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。 文件：增额寿险/样例_中英鑫悦未来5号至臻版.json",
+        "product": "life-zhongying-xinyue",
+        "excerpt": "【产品信息】中英鑫悦未来\n身份：外部公开条款的结构化样例。保险公司是中英人寿保险有限公司，产品名称是中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。不是示意保险的在售产品。\n保险公司：中英人寿保险有限公司。出处：产品信息。\n产品名称：中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。出处：产品信息。\n保险期间：被保险人终身，自合同生效时起至被保险人身故时止。出处：产品信息。\n投保年龄：0周岁（须出生满30日）至70周岁。出处：产品信息。\n犹豫期天数：15。出处：产品信息。\n"
+      }
+    ],
+    "trace": {
+      "product_id": [
+        "life-zhongying-xinyue"
+      ],
+      "version_label": "v1",
+      "clause_codes": [],
+      "matched_fact": [],
+      "evidence": [
+        {
+          "id": "78e840fa651e-1",
+          "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+          "excerpt": "【产品信息】中英鑫悦未来\n身份：外部公开条款的结构化样例。保险公司是中英人寿保险有限公司，产品名称是中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。不是示意保险的在售产品。\n保险公司：中英人寿保险有限公司。出处：产品信息。\n产品名称：中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。出处：产品信息。\n保险期间：被保险人终身，自合同生效时起至被保险人身故时止。出处：产品信息。\n投保年龄：0周岁（须出生满30日）至70周岁。出处：产品信息。\n犹豫期天数：15。出处：产品信息。\n",
+          "product": "life-zhongying-xinyue"
+        }
+      ],
+      "model_output": "问题涉及收益演示或违规话术，未调用模型。",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "未调用模型"
+      },
+      "rule_category": "deposit_compare",
+      "adopted": false,
+      "final_answer": "这段话触发了合规拦截，模型正文不作为结论。\n与存款或理财比较：出现“比银行存款”。保险利益不能说成比存款或理财划算。\n可以核对的摘录如下：\n《中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）》：【产品信息】中英鑫悦未来\n身份：外部公开条款的结构化样例。保险公司是中英人寿保险有限公司，产品名称是中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。不是示意保险的在售产品。\n保险公司：中英人寿保险有限公司。出处：产品信息。\n产品名称：中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）。出处：产品信息。\n保险期间：被保险人终身，自合同生效时起至被保险人身故时止。出处：产品信息。\n投保年龄：0周岁（须出生满30日）至70周岁。出处：产品信息。\n犹豫期天数：15。出处：产品信息。\n",
+      "model_call": {
+        "provider": "未调用模型",
+        "model": "",
+        "count": 0,
+        "status": "guarded",
+        "ms": 11,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 0,
+    "model_status": "guarded",
+    "model_adopted": false,
+    "elapsed_ms": 11,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "P01",
+    "group": "三入口与后台流程",
+    "product_id": "life-zhongying-xinyue",
+    "channel": "sales",
+    "route": "professional",
+    "question": "这张演示保单的犹豫期是多少天？",
+    "call_id": "f76e9d68e909",
+    "status": "error",
+    "answer": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的犹豫期：15天。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-life-zhongying-xinyue-犹豫期",
+        "title": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "犹豫期：15天。出处：产品信息。来源文件：增额寿险/样例_中英鑫悦未来5号至臻版.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "life-zhongying-xinyue",
+          "label": "犹豫期",
+          "text": "15天",
+          "cite": "产品信息",
+          "exception": ""
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）的犹豫期：15天。〔中英人寿鑫悦未来5号（至臻版）终身寿险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "life-zhongying-xinyue"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 681,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 681,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "P02",
+    "group": "三入口与后台流程",
+    "product_id": "ci-zhonghong-shuangxing",
+    "channel": "self",
+    "route": "professional",
+    "question": "这张演示保单的等待期是多少天？",
+    "call_id": "a45ffc5cf78a",
+    "status": "error",
+    "answer": "中宏健康双星守护版重大疾病保险的等待期：90天。因意外伤害导致的情形不适用该等待期。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-ci-zhonghong-shuangxing-等待期",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "等待期：90天。因意外伤害导致的情形不适用该等待期。出处：2.3.1。来源文件：重大疾病/样例_中宏健康双星守护版重疾.json。"
+      }
+    ],
+    "trace": {
+      "consultation": {
+        "mode": "professional",
+        "label": "授权条款查询 · 千问解释",
+        "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索",
+        "checks": [
+          "岗位与智能体授权",
+          "产品与资料范围",
+          "字段及出处核对",
+          "解释数字与话术核对"
+        ]
+      },
+      "matched_fact": [
+        {
+          "product_id": "ci-zhonghong-shuangxing",
+          "label": "等待期",
+          "text": "90天。因意外伤害导致的情形不适用该等待期",
+          "cite": "2.3.1",
+          "exception": "因意外伤害导致的情形不适用该等待期"
+        }
+      ],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "v1",
+      "final_answer": "中宏健康双星守护版重大疾病保险的等待期：90天。因意外伤害导致的情形不适用该等待期。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "product_id": [
+        "ci-zhonghong-shuangxing"
+      ],
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 677,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 677,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "P03",
+    "group": "三入口与后台流程",
+    "product_id": "ci-zhonghong-shuangxing",
+    "channel": "phone",
+    "route": "legacy",
+    "question": "客户问中宏健康双星等待期是多少天？",
+    "call_id": "da13f24f8b0d",
+    "status": "error",
+    "answer": "中宏健康双星守护版重大疾病保险的等待期：90天。因意外伤害导致的情形不适用该等待期。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 4,
+    "evidence": [
+      {
+        "id": "field-ci-zhonghong-shuangxing-等待期",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "等待期：90天。因意外伤害导致的情形不适用该等待期。出处：2.3.1。来源文件：重大疾病/样例_中宏健康双星守护版重疾.json。"
+      },
+      {
+        "id": "e48a7b252a24-1",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": 1,
+        "kind": "imported",
+        "position": 1,
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。 文件：重大疾病/样例_中宏健康双星守护版重疾.json",
+        "product": "ci-zhonghong-shuangxing",
+        "excerpt": "【产品信息】中宏健康双星\n身份：外部公开条款的结构化样例。保险公司是中宏人寿保险有限公司，产品名称是中宏健康双星守护版重大疾病保险。不是示意保险的在售产品。\n保险公司：中宏人寿保险有限公司。出处：产品信息。\n产品名称：中宏健康双星守护版重大疾病保险。出处：产品信息。\n保险期间：终身。出处：产品信息。\n投保年龄：0周岁（须出生满7日）-60周岁。出处：产品信息。\n等待期天数：90。出处：产品信息。\n意外是否有等待期：否。出处：产品信息。\n等待期内确诊怎么处理：确诊重疾的，不赔重"
+      },
+      {
+        "id": "da83c6d1881b-1",
+        "title": "住院医疗保险（2024版）（互联网专属）",
+        "version": 1,
+        "kind": "imported",
+        "position": 1,
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。 文件：医疗险/样例_人保住院医疗2024.json",
+        "product": "medical-picc-2024",
+        "excerpt": "【产品信息】人保住院医疗\n身份：外部公开条款的结构化样例。保险公司是中国人民财产保险股份有限公司，产品名称是住院医疗保险（2024版）（互联网专属）。不是示意保险的在售产品。\n保险公司：中国人民财产保险股份有限公司。出处：产品信息。\n产品名称：住院医疗保险（2024版）（互联网专属）。出处：产品信息。\n保险期间：1年。出处：产品信息。\n投保年龄：0-105周岁（0周岁需出生满28日）。出处：产品信息。\n等待期天数：30。出处：产品信息。\n意外是否有等待期：否。出处：产品信息。"
+      },
+      {
+        "id": "e48a7b252a24-15",
+        "title": "中宏健康双星守护版重大疾病保险",
+        "version": 1,
+        "kind": "imported",
+        "position": 15,
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。 文件：重大疾病/样例_中宏健康双星守护版重疾.json",
+        "product": "ci-zhonghong-shuangxing",
+        "excerpt": "【其他免责提示】出处：2.5。除2.4责任免除外，条款2.5另行提示合同中还有一些免除或减轻保险人责任的条款。分布：1.3犹豫期、2.3.1等待期、3.2宽限期、5.2保险事故的通知与保险金的申请、6.3自动贷款垫交保险费、6.4保险合同贷款、8.2明确说明与如实告知、8.3年龄性别错误、附录1至4"
+      }
+    ],
+    "trace": {
+      "product_id": [
+        "ci-zhonghong-shuangxing"
+      ],
+      "version_label": "v1",
+      "clause_codes": [
+        "2.3.1"
+      ],
+      "matched_fact": [
+        {
+          "product_id": "ci-zhonghong-shuangxing",
+          "label": "等待期",
+          "text": "90天。因意外伤害导致的情形不适用该等待期",
+          "cite": "2.3.1",
+          "exception": "因意外伤害导致的情形不适用该等待期"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "field-ci-zhonghong-shuangxing-等待期",
+          "title": "中宏健康双星守护版重大疾病保险",
+          "excerpt": "等待期：90天。因意外伤害导致的情形不适用该等待期。出处：2.3.1。来源文件：重大疾病/样例_中宏健康双星守护版重疾.json。",
+          "product": ""
+        },
+        {
+          "id": "e48a7b252a24-1",
+          "title": "中宏健康双星守护版重大疾病保险",
+          "excerpt": "【产品信息】中宏健康双星\n身份：外部公开条款的结构化样例。保险公司是中宏人寿保险有限公司，产品名称是中宏健康双星守护版重大疾病保险。不是示意保险的在售产品。\n保险公司：中宏人寿保险有限公司。出处：产品信息。\n产品名称：中宏健康双星守护版重大疾病保险。出处：产品信息。\n保险期间：终身。出处：产品信息。\n投保年龄：0周岁（须出生满7日）-60周岁。出处：产品信息。\n等待期天数：90。出处：产品信息。\n意外是否有等待期：否。出处：产品信息。\n等待期内确诊怎么处理：确诊重疾的，不赔重",
+          "product": "ci-zhonghong-shuangxing"
+        },
+        {
+          "id": "da83c6d1881b-1",
+          "title": "住院医疗保险（2024版）（互联网专属）",
+          "excerpt": "【产品信息】人保住院医疗\n身份：外部公开条款的结构化样例。保险公司是中国人民财产保险股份有限公司，产品名称是住院医疗保险（2024版）（互联网专属）。不是示意保险的在售产品。\n保险公司：中国人民财产保险股份有限公司。出处：产品信息。\n产品名称：住院医疗保险（2024版）（互联网专属）。出处：产品信息。\n保险期间：1年。出处：产品信息。\n投保年龄：0-105周岁（0周岁需出生满28日）。出处：产品信息。\n等待期天数：30。出处：产品信息。\n意外是否有等待期：否。出处：产品信息。",
+          "product": "medical-picc-2024"
+        },
+        {
+          "id": "e48a7b252a24-15",
+          "title": "中宏健康双星守护版重大疾病保险",
+          "excerpt": "【其他免责提示】出处：2.5。除2.4责任免除外，条款2.5另行提示合同中还有一些免除或减轻保险人责任的条款。分布：1.3犹豫期、2.3.1等待期、3.2宽限期、5.2保险事故的通知与保险金的申请、6.3自动贷款垫交保险费、6.4保险合同贷款、8.2明确说明与如实告知、8.3年龄性别错误、附录1至4",
+          "product": "ci-zhonghong-shuangxing"
+        }
+      ],
+      "model_output": "模型连接或返回结果异常，已改用资料摘录。",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "模型未返回可用正文，终答使用字段模板"
+      },
+      "rule_category": "",
+      "adopted": false,
+      "final_answer": "中宏健康双星守护版重大疾病保险的等待期：90天。因意外伤害导致的情形不适用该等待期。〔中宏健康双星守护版重大疾病保险 · 条款 2.3.1〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 681,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 681,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "P04",
+    "group": "三入口与后台流程",
+    "product_id": "",
+    "channel": "platform",
+    "route": "review",
+    "question": "平台检索本批次一条调用，追加“已核对本批次原文”的抽检处置，并确认原回答不变。",
+    "call_id": "0df1c7cfddfb",
+    "status": "reviewed",
+    "answer": "海港金彩颐年悦享版养老年金保险（分红型）的犹豫期：15天。〔海港金彩颐年悦享版养老年金保险（分红型） · 条款 产品信息〕\n以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "id": "field-annuity-haigang-jincai-犹豫期",
+        "title": "海港金彩颐年悦享版养老年金保险（分红型）",
+        "version": "",
+        "kind": "imported",
+        "position": "",
+        "source": "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。",
+        "excerpt": "犹豫期：15天。出处：产品信息。来源文件：养老年金/样例_海港金彩颐年悦享版养老年金.json。"
+      }
+    ],
+    "trace": {
+      "review": {
+        "call_id": "0df1c7cfddfb",
+        "action": "need_knowledge",
+        "note": "已核对本批次原文；该意见仅追加，不改原回答。",
+        "answer_unchanged": true
+      },
+      "answer_unchanged": true,
+      "model_call": {
+        "count": 0,
+        "status": "not_applicable",
+        "adopted": false,
+        "ms": 0
+      }
+    },
+    "model_count": 0,
+    "model_status": "not_applicable",
+    "model_adopted": false,
+    "elapsed_ms": 0,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "M01",
+    "group": "普通咨询和岗位方法题",
+    "product_id": "",
+    "channel": "sales",
+    "route": "general",
+    "question": "保险等待期一般是什么意思？",
+    "call_id": "e11e033ebab0",
+    "status": "error",
+    "answer": "千问本次没有返回可用回答，请稍后重试。没有用资料摘录冒充模型回答。",
+    "evidence_count": 0,
+    "evidence": [],
+    "trace": {
+      "consultation": {
+        "mode": "general",
+        "label": "千问通用咨询",
+        "source": "模型通用解释，未核对具体合同"
+      },
+      "matched_fact": [],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "SYN-1",
+      "final_answer": "千问本次没有返回可用回答，请稍后重试。没有用资料摘录冒充模型回答。",
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 651,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 651,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "M02",
+    "group": "普通咨询和岗位方法题",
+    "product_id": "",
+    "channel": "self",
+    "route": "general",
+    "question": "保险犹豫期一般有什么作用？",
+    "call_id": "2cfbee52ef44",
+    "status": "error",
+    "answer": "千问本次没有返回可用回答，请稍后重试。没有用资料摘录冒充模型回答。",
+    "evidence_count": 0,
+    "evidence": [],
+    "trace": {
+      "consultation": {
+        "mode": "general",
+        "label": "千问通用咨询",
+        "source": "模型通用解释，未核对具体合同"
+      },
+      "matched_fact": [],
+      "model_output": "",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "通用咨询或需求梳理不作合同数字核验"
+      },
+      "version_label": "SYN-1",
+      "final_answer": "千问本次没有返回可用回答，请稍后重试。没有用资料摘录冒充模型回答。",
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 718,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 718,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "M03",
+    "group": "普通咨询和岗位方法题",
+    "product_id": "",
+    "channel": "phone",
+    "route": "legacy",
+    "question": "保险电话外呼时，一般应该怎么介绍产品边界？",
+    "call_id": "8eb35baee065",
+    "status": "error",
+    "answer": "本次没有生成可用的一般方法回答。请稍后重试；如需核对具体产品，请到专业咨询选择产品和授权资料。",
+    "evidence_count": 0,
+    "evidence": [],
+    "trace": {
+      "product_id": [],
+      "version_label": "不读取资料",
+      "clause_codes": [],
+      "matched_fact": [],
+      "evidence": [],
+      "model_output": "模型连接或返回结果异常，已改用资料摘录。",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "模型不可用，或回答包含无法由本次一般咨询核对的数字"
+      },
+      "rule_category": "",
+      "adopted": false,
+      "final_answer": "本次没有生成可用的一般方法回答。请稍后重试；如需核对具体产品，请到专业咨询选择产品和授权资料。",
+      "role_method": true,
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 668,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 668,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  },
+  {
+    "case_id": "M04",
+    "group": "普通咨询和岗位方法题",
+    "product_id": "",
+    "channel": "phone",
+    "route": "legacy",
+    "question": "保险通话质检一般要注意哪些承诺性表述？",
+    "call_id": "51be6cbcf7f9",
+    "status": "error",
+    "answer": "本次没有生成可用的一般方法回答。请稍后重试；如需核对具体产品，请到专业咨询选择产品和授权资料。",
+    "evidence_count": 0,
+    "evidence": [],
+    "trace": {
+      "product_id": [],
+      "version_label": "不读取资料",
+      "clause_codes": [],
+      "matched_fact": [],
+      "evidence": [],
+      "model_output": "模型连接或返回结果异常，已改用资料摘录。",
+      "number_check": {
+        "checked": false,
+        "ok": null,
+        "detail": "模型不可用，或回答包含无法由本次一般咨询核对的数字"
+      },
+      "rule_category": "",
+      "adopted": false,
+      "final_answer": "本次没有生成可用的一般方法回答。请稍后重试；如需核对具体产品，请到专业咨询选择产品和授权资料。",
+      "role_method": true,
+      "model_call": {
+        "provider": "千问兼容接口",
+        "model": "qwen3.8-flash",
+        "count": 1,
+        "status": "error",
+        "ms": 681,
+        "adopted": false
+      },
+      "program": {
+        "version": "0.17.1",
+        "build": "REQ071-20261018"
+      },
+      "lang": "zh"
+    },
+    "model_count": 1,
+    "model_status": "error",
+    "model_adopted": false,
+    "elapsed_ms": 681,
+    "auto_pass": true,
+    "auto_reasons": [],
+    "human_review_status": "待两位保险成员独立复核"
+  }
+]

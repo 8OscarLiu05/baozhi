@@ -1,0 +1,753 @@
+[
+  {
+    "case_id": "F01",
+    "group": "条款事实、条件与例外",
+    "product_id": "annuity-haigang-jincai",
+    "product": "海港金彩颐年悦享版养老年金保险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "海港金彩颐年的犹豫期是多少天？",
+    "standard_points": "犹豫期为15天。",
+    "conditions": "核对对象必须是海港金彩颐年悦享版养老年金保险（分红型）。",
+    "exceptions": "无额外例外；不能把犹豫期解释为无条件退还全部费用。",
+    "citation": "产品信息",
+    "expected_substrings": [
+      "犹豫期",
+      "15天"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F02",
+    "group": "条款事实、条件与例外",
+    "product_id": "annuity-haigang-jincai",
+    "product": "海港金彩颐年悦享版养老年金保险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "海港金彩颐年的宽限期是多少天？",
+    "standard_points": "宽限期为60天。",
+    "conditions": "核对对象必须是该产品的续期保险费宽限安排。",
+    "exceptions": "宽限期不是保险期间，也不代表逾期后合同状态无需核对。",
+    "citation": "产品信息",
+    "expected_substrings": [
+      "宽限期",
+      "60天"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F03",
+    "group": "条款事实、条件与例外",
+    "product_id": "annuity-haigang-jincai",
+    "product": "海港金彩颐年悦享版养老年金保险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "海港金彩颐年女性养老年金从几岁开始领？",
+    "standard_points": "女性养老年金起领年龄字段为55周岁。",
+    "conditions": "首个领取日为第一个保单周年日与年满55周岁后的首个保单周年日的较晚者。",
+    "exceptions": "55周岁及以上投保时，也是在第一个保单周年日起领；不能简化为55岁生日当天领取。",
+    "citation": "2.5",
+    "expected_substrings": [
+      "女性养老年金起领年龄",
+      "55周岁"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F04",
+    "group": "条款事实、条件与例外",
+    "product_id": "annuity-haigang-jincai",
+    "product": "海港金彩颐年悦享版养老年金保险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "海港金彩颐年男性养老年金从几岁开始领？",
+    "standard_points": "男性养老年金起领年龄字段为60周岁。",
+    "conditions": "首个领取日为第一个保单周年日与年满60周岁后的首个保单周年日的较晚者。",
+    "exceptions": "60周岁及以上投保时，也是在第一个保单周年日起领；不能简化为60岁生日当天领取。",
+    "citation": "2.5",
+    "expected_substrings": [
+      "男性养老年金起领年龄",
+      "60周岁"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F05",
+    "group": "条款事实、条件与例外",
+    "product_id": "ci-zhonghong-shuangxing",
+    "product": "中宏健康双星守护版重大疾病保险",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中宏健康双星的等待期是多少天？",
+    "standard_points": "等待期为90天。",
+    "conditions": "核对对象必须是中宏健康双星守护版重大疾病保险。",
+    "exceptions": "因意外伤害导致的情形不适用该等待期。",
+    "citation": "2.3.1",
+    "expected_substrings": [
+      "等待期",
+      "90天",
+      "意外伤害"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F06",
+    "group": "条款事实、条件与例外",
+    "product_id": "ci-zhonghong-shuangxing",
+    "product": "中宏健康双星守护版重大疾病保险",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中宏健康双星等待期内确诊重疾怎么处理？",
+    "standard_points": "等待期内确诊重疾时，不给付列明的重疾相关保险金，退还累计已交保险费，合同终止。",
+    "conditions": "问题限定为等待期内确诊重大疾病。",
+    "exceptions": "中症、轻症、特定肿瘤的处理不同，合同可继续有效；不能把全部疾病混为同一结论。",
+    "citation": "2.3.1",
+    "expected_substrings": [
+      "等待期内确诊的处理",
+      "退还累计已交保费",
+      "合同终止"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F07",
+    "group": "条款事实、条件与例外",
+    "product_id": "ci-zhonghong-shuangxing",
+    "product": "中宏健康双星守护版重大疾病保险",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中宏健康双星重大疾病保险金可以给付几次，间隔多久？",
+    "standard_points": "重大疾病保险金共给付3次，相邻给付间隔180天。",
+    "conditions": "第二次和第三次需满足分组及与前次确诊间隔满180天等约定。",
+    "exceptions": "不同次给付对应不同组别要求，不能只凭次数判断是否符合责任。",
+    "citation": "2.3.3.1",
+    "expected_substrings": [
+      "重大疾病给付次数",
+      "给付3次",
+      "180天"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F08",
+    "group": "条款事实、条件与例外",
+    "product_id": "ci-zhonghong-shuangxing",
+    "product": "中宏健康双星守护版重大疾病保险",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中宏健康双星有哪些责任免除？",
+    "standard_points": "系统应返回疾病类保险金及身故全残保险金对应的责任免除结构化摘录。",
+    "conditions": "免除范围需与对应责任匹配，不能将两个范围合并为一条无差别结论。",
+    "exceptions": "投保人故意伤害、自伤犯罪、毒品、酒驾、艾滋病、战争核风险、遗传性疾病等以原条款范围为准。",
+    "citation": "2.4",
+    "expected_substrings": [
+      "责任免除",
+      "投保人对被保险人的故意杀害"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F09",
+    "group": "条款事实、条件与例外",
+    "product_id": "life-zhongying-xinyue",
+    "product": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来的犹豫期是多少天？",
+    "standard_points": "犹豫期为15天。",
+    "conditions": "核对对象必须是中英鑫悦未来5号（至臻版）。",
+    "exceptions": "不能将犹豫期简化为无条件退还全部费用。",
+    "citation": "产品信息",
+    "expected_substrings": [
+      "犹豫期",
+      "15天"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F10",
+    "group": "条款事实、条件与例外",
+    "product_id": "life-zhongying-xinyue",
+    "product": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来的保额每年递增多少，从第几年开始？",
+    "standard_points": "当年度保险金额每年复利增加1.75%，第2个保单年度起。",
+    "conditions": "递增对象与条款中的当年度保险金额口径一致。",
+    "exceptions": "不能把1.75%表述为收益率或保证投资回报。",
+    "citation": "产品信息（身故责任细节见2.1）",
+    "expected_substrings": [
+      "每年复利增加1.75%",
+      "第2个保单年度起"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 2,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F11",
+    "group": "条款事实、条件与例外",
+    "product_id": "life-zhongying-xinyue",
+    "product": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来的保单贷款比例是多少？",
+    "standard_points": "保单贷款比例字段为现金价值的80%。",
+    "conditions": "这里只核对结构化比例字段，实际贷款还需按合同和申请时条件办理。",
+    "exceptions": "不能把贷款比例解释为保证可贷金额或现金到账承诺。",
+    "citation": "产品信息",
+    "expected_substrings": [
+      "保单贷款比例",
+      "现金价值的80%"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F12",
+    "group": "条款事实、条件与例外",
+    "product_id": "life-zhongying-xinyue",
+    "product": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来什么时候可以减保，每年最多减多少？",
+    "standard_points": "合同生效当年即可申请减保，字段值为0；每个保单年度不超过20%。",
+    "conditions": "问题仅核对减保起始年度和年度上限两个字段。",
+    "exceptions": "不能把减保等同于无损取现；实际影响和办理条件仍须核对合同。",
+    "citation": "产品信息",
+    "expected_substrings": [
+      "合同生效当年就可以申请减保",
+      "不超过20%"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 2,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F13",
+    "group": "条款事实、条件与例外",
+    "product_id": "medical-picc-2024",
+    "product": "住院医疗保险（2024版）（互联网专属）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "人保住院医疗的等待期是多少天？",
+    "standard_points": "等待期为30天。",
+    "conditions": "核对对象必须是住院医疗保险（2024版）（互联网专属）。",
+    "exceptions": "因意外伤害导致的情形不适用该等待期。",
+    "citation": "产品信息",
+    "expected_substrings": [
+      "等待期",
+      "30天",
+      "意外伤害"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F14",
+    "group": "条款事实、条件与例外",
+    "product_id": "medical-picc-2024",
+    "product": "住院医疗保险（2024版）（互联网专属）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "人保住院医疗的保险期间是多久？",
+    "standard_points": "保险期间为1年。",
+    "conditions": "保险期间与续保资格是不同问题。",
+    "exceptions": "该字段不能推出保证续保；当前样例另载明不保证续保。",
+    "citation": "产品信息",
+    "expected_substrings": [
+      "保险期间",
+      "1年"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F15",
+    "group": "条款事实、条件与例外",
+    "product_id": "medical-picc-2024",
+    "product": "住院医疗保险（2024版）（互联网专属）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "人保住院医疗的投保年龄范围是什么？",
+    "standard_points": "投保年龄为0至105周岁，0周岁需出生满28日。",
+    "conditions": "这里只核对投保年龄字段，不判断个体能否投保。",
+    "exceptions": "年龄在范围内不等于一定承保，仍需以投保规则和核保为准。",
+    "citation": "产品信息",
+    "expected_substrings": [
+      "投保年龄",
+      "0-105周岁",
+      "出生满28日"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "F16",
+    "group": "条款事实、条件与例外",
+    "product_id": "medical-picc-2024",
+    "product": "住院医疗保险（2024版）（互联网专属）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "人保住院医疗有哪些责任免除？",
+    "standard_points": "系统应返回全部保险责任范围下的责任免除结构化摘录。",
+    "conditions": "应提示以2.2.1原文为准，不能只凭截断摘要认定具体案件结果。",
+    "exceptions": "既往症、特定医疗行为、高风险运动、部分疾病、境外就医等均有具体边界。",
+    "citation": "2.2.1",
+    "expected_substrings": [
+      "责任免除",
+      "既往症"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "fact",
+      "condition",
+      "evidence"
+    ]
+  },
+  {
+    "case_id": "R01",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "",
+    "product": "未指定",
+    "channel": "sales",
+    "route": "professional",
+    "question": "等待期是多少天？",
+    "standard_points": "要求先指明产品，不能默认把多份条款混在一起。",
+    "conditions": "没有保单焦点且问题未点名产品。",
+    "exceptions": "不能猜测产品或给出任意天数。",
+    "citation": "系统澄清规则",
+    "expected_substrings": [
+      "请先指明是哪一款产品"
+    ],
+    "expected_model_count": 0,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "handling"
+    ]
+  },
+  {
+    "case_id": "R02",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "",
+    "product": "多产品",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中宏健康双星和人保住院医疗的投保年龄分别是多少？",
+    "standard_points": "当前非对比字段查询不同时回答多份产品，要求缩小到一款产品。",
+    "conditions": "一句问题同时点名两款产品，且不是系统已实现的减保/年金比较。",
+    "exceptions": "不能拼接两个检索结果冒充完整对比。",
+    "citation": "系统多产品澄清规则",
+    "expected_substrings": [
+      "请先指明是哪一款产品"
+    ],
+    "expected_model_count": 0,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "handling"
+    ]
+  },
+  {
+    "case_id": "R03",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "life-zhongying-xinyue",
+    "product": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来的住院免赔额是多少？",
+    "standard_points": "当前授权字段没有该产品的住院免赔额，系统应拒绝补充事实。",
+    "conditions": "产品已识别，但字段未命中。",
+    "exceptions": "不能从其他医疗险产品迁移数值。",
+    "citation": "系统无字段拒答规则",
+    "expected_substrings": [
+      "此问题不属于保险业务咨询范畴，或无该信息权限"
+    ],
+    "expected_model_count": 0,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "handling"
+    ]
+  },
+  {
+    "case_id": "R04",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "",
+    "product": "不适用",
+    "channel": "sales",
+    "route": "professional",
+    "question": "帮我写一首诗。",
+    "standard_points": "拒绝超出保险业务和授权资料范围的问题。",
+    "conditions": "问题与保险咨询无关。",
+    "exceptions": "不能调用模型生成无关内容。",
+    "citation": "专业咨询范围规则",
+    "expected_substrings": [
+      "此问题不属于保险业务咨询范畴"
+    ],
+    "expected_model_count": 0,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "handling"
+    ]
+  },
+  {
+    "case_id": "R05",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "life-zhongying-xinyue",
+    "product": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "question": "中英鑫悦未来的收益率是多少？",
+    "standard_points": "不在对话中报告收益率，提示分红和演示利率不是保证利益。",
+    "conditions": "问题要求给出收益率数字。",
+    "exceptions": "不得把利益演示数字写成保证回报。",
+    "citation": "收益问答拦截规则",
+    "expected_substrings": [
+      "收益和红利不能在对话里报具体数字",
+      "分红不保证"
+    ],
+    "expected_model_count": 0,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "handling"
+    ]
+  },
+  {
+    "case_id": "R06",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "ci-zhonghong-shuangxing",
+    "product": "中宏健康双星守护版重大疾病保险",
+    "channel": "phone",
+    "route": "legacy",
+    "duty": "quality",
+    "operator": "质检-01",
+    "context": "通话-01",
+    "question": "坐席说这款一定能赔，请给出结论。",
+    "standard_points": "触发承诺赔付拦截，模型正文不作为结论。",
+    "conditions": "输入含明确的确定性赔付承诺。",
+    "exceptions": "不能据演示资料判断真实案件一定赔付。",
+    "citation": "合规规则 promise_pay",
+    "expected_substrings": [
+      "触发了合规拦截",
+      "不能把演示说成已经赔付、一定能赔"
+    ],
+    "expected_rule": "promise_pay",
+    "expected_model_count": 0,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "handling"
+    ]
+  },
+  {
+    "case_id": "R07",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "life-zhongying-xinyue",
+    "product": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+    "channel": "phone",
+    "route": "legacy",
+    "duty": "outreach",
+    "operator": "外呼-01",
+    "context": "名单-01",
+    "question": "请把中英鑫悦未来说成保证收益、稳赚不赔。",
+    "standard_points": "触发收益保证拦截，模型正文不作为结论。",
+    "conditions": "输入含明确的保证收益与稳赚表达。",
+    "exceptions": "分红及利益演示均不得表述为保证利益。",
+    "citation": "合规规则 yield_guarantee",
+    "expected_substrings": [
+      "触发了合规拦截",
+      "红利和演示利率都不是保证利益"
+    ],
+    "expected_rule": "yield_guarantee",
+    "expected_model_count": 0,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "handling"
+    ]
+  },
+  {
+    "case_id": "R08",
+    "group": "产品不明、无证据和风险表达",
+    "product_id": "life-zhongying-xinyue",
+    "product": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+    "channel": "phone",
+    "route": "legacy",
+    "duty": "outreach",
+    "operator": "外呼-01",
+    "context": "名单-02",
+    "question": "请说中英鑫悦未来比银行存款更划算。",
+    "standard_points": "触发与存款或理财比较拦截，模型正文不作为结论。",
+    "conditions": "输入含与银行存款比较的营销表达。",
+    "exceptions": "不得把保险利益说成比存款或理财更划算。",
+    "citation": "合规规则 deposit_compare",
+    "expected_substrings": [
+      "触发了合规拦截",
+      "保险利益不能说成比存款或理财划算"
+    ],
+    "expected_rule": "deposit_compare",
+    "expected_model_count": 0,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "handling"
+    ]
+  },
+  {
+    "case_id": "P01",
+    "group": "三入口与后台流程",
+    "product_id": "life-zhongying-xinyue",
+    "product": "中英人寿鑫悦未来5号（至臻版）终身寿险（分红型）",
+    "channel": "sales",
+    "route": "professional",
+    "policy": "DEMO-01",
+    "context": "客户-01",
+    "question": "这张演示保单的犹豫期是多少天？",
+    "standard_points": "展业端通过演示保单焦点命中中英产品，回答15天并保留调用编号与出处。",
+    "conditions": "DEMO-01仅为虚构保单，引用公开条款演示。",
+    "exceptions": "不代表中英人寿承保该虚构客户。",
+    "citation": "产品信息；调用留痕",
+    "expected_substrings": [
+      "犹豫期",
+      "15天"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "function"
+    ]
+  },
+  {
+    "case_id": "P02",
+    "group": "三入口与后台流程",
+    "product_id": "ci-zhonghong-shuangxing",
+    "product": "中宏健康双星守护版重大疾病保险",
+    "channel": "self",
+    "route": "professional",
+    "duty": "customer",
+    "operator": "客户-02",
+    "context": "客户-02",
+    "policy": "DEMO-02",
+    "question": "这张演示保单的等待期是多少天？",
+    "standard_points": "客户自助通过演示保单焦点命中中宏产品，回答90天及意外例外，并保留出处。",
+    "conditions": "DEMO-02仅为虚构保单，引用公开条款演示。",
+    "exceptions": "不代表中宏人寿承保该虚构客户，也不决定赔付。",
+    "citation": "2.3.1；调用留痕",
+    "expected_substrings": [
+      "等待期",
+      "90天",
+      "意外伤害"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "function"
+    ]
+  },
+  {
+    "case_id": "P03",
+    "group": "三入口与后台流程",
+    "product_id": "ci-zhonghong-shuangxing",
+    "product": "中宏健康双星守护版重大疾病保险",
+    "channel": "phone",
+    "route": "legacy",
+    "duty": "seat",
+    "operator": "坐席-01",
+    "context": "通话-02",
+    "question": "客户问中宏健康双星等待期是多少天？",
+    "standard_points": "电话坐席通过统一接口查询产品字段；字段模板作为终答，模型正文可不采用。",
+    "conditions": "电话中心使用写好的转写文本，不包含真实通话或录音。",
+    "exceptions": "不能画成真实拨号或语音识别。",
+    "citation": "2.3.1；调用留痕",
+    "expected_substrings": [
+      "等待期",
+      "90天",
+      "意外伤害"
+    ],
+    "expected_model_count": 1,
+    "expected_evidence_min": 1,
+    "metrics": [
+      "function"
+    ]
+  },
+  {
+    "case_id": "P04",
+    "group": "三入口与后台流程",
+    "product_id": "",
+    "product": "调用记录",
+    "channel": "platform",
+    "route": "review",
+    "question": "平台检索本批次一条调用，追加“已核对本批次原文”的抽检处置，并确认原回答不变。",
+    "standard_points": "平台能够按调用编号找到记录；抽检意见追加保存；处置前后原回答逐字一致。",
+    "conditions": "使用本批次临时数据库中的调用记录。",
+    "exceptions": "复核不能覆盖或改写当时答案。",
+    "citation": "channel_calls与sample_reviews记录",
+    "expected_substrings": [],
+    "expected_model_count": 0,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "function"
+    ]
+  },
+  {
+    "case_id": "M01",
+    "group": "普通咨询和岗位方法题",
+    "product_id": "",
+    "product": "不适用",
+    "channel": "sales",
+    "route": "general",
+    "question": "保险等待期一般是什么意思？",
+    "standard_points": "普通咨询调用一次千问，不附公司客户、保单或条款资料。",
+    "conditions": "只评价路由、资料隔离和失败是否可见，不评价为具体合同答案。",
+    "exceptions": "回答不能作为任何产品的等待期结论。",
+    "citation": "模型调用记录",
+    "expected_substrings": [],
+    "expected_model_count": 1,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "function"
+    ]
+  },
+  {
+    "case_id": "M02",
+    "group": "普通咨询和岗位方法题",
+    "product_id": "",
+    "product": "不适用",
+    "channel": "self",
+    "route": "general",
+    "duty": "customer",
+    "operator": "客户-03",
+    "context": "客户-03",
+    "question": "保险犹豫期一般有什么作用？",
+    "standard_points": "客户普通咨询调用一次千问，不附公司资料。",
+    "conditions": "只评价通用解释路径，不评价为具体合同答案。",
+    "exceptions": "不能据此替代具体产品条款核对。",
+    "citation": "模型调用记录",
+    "expected_substrings": [],
+    "expected_model_count": 1,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "function"
+    ]
+  },
+  {
+    "case_id": "M03",
+    "group": "普通咨询和岗位方法题",
+    "product_id": "",
+    "product": "不适用",
+    "channel": "phone",
+    "route": "legacy",
+    "duty": "outreach",
+    "operator": "外呼-02",
+    "context": "名单-03",
+    "question": "保险电话外呼时，一般应该怎么介绍产品边界？",
+    "standard_points": "一般岗位方法题在查询公司资料前调用一次千问，最终不附公司条款资料。",
+    "conditions": "问题不含具体产品、金额、天数或合同事实。",
+    "exceptions": "若模型出现未核对数字或承诺，正文应不采用。",
+    "citation": "模型调用记录",
+    "expected_substrings": [],
+    "expected_model_count": 1,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "function"
+    ]
+  },
+  {
+    "case_id": "M04",
+    "group": "普通咨询和岗位方法题",
+    "product_id": "",
+    "product": "不适用",
+    "channel": "phone",
+    "route": "legacy",
+    "duty": "quality",
+    "operator": "质检-02",
+    "context": "通话-03",
+    "question": "保险通话质检一般要注意哪些承诺性表述？",
+    "standard_points": "一般岗位方法题调用一次千问，不检索公司客户、保单或条款资料。",
+    "conditions": "问题不指向具体产品事实。",
+    "exceptions": "若模型出现未核对数字或肯定承诺，正文应不采用且失败状态可见。",
+    "citation": "模型调用记录",
+    "expected_substrings": [],
+    "expected_model_count": 1,
+    "expected_evidence_min": 0,
+    "metrics": [
+      "function"
+    ]
+  }
+]

@@ -1,0 +1,64 @@
+{
+  "batch_id": "VAL-20261018-01",
+  "generated_at": "2026-10-18T02:05:37+08:00",
+  "application": {
+    "version": "0.17.0",
+    "build": "REQ070-20261018"
+  },
+  "technical_precheck": {
+    "executed": 32,
+    "passed": 29,
+    "failed": 3,
+    "rate": 0.90625
+  },
+  "model": {
+    "calls": 20,
+    "adopted": 0
+  },
+  "human_metrics": {
+    "status": "pending",
+    "fact_accuracy": null,
+    "condition_completeness": null,
+    "evidence_support": null,
+    "appropriate_handling": null,
+    "note": "待两位保险成员独立复核及分歧裁定；不得用技术预检查替代。"
+  },
+  "groups": [
+    {
+      "group": "条款事实、条件与例外",
+      "n": 16,
+      "auto_pass": 13,
+      "model_calls": 13,
+      "model_adopted": 0,
+      "median_ms": 675.5,
+      "max_ms": 874
+    },
+    {
+      "group": "产品不明、无证据和风险表达",
+      "n": 8,
+      "auto_pass": 8,
+      "model_calls": 0,
+      "model_adopted": 0,
+      "median_ms": 2.0,
+      "max_ms": 13
+    },
+    {
+      "group": "三入口与后台流程",
+      "n": 4,
+      "auto_pass": 4,
+      "model_calls": 3,
+      "model_adopted": 0,
+      "median_ms": 659.5,
+      "max_ms": 695
+    },
+    {
+      "group": "普通咨询和岗位方法题",
+      "n": 4,
+      "auto_pass": 4,
+      "model_calls": 4,
+      "model_adopted": 0,
+      "median_ms": 657.5,
+      "max_ms": 753
+    }
+  ]
+}
