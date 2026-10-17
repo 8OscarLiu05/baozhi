@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Baosu — Agentic middleware for insurance</title>
+<meta name="description" content="Baosu is an agentic middleware layer for life insurance: one core that routes every front-line question to the right agent, the right evidence and the right guardrail.">
+<meta name="theme-color" content="#04060b">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/home.css?v=066">
+</head>
+<body>
+<div class="loader" aria-hidden="true">
+  <div class="loader-mark">
+    <svg viewBox="0 0 64 64" width="44" height="44"><path class="lm-doc" d="M17 15h24l7 7v26H17z"/><path class="lm-fold" d="M41 15v8h8"/><circle class="lm-lens" cx="38" cy="42" r="9"/><path class="lm-handle" d="M44.5 48.5 51 55"/></svg>
+  </div>
+  <div class="loader-meta"><span>Baosu</span><span class="loader-count">000</span></div>
+  <div class="loader-bar"><i></i></div>
+</div>
+
+<canvas class="field" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="brand" href="#core" aria-label="Baosu home">
+    <svg viewBox="0 0 64 64" width="22" height="22" aria-hidden="true"><path d="M17 15h24l7 7v26H17z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/><path d="M41 15v8h8" fill="none" stroke="currentColor" stroke-width="3.2"/><circle cx="38" cy="42" r="8.5" fill="#04060b" stroke="currentColor" stroke-width="3.2"/><path d="M44.5 48.5 51 55" stroke="currentColor" stroke-width="4.2" stroke-linecap="round"/></svg>
+    <span>Baosu</span>
+  </a>
+  <nav class="nav-pill" aria-label="Sections">
+    <a href="#core">Platform</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#evidence">Evidence</a>
+    <a href="#governance">Governance</a>
+  </nav>
+  <a class="nav-cta" href="/index.html?desk=platform">Open console <span aria-hidden="true">↗</span></a>
+</header>
+
+<aside class="rail" aria-hidden="true">
+  <ol>
+    <li data-rail="0"><i>01</i><span>Core</span></li>
+    <li data-rail="1"><i>02</i><span>Problem</span></li>
+    <li data-rail="2"><i>03</i><span>Channels</span></li>
+    <li data-rail="3"><i>04</i><span>Architecture</span></li>
+    <li data-rail="4"><i>05</i><span>Routing</span></li>
+    <li data-rail="5"><i>06</i><span>Evidence</span></li>
+    <li data-rail="6"><i>07</i><span>Governance</span></li>
+    <li data-rail="7"><i>08</i><span>Start</span></li>
+  </ol>
+</aside>
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<main>
+  <section class="chapter hero" id="core" data-scene="0">
+    <div class="copy">
+      <p class="eyebrow"><span class="dot"></span>Agentic middleware · Life insurance</p>
+      <h1 class="display"><span class="ln">The intelligence</span><span class="ln">layer for <em>insurance.</em></span></h1>
+      <p class="lede">Baosu sits between foundation models and every insurance front line. One core routes each question to the right agent, the right evidence and the right guardrail.</p>
+      <div class="actions">
+        <a class="btn btn-solid" href="/index.html?desk=platform">Open the console <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="#problem">See how it works <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <span>Prototype 0.16</span>
+      <span class="scroll-cue"><i></i>Scroll</span>
+      <span>Local build · Fictional data</span>
+    </div>
+  </section>
+
+  <section class="chapter" id="problem" data-scene="1">
+    <div class="copy">
+      <p class="index">02 — The problem</p>
+      <h2 class="title">Insurance runs on <em>fragmented</em> answers.</h2>
+      <p class="lede">Agents, customers and contact centers ask the same questions about waiting periods, exclusions and surrender values. Each tool answers on its own, and nobody can show where an answer came from.</p>
+      <ul class="facts">
+        <li><b>Inconsistent</b><span>Same clause, different wording across channels.</span></li>
+        <li><b>Untraceable</b><span>Model output without a citation cannot be reviewed.</span></li>
+        <li><b>Ungoverned</b><span>Promises like “this will definitely pay” slip through.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter" id="channels" data-scene="2">
+    <div class="copy">
+      <p class="index">03 — Many front doors</p>
+      <h2 class="title">Many front doors.<br><em>One core.</em></h2>
+      <p class="lede">Every channel sends its request to the same platform API, with role, context and an optional demo policy. Front-end pages never call the model directly.</p>
+      <ol class="channels">
+        <li><i>A</i><div><b>Sales agent desk</b><span>Product facts and clause checks in front of the client.</span></div></li>
+        <li><i>B</i><div><b>Customer self-service</b><span>Plain-language answers with a hand-off to a human.</span></div></li>
+        <li><i>C</i><div><b>Contact center</b><span>Outbound scripts, live-agent prompts and call QA.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="chapter chapter-tall" id="architecture" data-scene="3">
+    <div class="copy">
+      <p class="index">04 — Architecture</p>
+      <h2 class="title">Four layers.<br>The middle two are <em>the product.</em></h2>
+      <ol class="layers">
+        <li data-layer="4"><i>04</i><div><b>Integration</b><span>Sales, self-service and contact-center callers. Demonstration only.</span></div><em class="tag tag-demo">Demo</em></li>
+        <li data-layer="3" class="core"><i>03</i><div><b>Applications</b><span>Q&amp;A, service, training and outreach agents, opened across nine job roles.</span></div><em class="tag">Core</em></li>
+        <li data-layer="2" class="core"><i>02</i><div><b>Platform</b><span>Agent builder, knowledge versions, plugins, dialog management and analytics.</span></div><em class="tag">Core</em></li>
+        <li data-layer="1"><i>01</i><div><b>Foundation</b><span>Qwen connected. Doubao and DeepSeek interfaces reserved, not connected.</span></div><em class="tag tag-model">Model</em></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="chapter" id="routing" data-scene="4">
+    <div class="copy">
+      <p class="index">05 — Routing</p>
+      <h2 class="title">Three routes,<br>chosen <em>per request.</em></h2>
+      <p class="lede">The core decides how much the model is allowed to do before it does anything.</p>
+      <div class="routes">
+        <article><small>General consultation</small><b>1 model call</b><p>The question alone is sent. Company and policy records stay out.</p></article>
+        <article><small>Professional lookup</small><b>Up to 1 call</b><p>Authorized fields answer first. A matched fact may receive one checked explanation.</p></article>
+        <article><small>Role-based answer</small><b>Evidence first</b><p>Fields and excerpts set the answer. Unsafe or unsupported model text is dropped.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter-right" id="evidence" data-scene="5">
+    <div class="copy">
+      <p class="index">06 — Evidence</p>
+      <h2 class="title">Every answer,<br>traceable to <em>the clause.</em></h2>
+      <p class="lede">Numbers must be found in the current fields or excerpts. If the model writes a figure that cannot be matched, its sentence is dropped and the field template answers instead.</p>
+      <figure class="trace">
+        <div class="trace-q"><small>Customer</small><p>What is the waiting period for Health Double Star? Does it apply to accidents?</p></div>
+        <div class="trace-a"><small>Baosu</small><p>The clause sample records a <b>90-day</b> waiting period. It does not apply to accidental injury. Coverage still depends on the full contract and review.</p></div>
+        <dl class="trace-grid">
+          <div><dt>Field</dt><dd>waiting_period = 90 days</dd></div>
+          <div><dt>Exception</dt><dd>Accidental injury</dd></div>
+          <div><dt>Clause</dt><dd>§ 2.3.1</dd></div>
+          <div><dt>Number check</dt><dd class="ok">Passed</dd></div>
+          <div><dt>Model</dt><dd>Field template</dd></div>
+        </dl>
+        <figcaption>Illustrative trace from a public clause sample. Not an underwriting statement by the original insurer.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="chapter" id="governance" data-scene="6">
+    <div class="copy">
+      <p class="index">07 — Governance</p>
+      <h2 class="title">Guardrails<br>before <em>eloquence.</em></h2>
+      <p class="lede">Four kinds of statements are never allowed to stand as conclusions. When one is detected, the model is not followed and the call is flagged for review.</p>
+      <ul class="guards">
+        <li><i>01</i><b>Claim promises</b><span>“It will definitely pay” becomes review conditions and a human path.</span></li>
+        <li><i>02</i><b>Guaranteed returns</b><span>Dividends and illustrations are never stated as certain.</span></li>
+        <li><i>03</i><b>Deposit comparisons</b><span>No “better than a savings account” framing.</span></li>
+        <li><i>04</i><b>Disparagement</b><span>Exaggeration is logged and sent to sampling.</span></li>
+      </ul>
+      <p class="note">Append-only audit: every call is retained, and reviewers add dispositions without rewriting the original answer.</p>
+    </div>
+  </section>
+
+  <section class="chapter finale" id="start" data-scene="7">
+    <div class="copy">
+      <p class="index">08 — Start</p>
+      <h2 class="display display-sm">Start with<br><em>one question.</em></h2>
+      <div class="doors">
+        <a href="/index.html?desk=sales"><small>A</small><b>Sales desk</b><span aria-hidden="true">↗</span></a>
+        <a href="/index.html?desk=wechat"><small>B</small><b>Self-service</b><span aria-hidden="true">↗</span></a>
+        <a href="/index.html?desk=phone"><small>C</small><b>Contact center</b><span aria-hidden="true">↗</span></a>
+        <a class="primary" href="/index.html?desk=platform"><small>Core</small><b>Platform console</b><span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="/home.js?v=069" defer></script>
+</body>
+</html>

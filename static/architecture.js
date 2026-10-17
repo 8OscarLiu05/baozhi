@@ -10,21 +10,22 @@
 
   const STATUS = {live: '已实现', demo: '本机演示', reserved: '预留接口'};
   const LAYERS = {
-    1: {n: '01', title: '基础能力层', en: 'FOUNDATION', copy: '使用千问理解问题和组织解释。先查条款字段与规则，需要解释时，流程末尾最多调用一次模型。',
-      note: '先核对，再解释。', link: ['#scores', '查看模型实测'],
+    1: {n: '01', title: '基础能力层', en: 'FOUNDATION', role: ['model', '模型接入'], copy: '接入千问，用于理解问题和组织解释。是否调用按路径决定：普通咨询一次，专业咨询不调用，岗位依据最多一次且正文可以不采用。',
+      note: '模型是底座，不是中台本身。', link: ['#trace', '查看证据'],
       nodes: [['千问', 'live', '已接入'], ['豆包', 'reserved', '预留'], ['DeepSeek', 'reserved', '预留'], ['自然语言理解', 'live'], ['知识问答', 'live'], ['内容生成', 'live']]},
-    2: {n: '02', title: '平台能力层', en: 'AGENT PLATFORM', copy: '这里管理智能体、资料版本、查询工具、对话记录和效果检查。',
+    2: {n: '02', title: '平台能力层', en: 'AGENT PLATFORM', role: ['core', '核心 · 智能体中台'], copy: '中台核心之一：管理智能体、资料版本、查询工具、对话记录和效果检查。',
       note: '每次查询都留下可回看的记录。', link: ['/index.html?desk=platform', '打开保溯平台'],
-      nodes: [['智能体开发', 'live', '广场 · 新建授权'], ['知识库管理', 'live', '条款字段 · 版本'], ['插件集成', 'demo', '字段查询 · 合规词表'], ['对话管理', 'live', '会话 · 调用留痕'], ['效果分析', 'live', '抽检 · 外部基准']]},
-    3: {n: '03', title: '应用能力层', en: 'APPLICATIONS', copy: '问答、客服、培训和外呼四类任务，按岗位开放。',
+      nodes: [['智能体开发', 'live', '广场 · 新建授权'], ['知识库管理', 'live', '条款字段 · 版本'], ['插件集成', 'demo', '字段查询 · 合规词表'], ['对话管理', 'live', '会话 · 调用留痕'], ['效果分析', 'live', '抽检 · 调用留存']]},
+    3: {n: '03', title: '应用能力层', en: 'APPLICATIONS', role: ['core', '核心 · 智能体中台'], copy: '中台核心之二：问答、客服、培训和外呼四类智能体，按九条岗位职责开放。',
       note: '岗位决定能用哪些资料与工具。', link: ['/index.html?desk=platform&page=plaza', '查看智能体广场'],
       nodes: [['智能问答类', 'live'], ['客服类', 'live'], ['培训类', 'live'], ['外呼类', 'demo', '只出草稿']],
       groups: [['智能问答类', ['营销展业', '核保作业', '理赔作业', '平台与知识运营']], ['客服类', ['客户服务', '电话坐席']], ['培训类', ['员工培训']], ['外呼类', ['电话外呼', '通话质检']]]},
-    4: {n: '04', title: '系统集成层', en: 'INTEGRATION', copy: '展业、客户自助和电话中心把问题交给同一个中台，回答和依据一起返回。',
-      note: '三个入口共用知识与留存记录。', link: ['/index.html?desk=sales', '进入业务端'],
+    4: {n: '04', title: '系统集成层', en: 'INTEGRATION', role: ['demo', '演示接入'], copy: '演示接入：展业、客户自助和电话中心把问题交给同一个中台接口，用来展示中台怎样被调用。均为本机演示，未对接真实展业 APP、微信或电话。',
+      note: '三个业务端是调用方，不是核心。', link: ['/index.html?desk=sales', '进入业务端'],
       nodes: [['代理人展业', 'demo'], ['客户自助', 'demo'], ['电话中心', 'demo', '外呼 · 坐席 · 质检'], ['统一中台接口', 'live']]}
   };
   const ORDER = [1, 2, 3, 4];
+  const TOUR = [2, 3, 4, 1];
   const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const tabs = [...section.querySelectorAll('.arch-tab')];
@@ -53,8 +54,8 @@
     const pos = slots(L.nodes.length);
     plate.innerHTML = '<span class="arch-rim"></span>' + L.nodes.map(([name, status, sub], k) =>
       `<div class="arch-node"><span class="arch-socket"></span><span class="arch-chip ${status}"><span class="arch-dot ${status}"></span>${esc(name)}${status === 'reserved' ? '<small>预留</small>' : ''}</span></div>`).join('') +
-      `<div class="arch-tag"><i>${L.n} · ${L.en}</i><b>${L.title}</b></div>` +
-      (id === 4 ? '<div class="arch-core"><b><img src="/logo.svg" alt="">保溯 · 四层机制图</b><small>点击展开 · 或等待自动演示</small></div>' : '');
+      `<div class="arch-tag"><i>${L.n} · ${L.en}</i><b>${L.title}</b><em class="arch-role ${L.role[0]}">${L.role[1]}</em></div>` +
+      (id === 4 ? '<div class="arch-core"><b><img src="/logo.svg" alt="">保溯 · 智能体中台</b><small>点击展开 · 或等待自动演示</small></div>' : '');
     [...plate.querySelectorAll('.arch-node')].forEach((node, k) => {
       node.style.setProperty('--x', `${pos[k][0]}px`);
       node.style.setProperty('--y', `${pos[k][1]}px`);
@@ -162,7 +163,7 @@
       await wait(1800); if (!alive()) return;
       await expand(); if (!alive()) return;
       await wait(1300); if (!alive()) return;
-      for (const id of ORDER) { focus(id, 2900); await wait(2900); if (!alive()) return; }
+      for (const id of TOUR) { focus(id, 2900); await wait(2900); if (!alive()) return; }
       focus(0); await wait(1500); if (!alive()) return;
     }
   }
@@ -233,6 +234,14 @@
     if (document.hidden) stop(); else if (autoplay && visible) loop();
   });
   motion.addEventListener('change', () => { if (motion.matches) setAutoplay(false); });
+
+  /* 从开场硬币进入：硬币放平后，在这里落成紧凑的中台机制图 */
+  let arrived = false;
+  try { arrived = sessionStorage.getItem('baosu-arrive') === '1'; sessionStorage.removeItem('baosu-arrive'); } catch (err) {}
+  if (arrived && !motion.matches) {
+    stage.animate([{opacity: 0, transform: 'translateY(-40px) scale(1.18)'}, {opacity: 1, transform: 'none'}], {duration: 1100, easing: 'cubic-bezier(.16,1,.3,1)'});
+    section.querySelector('.arch-copy').animate([{opacity: 0, transform: 'translateY(18px)'}, {opacity: 1, transform: 'none'}], {duration: 900, delay: 350, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards'});
+  }
 
   setPhase('assembled');
   setAutoplay(autoplay);

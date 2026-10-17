@@ -6,6 +6,8 @@ import os
 import re
 from pathlib import Path
 
+import intl
+
 PRODUCT = "zijin-hospital-allowance"
 TITLE = "紫金保险附加个人意外伤害住院日额津贴保险条款"
 SOURCE = "紫金财产保险股份有限公司条款对照，注册编号 C00013732522021043058442。用户下载后导入，不是骑安心产品，不能据此投保或赔付。"
@@ -61,6 +63,10 @@ def clause_blocks(text):
 
 
 def read_question(message):
+    if intl.english():
+        event = "Mentions a hospital stay" if "住院" in message else ("Mentions an outpatient visit" if "门诊" in message else "Has not said whether it was a hospital stay")
+        cause = "Mentions hypertension" if "高血压" in message else ("Mentions an accident" if "意外" in message else ("Mentions an illness" if "疾病" in message else "Has not given a cause"))
+        return {"event": event, "cause": cause, "note": "This only restates the question to confirm it was understood. It is not an application, underwriting or claim decision."}
     event = "提到住院" if "住院" in message else ("提到门诊" if "门诊" in message else "还没说明是不是住院")
     if "高血压" in message:
         cause = "提到高血压"

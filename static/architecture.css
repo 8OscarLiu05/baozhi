@@ -119,3 +119,38 @@
 @media(max-width:980px){.arch{grid-template-columns:1fr;padding:80px 28px 60px;gap:10px;--s:.82}.arch-copy{justify-self:start;max-width:680px}.architecture-stage{height:560px}}
 @media(max-width:620px){.arch{padding:64px 18px 48px;--s:.56}.architecture-detail{min-height:340px}.arch-copy h2{font-size:36px}.arch-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.arch-groups{grid-template-columns:1fr}.architecture-stage{height:420px}.arch-tag{display:none}.arch-chip{font-size:15px}.arch-chip small{display:none}.arch-play small{display:none}.arch-hint{display:none}}
 @media(prefers-reduced-motion:reduce){.arch-plate,.arch-node,.arch-socket,.arch-chip,.arch-tag,.arch-core,.arch-pillar,.arch-beam,.architecture-detail,.architecture-toggle span{transition:none!important}.architecture-stage .arch-beam i,.arch-caption i,.arch-tab.is-timing::after{animation:none!important}}
+
+/* REQ-060 层级强弱：中台两层是核心，三个业务端只是演示接入，模型是底座 */
+.arch-key{display:flex;flex-wrap:wrap;gap:10px 20px;margin:24px 0 0;font-size:13px;color:#b4c0b8}
+.arch-key span{display:inline-flex;align-items:center;gap:9px}
+.arch-key i{width:24px;height:12px;border-radius:4px;flex:none}
+.key-core i{background:rgba(217,239,188,.6);box-shadow:0 0 14px rgba(217,239,188,.55)}
+.key-demo i{border:1px dashed rgba(185,212,255,.65)}
+.key-model i{background:rgba(127,214,194,.14);border:1px solid rgba(127,214,194,.3)}
+.arch-tabs{grid-template-rows:auto auto;row-gap:0}
+.arch-tabs .arch-tab{grid-row:2;margin-top:0}
+.arch-bracket{grid-column:2/4;grid-row:1;margin:0 0 8px;padding:0 0 6px;text-align:center;font-size:13px;letter-spacing:.08em;color:#d9efbc;border-bottom:1px solid rgba(217,239,188,.55);position:relative}
+.arch-bracket::before,.arch-bracket::after{content:"";position:absolute;bottom:-1px;width:1px;height:8px;background:rgba(217,239,188,.55);transform:translateY(100%)}
+.arch-bracket::before{left:0}.arch-bracket::after{right:0}
+.arch-tab[data-layer="2"],.arch-tab[data-layer="3"]{border-color:rgba(217,239,188,.38);background:rgba(217,239,188,.07);color:#eef3ec}
+.arch-tab[data-layer="4"]{border-style:dashed;color:#9aa7a0}
+.arch-tab[data-layer="1"]{color:#9aa7a0}
+.arch-role{display:inline-block;margin-top:6px;font-style:normal;font-size:13px;letter-spacing:.06em;padding:3px 9px;border-radius:999px}
+.arch-role.core{color:#10200f;background:#d9efbc;font-weight:700}
+.arch-role.demo{color:#b9d4ff;border:1px dashed rgba(185,212,255,.6)}
+.arch-role.model{color:#7fd6c2;border:1px solid rgba(127,214,194,.35)}
+.architecture-stage .arch-plate[data-layer="2"],.architecture-stage .arch-plate[data-layer="3"]{border-color:rgba(217,239,188,.55);box-shadow:inset 0 0 46px rgba(217,239,188,.09),0 0 56px rgba(217,239,188,.12)}
+.architecture-stage .arch-plate[data-layer="2"] .arch-rim,.architecture-stage .arch-plate[data-layer="3"] .arch-rim{opacity:.5}
+.architecture-stage .arch-plate[data-layer="4"]{background:rgba(16,26,34,.16);border:1px dashed rgba(185,212,255,.42);box-shadow:none}
+.architecture-stage .arch-plate[data-layer="4"]::before{opacity:.3}
+.architecture-stage .arch-plate[data-layer="4"]::after{background:transparent;border-color:transparent}
+.architecture-stage .arch-plate[data-layer="4"].is-active{background:rgba(30,46,62,.32);border-color:rgba(185,212,255,.75)}
+.architecture-stage .arch-plate[data-layer="4"] .arch-chip{background:rgba(9,17,14,.55);color:#c3d2e4;box-shadow:none}
+.architecture-stage .arch-plate[data-layer="1"]{background:rgba(14,28,24,.4);border-color:rgba(127,214,194,.22)}
+.architecture-stage[data-phase="assembled"] .arch-plate[data-layer="4"]{background:rgba(16,26,34,.3)}
+@media(max-width:620px){.arch-bracket{display:none}.arch-tabs{grid-template-rows:none}.arch-tabs .arch-tab{grid-row:auto}.arch-key{gap:8px 14px}}
+.nav:not(.is-scrolled){background:rgba(6,11,9,.55);border-bottom-color:rgba(217,239,188,.1)}
+.nav:not(.is-scrolled) .nav-brand,.nav:not(.is-scrolled) .nav-links a,.nav:not(.is-scrolled) .nav-more{color:#dfe8e0}
+.nav:not(.is-scrolled) .nav-links a:hover,.nav:not(.is-scrolled) .nav-more:hover{color:#d9efbc}
+.nav:not(.is-scrolled) .nav-cta{background:#d9efbc;color:#10200f}
+.nav:not(.is-scrolled) .nav-mobile{color:#dfe8e0}

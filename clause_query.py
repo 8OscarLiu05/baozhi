@@ -4,6 +4,8 @@ from __future__ import annotations
 import json
 import re
 
+import intl
+
 SYNONYMS = (("取钱", "减保"), ("取现", "减保"), ("生病", "重疾"), ("养老", "年金领取"), ("等多久", "等待期"), ("才开始赔", "等待期"))
 YIELD_REPLY = "收益和红利不能在对话里报具体数字。请到展业页打开利益演示，先看前提：分红不保证，演示利率下的数字不是保证利益，实际以公司公布为准。这次不引用演示表里的收益率。"
 COMPARE_WORDS = ("哪款", "哪一个", "哪家", "最早", "对比", "比较")
@@ -120,6 +122,24 @@ def _named(products, question):
 
 
 CLARIFY_REPLY = "请先指明是哪一款产品。当前没有唯一识别到一份已发布条款，不能默认把全部主产品放在一起回答。请在问题里写上产品名，或先选中一张演示保单。"
+CLARIFY_REPLY_EN = ("Please name the product first. No single published clause could be identified, so the main products are not "
+                    "answered together by default. Add the product name to your question, or select a demo policy first.")
+YIELD_REPLY_EN = ("Returns and dividends are never quoted as figures in a conversation. Open the benefit walkthrough on the sales "
+                  "desk and read its assumptions first: dividends are not guaranteed, figures at the illustrated rate are not "
+                  "guaranteed benefits, and actual results follow what the company announces. No return rates from the "
+                  "illustration table are quoted here.")
+FACTS_TAIL_EN = ("These details come from a structured sample of the public clause. The fictional policy does not mean the original "
+                 "insurer underwrites it, and this is not a claim decision.")
+COMPARE_TAIL_EN = ("The comparison above is calculated directly from structured fields. Dividends are not guaranteed. Fictional "
+                   "policies cite public clauses and do not mean the original insurer underwrites them.")
+
+
+def clarify_reply():
+    return intl.pick(CLARIFY_REPLY, CLARIFY_REPLY_EN)
+
+
+def yield_reply():
+    return intl.pick(YIELD_REPLY, YIELD_REPLY_EN)
 
 
 def select_products(products, question, focus_id=None):
@@ -144,14 +164,24 @@ def _match_facts(product, question):
         matched = [fact for fact in matched if fact["label"] not in ("减保起始", "减保年度上限")]
     if "等待期内" in question or "确诊" in question:
         matched = [fact for fact in matched if "等待期内" in fact["label"] or "等待期" == fact["label"]] or matched
+    if any(word in question for word in ("女性", "女的", "女生")):
+        matched = [fact for fact in matched if not fact["label"].startswith("男性")]
+    elif any(word in question for word in ("男性", "男的", "男生")):
+        matched = [fact for fact in matched if not fact["label"].startswith("女性")]
     return matched[:4]
 
 
 def _sentence(product, fact):
+    if intl.english():
+        body = intl.fact_text(fact["text"]).rstrip(".")
+        end = "" if body.endswith("…") else "."
+        return f"{intl.product_name(product)} — {intl.label(fact['label'])}: {body}{end} [{intl.product_short(product)} · {intl.cite(fact['cite'])}]"
     return f"{product['name']}的{fact['label']}：{fact['text']}。〔{product['name']} · 条款 {fact['cite']}〕"
 
 
 def _evidence(product, fact):
+    if intl.english():
+        return {"id": f"field-{product['id']}-{fact['label']}", "title": intl.product_name(product), "version": "", "kind": "imported", "position": "", "source": intl.SOURCE_NOTE, "excerpt": f"{intl.label(fact['label'])}: {intl.fact_text(fact['text'])}. Source: {intl.cite(fact['cite'])}. Source file: public clause sample of {intl.product_short(product)}."}
     return {"id": f"field-{product['id']}-{fact['label']}", "title": product["name"], "version": "", "kind": "imported", "position": "", "source": product["source_note"], "excerpt": f"{fact['label']}：{fact['text']}。出处：{fact['cite']}。来源文件：{product['source_file']}。"}
 
 
@@ -168,9 +198,13 @@ def compare_rows(products, question):
             return None
         rows.sort(key=lambda item: item[0])
         earliest = rows[0][1]
-        lines = [f"按减保起始保单年度比较，最早的是{earliest['name']}，字段值为{rows[0][0]}。〔{earliest['name']} · 条款 产品信息〕"]
-        for raw, product in rows:
-            lines.append(f"{product['short']}：减保起始保单年度 {raw}。〔{product['name']} · 条款 产品信息〕")
+        if intl.english():
+            lines = [f"Compared by the policy year in which partial surrender starts, the earliest is {intl.product_name(earliest)} (field value {rows[0][0]}). [{intl.product_short(earliest)} · Product information]"]
+            lines += [f"{intl.product_short(product)}: partial surrender start year = {raw}. [{intl.product_short(product)} · Product information]" for raw, product in rows]
+        else:
+            lines = [f"按减保起始保单年度比较，最早的是{earliest['name']}，字段值为{rows[0][0]}。〔{earliest['name']} · 条款 产品信息〕"]
+            for raw, product in rows:
+                lines.append(f"{product['short']}：减保起始保单年度 {raw}。〔{product['name']} · 条款 产品信息〕")
         return {"sentence": lines[0], "lines": lines, "evidence": [_evidence(product, {"label": "减保起始", "text": f"减保起始保单年度为{raw}", "cite": "产品信息"}) for raw, product in rows]}
     if any(word in question for word in ("转年金", "转换年金")):
         lines = []
@@ -179,10 +213,11 @@ def compare_rows(products, question):
             duty = next((item for item in product["duties"] if "转换年金" in item["name"]), None)
             if not duty:
                 continue
-            lines.append(f"{product['name']}写有转换年金权益。〔{product['name']} · 条款 {duty['cite']}〕")
+            lines.append(intl.pick(f"{product['name']}写有转换年金权益。〔{product['name']} · 条款 {duty['cite']}〕", f"{intl.product_name(product)} includes an annuity conversion right. [{intl.product_short(product)} · {intl.cite(duty['cite'])}]"))
             evidence.append(_evidence(product, {"label": "转换年金", "text": duty["payload"].get("行使条件") or duty["payload"].get("赔付说明") or "写有转换年金权益", "cite": duty["cite"]}))
         if not lines:
-            return {"sentence": "当前主产品的结构化样例里，没有看到转换年金权益。", "lines": ["当前主产品的结构化样例里，没有看到转换年金权益。"], "evidence": []}
+            none = intl.pick("当前主产品的结构化样例里，没有看到转换年金权益。", "None of the main products' structured samples include an annuity conversion right.")
+            return {"sentence": none, "lines": [none], "evidence": []}
         return {"sentence": lines[0], "lines": lines, "evidence": evidence}
     return None
 
@@ -194,7 +229,7 @@ def _result(mode, grounded, evidence, yield_question=False, product_ids=None, fa
 def lookup(products, question, focus_id=None):
     question = question or ""
     if is_yield_question(question):
-        return _result("yield", YIELD_REPLY, [], yield_question=True)
+        return _result("yield", yield_reply(), [], yield_question=True)
     named = _named(products, question)
     focused = [item for item in products if item["id"] == focus_id] if focus_id else []
     compare = any(word in question for word in COMPARE_WORDS)
@@ -203,13 +238,13 @@ def lookup(products, question, focus_id=None):
         scope = named or [item for item in products if item["shelf"] == "主产品"]
         compared = compare_rows(scope, question)
         if compared:
-            tail = "上表由结构化字段直接算出。分红不保证。虚构保单引用公开条款，不代表该公司承保。"
+            tail = intl.pick("上表由结构化字段直接算出。分红不保证。虚构保单引用公开条款，不代表该公司承保。", COMPARE_TAIL_EN)
             return _result("compare", "\n".join(compared["lines"] + [tail]), compared["evidence"], product_ids=[item["id"] for item in scope])
     if len(named) > 1:
-        return _result("clarify", CLARIFY_REPLY, [], product_ids=[item["id"] for item in named])
+        return _result("clarify", clarify_reply(), [], product_ids=[item["id"] for item in named])
     chosen = named or focused
     if len(chosen) != 1:
-        return _result("clarify", CLARIFY_REPLY, [])
+        return _result("clarify", clarify_reply(), [])
     hits = []
     evidence = []
     facts = []
@@ -217,15 +252,18 @@ def lookup(products, question, focus_id=None):
         for fact in _match_facts(product, question):
             hits.append({"product": product["name"], "sentence": _sentence(product, fact)})
             evidence.append(_evidence(product, fact))
-            facts.append({"product_id": product["id"], "label": fact["label"], "text": fact["text"], "cite": fact["cite"], "exception": fact.get("exception") or ""})
+            if intl.english():
+                facts.append({"product_id": product["id"], "label": intl.label(fact["label"]), "text": intl.fact_text(fact["text"]), "cite": intl.cite(fact["cite"]), "exception": ""})
+            else:
+                facts.append({"product_id": product["id"], "label": fact["label"], "text": fact["text"], "cite": fact["cite"], "exception": fact.get("exception") or ""})
     if not hits:
         return _result("none", "", [], product_ids=[item["id"] for item in chosen])
-    tail = "以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。"
+    tail = intl.pick("以上内容来自公开条款的结构化样例。虚构保单不代表该公司承保，也不能当成赔付结论。", FACTS_TAIL_EN)
     return _result("facts", "\n".join([item["sentence"] for item in hits] + [tail]), evidence, product_ids=[item["id"] for item in chosen], facts=facts, hits=hits)
 
 
 def numbers_supported(reply, evidence_text):
-    for sentence in re.split(r"[。！？\n]", reply or ""):
+    for sentence in re.split(r"[。！？\n]|(?<=[.!?])\s+", reply or ""):
         numbers = re.findall(r"\d+(?:\.\d+)?%?", sentence)
         if any(number not in evidence_text for number in numbers):
             return False

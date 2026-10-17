@@ -21,20 +21,23 @@ from pathlib import Path
 from urllib.parse import urlparse, parse_qs
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
+import consultation
 import clause_query
 import company_library
 import compliance_rules
 import external_material
 import illustrations
+import simulation
 import insurance_content
+import intl
 import life_catalog
 import platform_ops
 import portal_hub
 import product_design
 
 ROOT = Path(__file__).resolve().parent
-VERSION = "0.11.0"
-BUILD = "REQ050-20261016"
+VERSION = "0.17.1"
+BUILD = "REQ071-20261018"
 WORK_NAME = "保溯 · 条款可溯源寿险辅助平台"
 TOOLS = {"intake": ["collect"], "analysis": ["search", "rules"], "service": ["search", "materials"]}
 SCENARIOS = {"medical": "住院医疗费用", "living": "住院期间生活支出", "recovery": "出院后停工支出"}
@@ -167,6 +170,8 @@ class Store:
         self.sync_clauses()
         self.ensure_company()
         self.ensure_life()
+        with self.db() as c:
+            consultation.initialize(c)
 
     def backup_before_catalog(self):
         if not self.path.exists() or self.path.stat().st_size == 0:
@@ -301,6 +306,12 @@ class Store:
         lib = company_library.generate()
         with self.db() as c:
             if c.execute("SELECT 1 FROM company_org").fetchone():
+                # 旧数据库保留原记录，只补充新增的虚构演示保单。
+                for row in lib["policies"]:
+                    c.execute(
+                        "INSERT OR IGNORE INTO company_policies(id,customer_id,product_id,status,fictional,catalog_id) VALUES(?,?,?,?,?,?)",
+                        (row["id"], row["customer_id"], row["product_id"], row["status"], row["fictional"], row.get("catalog_id", "")),
+                    )
                 return
             org = lib["org"]
             c.execute("INSERT INTO company_org VALUES(?,?,?,?,?)", (org["id"], org["name"], org["seed"], org["note"], org["fictional"]))
@@ -590,6 +601,36 @@ class Store:
     DUTY_LANE = {"sales": "sales", "service": "service", "underwrite": "uwclaim", "claim": "uwclaim",
                  "outreach": "phone", "seat": "phone", "quality": "phone", "training": "sales"}
 
+    def apply_permission(self, item):
+        with self.db() as c:
+            c.execute("CREATE TABLE IF NOT EXISTS agent_permissions(id TEXT PRIMARY KEY, products TEXT, duties TEXT, updated TEXT)")
+            row = c.execute("SELECT * FROM agent_permissions WHERE id=?", (item["id"],)).fetchone()
+        if row:
+            return {**item, "products": json.loads(row["products"]), "duties": json.loads(row["duties"]), "permission_override": True}
+        products = list(item.get("products") or [])
+        if item.get("origin") == "平台预置" and item.get("lane") != "office" and item.get("layer") != "platform":
+            products = list(dict.fromkeys(products + list(life_catalog.PRODUCT_IDS)))
+        return {**item, "products": products, "duties": item.get("duties") or [d for d, ids in company_library.ALLOWED_AGENTS.items() if item["id"] in ids]}
+
+    def edit_agent_permissions(self, data, role):
+        if role not in ("platform", "builder"):
+            raise Fault("当前职责不能修改授权", 403)
+        item = self.resolve_agent(data.get("id"))
+        products, duties = data.get("products"), data.get("duties")
+        if not isinstance(products, list) or not isinstance(duties, list) or any(not isinstance(x, str) for x in products + duties):
+            raise Fault("资料与职责必须是列表")
+        if len(products) > 100 or any(d not in company_library.DUTY_IDS + ("customer",) for d in duties):
+            raise Fault("授权范围无效")
+        if item.get("layer") == "platform" and any(d != "platform" for d in duties):
+            raise Fault("中台内部智能体只能供平台使用")
+        with self.db() as c:
+            known = {r[0] for r in c.execute("SELECT DISTINCT product FROM documents WHERE status='published'")}
+            if any(p not in known for p in products):
+                raise Fault("只能授权已发布资料")
+            c.execute("INSERT OR REPLACE INTO agent_permissions VALUES(?,?,?,?)", (item["id"], encode(list(dict.fromkeys(products))), encode(list(dict.fromkeys(duties))), now()))
+            self.audit(c, role, "edit_agent_permissions", {"id": item["id"], "before": {"products": item["products"], "duties": item.get("duties")}, "after": {"products": products, "duties": duties}})
+        return self.portal(role)
+
     def dialog_agents(self):
         with self.db() as c:
             rows = [dict(row) for row in c.execute("SELECT * FROM dialog_agents WHERE enabled=1 ORDER BY created")]
@@ -603,12 +644,12 @@ class Store:
 
     def resolve_agent(self, ident):
         try:
-            return {**portal_hub.agent(ident), "origin": "平台预置"}
+            return self.apply_permission({**portal_hub.agent(ident), "origin": "平台预置"})
         except KeyError:
             found = next((item for item in self.dialog_agents() if item["id"] == ident), None)
             if not found:
                 raise Fault("没有这个智能体")
-            return found
+            return self.apply_permission(found)
 
     def create_dialog_agent(self, data, role):
         name = text(data.get("name"), "名称", 40)
@@ -657,10 +698,10 @@ class Store:
             if role in company_library.DUTY_IDS or role == "customer":
                 return company_library.agent_allowed(role, item)
             return False
-        agents = [portal_hub.public_agent(item) for item in portal_hub.AGENTS if visible(item)]
-        agents += [portal_hub.public_agent(item) for item in self.dialog_agents() if visible(item)]
+        all_agents = [self.resolve_agent(item["id"]) for item in list(portal_hub.AGENTS) + self.dialog_agents()]
+        agents = [portal_hub.public_agent(item) for item in all_agents if visible(item)]
         with self.db() as c:
-            counts = {row["agent_id"]: row["total"] for row in c.execute("SELECT agent_id, count(*) AS total FROM channel_calls GROUP BY agent_id")}
+            counts = {row["agent_id"]: row["total"] for row in c.execute("SELECT agent_id, count(*) AS total FROM channel_calls WHERE 1=1" + intl.calls_filter() + " GROUP BY agent_id")}
         for item in agents:
             item["calls"] = counts.get(item["id"], 0)
         with self.db() as c:
@@ -683,9 +724,10 @@ class Store:
         if not duty_mode:
             return products
         chosen = [product for product in products if product not in life_catalog.LEGACY_PRODUCTS and product != "zijin-hospital-allowance"]
-        for product in life_catalog.PRODUCT_IDS:
-            if product not in chosen:
-                chosen.append(product)
+        if any(agent["id"] == item.get("id") for agent in portal_hub.AGENTS) and item.get("lane") != "office" and not item.get("permission_override"):
+            for product in life_catalog.PRODUCT_IDS:
+                if product not in chosen:
+                    chosen.append(product)
         if "骑" in (message or ""):
             chosen.extend(product for product in products if product in life_catalog.LEGACY_PRODUCTS and product not in chosen)
         return chosen
@@ -693,44 +735,110 @@ class Store:
     def platform_brief(self, agent_id, question, catalog):
         with self.db() as c:
             metrics = {
-                "calls": c.execute("SELECT count(*) FROM channel_calls").fetchone()[0],
-                "blocked": c.execute("SELECT count(*) FROM channel_calls WHERE rule_category!='' OR status='rejected'").fetchone()[0],
-                "confirmed": c.execute("SELECT count(*) FROM sample_reviews WHERE action='confirm'").fetchone()[0],
+                "calls": c.execute("SELECT count(*) FROM channel_calls WHERE 1=1" + intl.calls_filter()).fetchone()[0],
+                "blocked": c.execute("SELECT count(*) FROM channel_calls WHERE (rule_category!='' OR status='rejected')" + intl.calls_filter()).fetchone()[0],
+                "confirmed": c.execute("SELECT count(*) FROM sample_reviews WHERE action='confirm'" + (" AND call_id IN (SELECT id FROM channel_calls WHERE 1=1" + intl.calls_filter() + ")" if intl.english() else "")).fetchone()[0],
             }
-            calls = [dict(row) for row in c.execute("SELECT channel, rule_category, status, text, handoff FROM channel_calls ORDER BY created DESC LIMIT 100")]
-        names = {item["id"]: item["name"] for item in portal_hub.AGENTS}
+            calls = [dict(row) for row in c.execute("SELECT channel, rule_category, status, text, handoff FROM channel_calls WHERE 1=1" + intl.calls_filter() + " ORDER BY created DESC LIMIT 100")]
+        resolved = [self.resolve_agent(item["id"]) for item in list(portal_hub.AGENTS) + self.dialog_agents()]
         duties = []
         for duty in company_library.DUTIES:
             if duty["id"] == "platform":
                 continue
-            duties.append({"name": duty["name"], "agents": [names.get(item, item) for item in company_library.ALLOWED_AGENTS.get(duty["id"], ())]})
-        products = [{"short": item.get("short") or item.get("name"), "shelf": item.get("shelf") or "", "name": item.get("name")} for item in catalog]
+            duties.append({"name": duty["name"], "agents": [item["name"] for item in resolved if company_library.agent_allowed(duty["id"], item)]})
+        products = [{"id": item.get("id"), "short": item.get("short") or item.get("name"), "shelf": item.get("shelf") or "", "name": item.get("name")} for item in catalog]
         return platform_ops.compose(agent_id, question, products, metrics, calls, duties)
+
+    @staticmethod
+    def off_topic(question):
+        unrelated = ("天气", "写首诗", "写一首诗", "做饭", "菜谱", "打游戏", "足球比分", "旅游攻略", "讲笑话", "算命", "写代码")
+        relevant = ("保险", "保单", "条款", "客户", "核保", "理赔", "中台", "授权", "知识库", "展业", "话术", "坐席")
+        relevant += ("调用", "失败", "异常", "排查", "错误", "资料", "权限", "运行", "更新", "版本", "发布", "记录", "渠道", "统计", "违规", "培训", "流程", "投诉", "报销", "审核", "服务", "数据", "智能体", "知识", "抽检", "质检", "外呼", "告知", "糖尿病", "高血压", "健康", "收益", "保费", "保障", "等待期", "交费", "退保", "员工", "人事", "费用", "报销", "用印", "合同", "办公", "制度", "会议", "年金", "红利", "怎么说", "哪些可以", "哪些不可以")
+        return any(w in question for w in unrelated + ("推荐电影", "游戏攻略", "写小说", "股票代码", "旅游景点")) and not any(w in question for w in relevant)
+
+    @staticmethod
+    def is_role_method_question(item, question):
+        """Route general job-method questions to one model call without company retrieval."""
+        if item.get("id") not in ("coach", "outreach", "quality", "underwrite", "claimguide", "advisor", "desk", "compare"):
+            return False
+        specific = ("中宏", "海港", "中英", "人保", "金彩", "鑫悦", "双星", "条款", "保单", "等待期", "犹豫期", "宽限期", "减保", "红利", "金额", "多少天", "第几条")
+        method = ("怎么说", "如何说", "哪些可以", "哪些不可以", "怎么做", "如何做", "注意什么", "沟通原则", "工作方法", "培训", "陪练", "话术规范", "一般流程")
+        return not any(word in question for word in specific) and any(word in question for word in method + ("保险", "核保", "理赔", "投保", "糖尿病", "高血压", "健康", "告知", "注意", "客户", "话术", "质检", "材料"))
+
+    def role_method_turn(self, item, asked, prior):
+        """Answer job-method questions directly; never attach company or policy evidence."""
+        model = portal_hub.complete(item, asked, prior or [], [], general="role")
+        model_text = model.get("text") if isinstance(model.get("text"), str) else ""
+        rules = compliance_rules.find(model_text)
+        # Training answers may quote a forbidden phrase only to say it must not be used.
+        unsafe = []
+        lowered = model_text.lower()
+        for rule in rules:
+            phrase = rule["word"]
+            pos = model_text.find(phrase)
+            if pos < 0:
+                pos = lowered.find(phrase.lower())
+            sentence_start = max(model_text.rfind(mark, 0, pos) for mark in ("。", "！", "？", "\n", ";", "；", ". ", "! ", "? ")) + 1
+            lead = model_text[sentence_start:pos]
+            negated = any(word in lead for word in ("不能", "不可", "不应", "不要", "禁止", "避免", "不得", "严禁"))
+            negated = negated or bool(re.search(r"\b(?:not|never|avoid|don't|do not|must not|should not|cannot|can't|no one should|refrain from)\b", lead, re.I))
+            if not negated:
+                unsafe.append(rule)
+        unsupported_number = bool(re.search(r"\d+(?:\.\d+)?\s*(?:天|元|万元|%|岁|年)", model_text))
+        unsupported_number = unsupported_number or bool(re.search(r"\d+(?:\.\d+)?\s*(?:%|percent\b|days?\b|years?\b|months?\b|yuan\b|rmb\b)|(?:rmb|cny|¥)\s*\d", model_text, re.I))
+        adopted = model.get("status") == "ok" and not unsafe and not unsupported_number
+        if adopted:
+            reply = model_text
+            number_check = {"checked": True, "ok": True, "detail": intl.pick("一般方法回答未出现具体数字", "No specific figures in this general-method answer")}
+        else:
+            if model.get("status") == "ok":
+                model = {**model, "status": "rejected", "message": intl.pick("一般解释包含待核对的数字或承诺，未采用正文", "The general explanation contained unchecked figures or promises; its text was not used")}
+            reply = intl.pick("本次没有生成可用的一般方法回答。请稍后重试；如需核对具体产品，请到专业咨询选择产品和授权资料。",
+                              "No usable general-method answer was produced this time. Please try again; to check a specific product, switch to Professional and choose the product and authorized material.")
+            number_check = {"checked": bool(model_text), "ok": False if model_text else None, "detail": intl.pick("模型不可用，或回答包含无法由本次一般咨询核对的数字", "The model was unavailable, or the answer contained figures this general question cannot verify")}
+        trace = {
+            "product_id": [], "version_label": intl.pick("不读取资料", "No sources read"), "clause_codes": [], "matched_fact": [], "evidence": [],
+            "model_output": model_text or model.get("message") or "", "number_check": number_check,
+            "rule_category": ",".join(rule["id"] for rule in unsafe), "adopted": adopted, "final_answer": reply,
+            "role_method": True,
+        }
+        return {"reply": reply, "evidence": [], "model": model, "flags": [rule["word"] for rule in unsafe],
+                "rules": unsafe, "adopted": adopted, "manual": not adopted, "handoff_hint": None,
+                "reading": external_material.read_question(intl.route_text(asked)), "trace": trace}
 
     def answer_turn(self, item, message, prior=None, extra=None, duty_mode=False, focus_id=None, user_text=None):
         asked = user_text or message
+        routed = intl.route_text(asked)
+        if duty_mode and self.off_topic(routed):
+            reply = intl.pick("我负责保险业务与中台使用问题。这次的问题不在职责范围内，请换一个保险或岗位工作相关的问题。",
+                              "I handle insurance business and platform questions. This one is outside my remit; please ask something related to insurance or your job.")
+            return {"reply": reply, "evidence": [], "model": {"status": "refused", "message": intl.pick("超出职责范围，未调用模型", "Outside remit; no model call")}, "flags": [], "rules": [], "adopted": False, "manual": False, "handoff_hint": None, "reading": {}, "trace": {"final_answer": reply, "evidence": [], "adopted": False}}
         office = item.get("lane") == "office"
+        if duty_mode and self.is_role_method_question(item, routed):
+            return self.role_method_turn(item, asked, prior)
         with self.db() as c:
             catalog = clause_query.load_rows(c)
+        if item.get("permission_override") or not any(agent["id"] == item.get("id") for agent in portal_hub.AGENTS):
+            catalog = [row for row in catalog if row["id"] in (item.get("products") or [])]
         if office:
             # 内勤智能体不查保险条款字段，只读本机制度演示资料。
             field = {"hits": [], "grounded": "", "evidence": [], "yield_question": False}
         else:
-            field = clause_query.lookup(catalog, asked, focus_id)
+            field = clause_query.lookup(catalog, routed, focus_id)
         if item.get("layer") == "platform":
-            brief = self.platform_brief(item["id"], asked, catalog)
+            brief = self.platform_brief(item["id"], routed, catalog)
             if item["id"] == "ops-voice":
                 field = {**field, "yield_question": False, "grounded": brief["text"] + ("\n" + field["grounded"] if field.get("grounded") else ""), "evidence": brief["evidence"] + list(field.get("evidence") or [])}
             else:
                 field = {"hits": [], "grounded": brief["text"], "evidence": brief["evidence"], "yield_question": False}
         rules = compliance_rules.find(asked)
         if field.get("yield_question") and not any(rule["id"] == "yield_guarantee" for rule in rules):
-            rules = rules + [{"id": "yield_guarantee", "name": "收益保证", "note": "对话里不报收益率，只引导查看利益演示的前提。", "word": "收益演示"}]
+            rules = rules + [{"id": "yield_guarantee", "name": intl.pick("收益保证", "Guaranteed returns"), "note": intl.pick("对话里不报收益率，只引导查看利益演示的前提。", "No return rates in a conversation; only point to the assumptions of the benefit walkthrough."), "word": intl.pick("收益演示", "benefit illustration")}]
         if office:
             docs = self.published_products([product for product in (item.get("products") or []) if product in portal_hub.OFFICE_PRODUCTS])
         else:
-            docs = self.published_products(self.retrieval_products(item, asked, duty_mode))
-        found = self.retrieve(docs, clause_query.expand(asked))[:3]
+            docs = self.published_products(self.retrieval_products(item, routed, duty_mode))
+        found = self.retrieve(docs, intl.search_text(clause_query.expand(routed)))[:3]
         evidence = list(field["evidence"]) + list(extra or [])
         evidence.extend({"id": row["id"], "title": row["title"], "version": row["version"], "kind": row["kind"], "position": row["position"], "source": row["source"], "product": row.get("product", ""), "excerpt": row["content"][:240]} for row in found)
         constrained = bool(duty_mode and not office and item.get("layer") != "platform")
@@ -738,51 +846,53 @@ class Store:
         formal = [row for row in evidence if row.get("product") in life_catalog.PRODUCT_IDS and row.get("kind") != "mock" and not str(row.get("id", "")).startswith("field-")]
         if not office and not constrained:
             # 内勤智能体只引用制度演示资料，不混入保险条款或外部问答片段。
-            evidence.extend(self.qa_evidence(asked))
+            evidence.extend(self.qa_evidence(intl.search_text(routed)))
         if any(rule["id"] in ("yield_guarantee", "deposit_compare") for rule in rules) or field.get("yield_question"):
             evidence = [row for row in evidence if "%" not in (row.get("excerpt") or "") and "IRR" not in (row.get("excerpt") or "")]
             formal = [row for row in formal if "%" not in (row.get("excerpt") or "") and "IRR" not in (row.get("excerpt") or "")]
         template = field.get("grounded") or ""
         use_template = constrained and mode in ("facts", "compare") and bool(template)
         skip_model = bool(field.get("yield_question") or rules)
-        if item.get("layer") == "platform" and item["id"] != "ops-voice":
-            skip_model = True
+        if item.get("layer") == "platform":
+            evidence = list(brief["evidence"])
+            skip_model = bool(rules)
         if constrained and mode == "clarify":
             skip_model = True
         if constrained and mode == "none":
             skip_model = True
         if skip_model:
             if rules or field.get("yield_question"):
-                model = {"status": "guarded", "message": "问题涉及收益演示或违规话术，未调用模型。"}
+                model = {"status": "guarded", "message": intl.pick("问题涉及收益演示或违规话术，未调用模型。", "The question involves a benefit illustration or a restricted statement; no model call.")}
             elif constrained and mode == "clarify":
-                model = {"status": "clarify", "message": "未唯一识别产品，未调用模型。"}
+                model = {"status": "clarify", "message": intl.pick("未唯一识别产品，未调用模型。", "No single product identified; no model call.")}
             elif constrained and mode == "none" and not formal:
-                model = {"status": "refused", "message": "事实不足，未调用模型。"}
+                model = {"status": "refused", "message": intl.pick("事实不足，未调用模型。", "Not enough facts; no model call.")}
             elif constrained and mode == "none":
-                model = {"status": "excerpt", "message": "只有正式条款摘录，未调用模型补充事实。"}
+                model = {"status": "excerpt", "message": intl.pick("只有正式条款摘录，未调用模型补充事实。", "Only formal clause excerpts are available; the model was not called to add facts.")}
             else:
-                model = {"status": "guarded", "message": "问题涉及收益演示或违规话术，未调用模型。"}
+                model = {"status": "guarded", "message": intl.pick("问题涉及收益演示或违规话术，未调用模型。", "The question involves a benefit illustration or a restricted statement; no model call.")}
         else:
-            model = portal_hub.complete(item, asked, prior or [], evidence)
+            model = portal_hub.complete(item, asked, prior or [], evidence, general="platform" if item.get("layer") == "platform" else False)
         flags = [hit["word"] for hit in rules]
         model_text = model.get("text") if isinstance(model.get("text"), str) else ""
         model_rules = compliance_rules.find(model_text)
         blob = "\n".join(row.get("excerpt", "") for row in evidence) + "\n" + template
-        number_ok = clause_query.numbers_supported(model_text, blob) if model.get("status") == "ok" else None
+        number_text = re.sub(r"(?m)^\s*(?:\d+[.、)）]|[（(]\d+[)）])\s*", "", model_text) if item.get("layer") == "platform" else model_text
+        number_ok = clause_query.numbers_supported(number_text, blob) if model.get("status") == "ok" else None
         if model.get("status") == "ok":
-            number_check = {"checked": True, "ok": bool(number_ok), "detail": "通过" if number_ok else "模型句中的数字未出现在字段或摘录中，已放弃该句"}
+            number_check = {"checked": True, "ok": bool(number_ok), "detail": intl.pick("通过", "Passed") if number_ok else intl.pick("模型句中的数字未出现在字段或摘录中，已放弃该句", "A figure in the model text is not in the fields or excerpts; that text was dropped")}
         elif use_template:
-            number_check = {"checked": False, "ok": None, "detail": "模型未返回可用正文，终答使用字段模板"}
+            number_check = {"checked": False, "ok": None, "detail": intl.pick("模型未返回可用正文，终答使用字段模板", "The model returned no usable text; the final answer uses the field template")}
         else:
-            number_check = {"checked": False, "ok": None, "detail": "未调用模型"}
+            number_check = {"checked": False, "ok": None, "detail": intl.pick("未调用模型", "No model call")}
         adopted = model.get("status") == "ok" and not model_rules and bool(number_ok) and not use_template
         if model.get("status") == "ok" and not adopted:
             if use_template and number_ok and not model_rules:
-                reason = "已有结构化事实，终答使用字段模板，模型润色不作为结论。"
+                reason = intl.pick("已有结构化事实，终答使用字段模板，模型润色不作为结论。", "Structured facts exist, so the final answer uses the field template; the model wording is not the conclusion.")
             elif model_rules:
-                reason = "模型输出出现不适当的确定性表述，已隐藏并改用资料摘录。"
+                reason = intl.pick("模型输出出现不适当的确定性表述，已隐藏并改用资料摘录。", "The model wrote an inappropriate guarantee; it was hidden and source excerpts were used instead.")
             else:
-                reason = "模型写出的数字对不上摘录，已改用结构化字段或资料摘录。"
+                reason = intl.pick("模型写出的数字对不上摘录，已改用结构化字段或资料摘录。", "Figures in the model text do not match the excerpts; structured fields or excerpts were used instead.")
             model = {**model, "status": "rejected", "message": reason, "text": model_text}
             rules = rules + [hit for hit in model_rules if hit["id"] not in {item["id"] for item in rules}]
             flags = [hit["word"] for hit in rules]
@@ -790,7 +900,7 @@ class Store:
             template = ""
             field = {**field, "grounded": ""}
         if field.get("yield_question"):
-            reply = template or clause_query.YIELD_REPLY
+            reply = template or clause_query.yield_reply()
             adopted = False
         elif rules:
             reply = self.rule_reply(item, rules, evidence)
@@ -799,13 +909,13 @@ class Store:
             reply = template
             adopted = False
         elif constrained and mode == "clarify":
-            reply = template or clause_query.CLARIFY_REPLY
+            reply = template or clause_query.clarify_reply()
             adopted = False
         elif constrained and mode == "none" and formal:
             reply = portal_hub.local_reply(item, formal)
             adopted = False
         elif constrained and mode == "none":
-            reply = "事实不足：当前没有可核对的结构化事实，也没有对应的正式条款摘录，不能补充保险事实。请改问已收录产品的具体条款，或转人工核对。"
+            reply = intl.pick("事实不足：当前没有可核对的结构化事实，也没有对应的正式条款摘录，不能补充保险事实。请改问已收录产品的具体条款，或转人工核对。", "Not enough facts: there are no structured facts to check and no matching formal clause excerpt, so no insurance facts can be added. Please ask about a specific clause of an included product, or hand the question to a person.")
             adopted = False
         elif field.get("grounded") and not adopted:
             reply = field["grounded"]
@@ -813,8 +923,9 @@ class Store:
             reply = model_text
         else:
             reply = portal_hub.local_reply(item, evidence)
-        if flags and item["id"] == "quality" and "质检标记" not in reply:
-            reply += "\n质检标记：这段话里出现了“" + "、".join(flags) + "”。这类说法不能出现在演示说明中。"
+        if flags and item["id"] == "quality" and "质检标记" not in reply and "QA flag" not in reply:
+            reply += intl.pick("\n质检标记：这段话里出现了“" + "、".join(flags) + "”。这类说法不能出现在演示说明中。",
+                               "\nQA flag: this text contains “" + "”, “".join(flags) + "”. Statements like this must not appear in demo explanations.")
         codes = []
         for fact in field.get("facts") or []:
             cite = str(fact.get("cite") or "")
@@ -832,7 +943,7 @@ class Store:
             "adopted": adopted,
             "final_answer": reply,
         }
-        return {"reply": reply, "evidence": evidence, "model": model, "flags": flags, "rules": rules, "adopted": adopted, "manual": not adopted, "handoff_hint": portal_hub.handoff_for(item["id"], asked), "reading": external_material.read_question(asked), "trace": trace}
+        return {"reply": reply, "evidence": evidence, "model": model, "flags": flags, "rules": rules, "adopted": adopted, "manual": not adopted, "handoff_hint": portal_hub.handoff_for(item["id"], routed), "reading": external_material.read_question(routed), "trace": trace}
 
     def version_label(self, product_ids):
         labels = []
@@ -851,6 +962,17 @@ class Store:
 
     @staticmethod
     def rule_reply(item, rules, evidence):
+        if intl.english():
+            lines = ["This text triggered a compliance block; model text is not used as the conclusion."]
+            for rule in rules:
+                lines.append(f"{rule['name']}: contains “{rule['word']}”. {rule['note']}")
+            if evidence:
+                lines.append("Excerpts you can check (original language):")
+                for row in evidence[:2]:
+                    lines.append(f"[{row['title']}] {row['excerpt'][:160]}")
+            else:
+                lines.append("This is demo material. It is not an underwriting, claim or purchase decision.")
+            return "\n".join(lines)
         lines = ["这段话触发了合规拦截，模型正文不作为结论。"]
         for rule in rules:
             lines.append(f"{rule['name']}：出现“{rule['word']}”。{rule['note']}")
@@ -885,6 +1007,7 @@ class Store:
         turn = self.answer_turn(item, message, prior, duty_mode=role in company_library.DUTY_IDS)
         evidence, model, flags, reply = turn["evidence"], turn["model"], turn["flags"], turn["reply"]
         meta = {"evidence": evidence, "model": {k: model[k] for k in ("status", "message", "model", "label") if k in model}, "flags": flags, "handoff": turn["handoff_hint"], "skills": item["skills"], "reading": turn["reading"]}
+        meta["model"].update({"count": int(model.get("status") in ("ok", "error", "rejected")), "ms": int((time.monotonic()-started)*1000), "adopted": bool(turn["adopted"])})
         stamp = now()
         with self.db() as c:
             if not current:
@@ -922,12 +1045,26 @@ class Store:
             policies = [dict(row) for row in c.execute("SELECT * FROM company_policies ORDER BY id")]
             names = {row["id"]: row["name"] for row in c.execute("SELECT id,name FROM products")} if c.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='products'").fetchone() else {}
             sessions = c.execute("SELECT count(*) FROM channel_sessions").fetchone()[0]
-            calls = c.execute("SELECT count(*) FROM channel_calls").fetchone()[0]
+            calls = c.execute("SELECT count(*) FROM channel_calls WHERE 1=1" + intl.calls_filter()).fetchone()[0]
+            tables = {row[0] for row in c.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+            count = lambda sql, table: c.execute(sql).fetchone()[0] if table in tables else 0
+            knowledge = {
+                "products": count("SELECT count(*) FROM products", "products"),
+                "duties": count("SELECT count(*) FROM product_duties", "product_duties"),
+                "exclusions": count("SELECT count(*) FROM product_exclusions", "product_exclusions"),
+                "documents": count("SELECT count(*) FROM documents WHERE status='published'", "documents"),
+                "chunks": count("SELECT count(*) FROM chunks", "chunks"),
+                "reviews": count("SELECT count(*) FROM sample_reviews", "sample_reviews"),
+                "scenarios": count("SELECT count(*) FROM consultation_scenarios", "consultation_scenarios"),
+            }
         for policy in policies:
             policy["catalog_id"] = policy.get("catalog_id") or ""
             policy["catalog_name"] = names.get(policy["catalog_id"], "")
             policy["catalog_notice"] = "虚构保单，产品条款引用公开资料演示，不代表该公司承保。" if policy["catalog_id"] else ""
-        return {"org": org, "staff": staff, "products": products, "customers": customers, "policies": policies, "counts": {"staff": len(staff), "customers": len(customers), "policies": len(policies), "sessions": sessions, "calls": calls}, "fictional": True, "duties": list(company_library.DUTIES)}
+            if intl.english() and policy["catalog_id"]:
+                policy["catalog_name"] = intl.PRODUCTS.get(policy["catalog_id"], (policy["catalog_name"],))[0]
+                policy["catalog_notice"] = "Fictional policy citing a public clause for demonstration; the original insurer does not underwrite it."
+        return {"org": org, "staff": staff, "products": products, "customers": customers, "policies": policies, "counts": {"staff": len(staff), "customers": len(customers), "policies": len(policies), "sessions": sessions, "calls": calls}, "knowledge": knowledge, "fictional": True, "duties": list(company_library.DUTIES)}
 
     def _require_channel_party(self, channel, duty, operator, context, policy):
         with self.db() as c:
@@ -952,6 +1089,74 @@ class Store:
             found = c.execute("SELECT customer_id,status FROM company_policies WHERE id=?", (policy,)).fetchone()
             if not found or found["customer_id"] != context or found["status"] != "演示保单":
                 raise Fault("这张演示保单不属于当前客户")
+
+    def consult_turn(self, item, message, mode, profile, role, focus_id):
+        if mode == "general":
+            model = portal_hub.complete(item, message, [], [], general=True)
+            reply = model.get("text") if model.get("status") == "ok" else intl.pick("千问本次没有返回可用回答，请稍后重试。没有用资料摘录冒充模型回答。", "Qwen did not return a usable answer this time. Please try again. Source excerpts are not passed off as a model answer.")
+            return consultation.turn(reply, model=model, consultation={"mode": mode, "label": intl.pick("千问通用咨询", "General question · Qwen"), "source": intl.pick("模型通用解释，未核对具体合同", "General model explanation; no contract was checked")})
+        if profile is not None:
+            # 合成需求库只由明确授予需求梳理能力的预置顾问/客服访问。
+            if item["id"] not in ("advisor", "desk", "compare"):
+                return consultation.turn(consultation.refusal(), "refused", consultation={"mode": mode})
+            try:
+                with self.db() as c:
+                    row, reply = consultation.lookup(c, profile, role)
+            except ValueError as exc:
+                raise Fault(str(exc))
+            if not row:
+                return consultation.turn(reply, "refused", consultation={"mode": mode})
+            if intl.english():
+                note = "For needs exploration and software testing only; not clause wording, underwriting rules or independent validation samples."
+                evidence = [{"id": row["id"], "title": "Authored needs scenario", "version": row["version"], "kind": "mock", "position": row["id"], "source": note, "excerpt": reply}]
+                return consultation.turn(reply, evidence=evidence, consultation={"mode": mode, "label": "Needs exploration", "profile": profile, "scenario_id": row["id"], "source": note, "checks": ["Needs and existing cover", "Health disclosure and limits", "Premium burden and contract conditions"]})
+            evidence = [{"id": row["id"], "title": "自编需求梳理情景", "version": row["version"], "kind": "mock", "position": row["id"], "source": row["note"], "excerpt": row["answer"]}]
+            return consultation.turn(reply, evidence=evidence, consultation={"mode": mode, "label": "需求梳理", "profile": profile, "scenario_id": row["id"], "source": row["note"], "checks": ["需求与已有保障", "健康告知与限制", "缴费负担与合同条件"]})
+        # 新建智能体严格使用保存时勾选的资料；预置业务助手沿用公开条款权限。
+        allowed = set(item.get("products") or [])
+        if item.get("origin") == "平台预置" and item.get("lane") != "office" and not item.get("permission_override"):
+            allowed.update(life_catalog.PRODUCT_IDS)
+        with self.db() as c:
+            catalog = [r for r in clause_query.load_rows(c) if r["id"] in allowed]
+        if focus_id and focus_id not in allowed:
+            return consultation.turn(consultation.refusal(), "refused", consultation={"mode": mode})
+        routed = intl.route_text(message)
+        relevant = any(word in routed for word in ("保险", "条款", "保单", "投保", "等待期", "犹豫期", "宽限期", "赔", "缴费", "年金", "退保", "重疾", "减保", "红利", "收益", "承保", "贷款", "保障", "递增", "增额", "免责", "免除", "不赔"))
+        if not relevant:
+            return consultation.turn(consultation.refusal(), "refused", consultation={"mode": mode})
+        field = clause_query.lookup(catalog, routed, focus_id)
+        evidence = field.get("evidence") or []
+        reply = field.get("grounded") if field.get("mode") in ("facts", "compare", "clarify", "yield") else None
+        if not reply:
+            reply = consultation.refusal()
+        if intl.english():
+            labels = {"mode": mode, "label": "Authorized clause lookup", "source": "Structured field lookup; no vector search", "checks": ["Role and agent access", "Product and material scope", "Field and source check"]}
+        else:
+            labels = {"mode": mode, "label": "授权条款查询", "source": "结构化字段查询；未使用向量检索", "checks": ["岗位与智能体授权", "产品与资料范围", "字段及出处核对"]}
+        model, number_check = None, None
+        explain = (not intl.english() and field.get("mode") in ("facts", "compare") and evidence and reply != consultation.refusal()
+                   and not field.get("yield_question") and not compliance_rules.find(routed))
+        if explain:
+            # 国内版：字段仍是结论，千问只把已查到的事实改写成通俗解释；数字或话术不过关就只给字段回答。
+            facts = evidence + [{"title": "授权字段查询结果", "excerpt": reply}]
+            model = portal_hub.complete(item, message, [], facts)
+            model_text = model.get("text") if model.get("status") == "ok" else ""
+            if model_text:
+                blob = "\n".join(f"{row.get('title', '')} {row.get('position', '')} {row.get('excerpt', '')}" for row in evidence) + "\n" + reply
+                number_ok = clause_query.numbers_supported(model_text, blob)
+                model_rules = compliance_rules.find(model_text)
+                number_check = {"checked": True, "ok": bool(number_ok), "detail": "通过" if number_ok else "模型解释中的数字未出现在字段或摘录中，已放弃该解释"}
+                if number_ok and not model_rules:
+                    reply = reply + "\n\n通俗解释（千问根据上面的字段整理，数字已与字段核对）：\n" + model_text
+                else:
+                    reason = "模型解释出现不适当的确定性表述，已隐藏，只用字段回答。" if model_rules else "模型解释中的数字对不上字段，已隐藏，只用字段回答。"
+                    model = {**model, "status": "rejected", "message": reason}
+            labels = {**labels, "label": "授权条款查询 · 千问解释", "source": "结构化字段查询；千问只改写已查到的事实，未使用向量检索", "checks": labels["checks"] + ["解释数字与话术核对"]}
+        result = consultation.turn(reply, "local" if evidence else "refused", evidence, labels, model=model)
+        result["trace"].update({"matched_fact": field.get("facts") or [], "product_id": field.get("product_ids") or [], "version_label": self.version_label(field.get("product_ids") or [])})
+        if number_check:
+            result["trace"]["number_check"] = number_check
+        return result
 
     def channel_ask(self, data, role):
         channel = choice(data.get("channel"), tuple(company_library.CHANNELS), "渠道")
@@ -984,18 +1189,31 @@ class Store:
             if linked:
                 extra.insert(0, {"id": focus_id, "title": linked["name"], "version": "", "kind": "imported", "position": "", "source": "公开条款演示", "excerpt": f"虚构保单{policy}引用公开产品{linked['name']}。不代表该公司承保。"})
         started = time.monotonic()
-        turn = self.answer_turn(item, message, extra=extra, duty_mode=True, focus_id=focus_id, user_text=message)
+        mode = data.get("consult_mode", "legacy")
+        if mode not in ("legacy", "general", "professional"):
+            raise Fault("咨询方式无效")
+        if mode != "legacy" and duty not in ("sales", "customer"):
+            raise Fault("此咨询入口只供展业和客户自助使用", 403)
+        profile = data.get("profile") if mode == "professional" else None
+        if mode == "legacy":
+            turn = self.answer_turn(item, message, extra=extra, duty_mode=True, focus_id=focus_id, user_text=message)
+        else:
+            turn = self.consult_turn(item, message, mode, profile, role, focus_id)
+            if profile is not None and turn["trace"].get("consultation", {}).get("scenario_id"):
+                message = consultation.question(profile)
         elapsed_ms = int((time.monotonic() - started) * 1000)
         model_status = turn["model"].get("status", "local")
         model_count = 1 if model_status in ("ok", "error", "rejected") else 0
         turn.setdefault("trace", {})["model_call"] = {
-            "provider": "千问兼容接口" if model_count else "未调用模型",
+            "provider": intl.pick("千问兼容接口", "Qwen-compatible API") if model_count else intl.pick("未调用模型", "No model call"),
             "model": os.environ.get("BAOZHI_MODEL", "") if model_count else "",
             "count": model_count,
             "status": model_status,
             "ms": elapsed_ms,
             "adopted": bool(turn["adopted"]),
         }
+        turn.setdefault("trace", {})["program"] = {"version": VERSION, "build": BUILD}
+        turn["trace"]["lang"] = intl.LANG.get()
         stamp = now()
         ident = uuid.uuid4().hex[:12]
         session_id = uuid.uuid4().hex[:12]
@@ -1007,7 +1225,7 @@ class Store:
             usage = encode(turn["model"].get("usage", {})) if turn["adopted"] else ""
             c.execute("INSERT INTO model_calls VALUES(?,?,?,?,?,?,?)", (uuid.uuid4().hex[:12], stamp, item["id"], ident, model_status, elapsed_ms, usage))
             self.audit(c, role, "channel", {"id": ident, "channel": channel, "duty": duty, "status": model_status})
-        return {"call_id": ident, "channel": channel, "channel_name": company_library.CHANNELS[channel], "duty": duty, "operator": operator, "context": context, "policy": policy, "adopted": turn["adopted"], "manual": turn["manual"], "answer": turn["reply"], "excerpts": turn["evidence"], "status": model_status, "flags": turn["flags"], "rules": turn.get("rules") or [], "trace": turn.get("trace") or {}, "fictional": False, "agent": portal_hub.public_agent(item)}
+        return {"text": message, "call_id": ident, "channel": channel, "channel_name": intl.pick(company_library.CHANNELS[channel], intl.CHANNELS.get(channel, channel)), "duty": duty, "operator": operator, "context": context, "policy": policy, "adopted": turn["adopted"], "manual": turn["manual"], "answer": turn["reply"], "excerpts": turn["evidence"], "status": model_status, "flags": turn["flags"], "rules": turn.get("rules") or [], "trace": turn.get("trace") or {}, "fictional": False, "agent": portal_hub.public_agent(item)}
 
     def channel_handoff(self, data, role):
         if role != "customer":
@@ -1023,7 +1241,7 @@ class Store:
             c.execute("INSERT INTO handoffs VALUES(?,?,?,?,?,?,?)", (ident, now(), call_id, row["operator_id"], row["text"], "待处理", 0))
             c.execute("UPDATE channel_calls SET handoff=1 WHERE id=?", (call_id,))
             self.audit(c, role, "handoff", {"id": ident, "call": call_id})
-        return {"id": ident, "call_id": call_id, "status": "待处理", "fictional": False, "notice": "已记下转人工。没有打开微信，也没有连接客服系统。"}
+        return {"id": ident, "call_id": call_id, "status": "待处理", "fictional": False, "notice": intl.pick("已记下转人工。没有打开微信，也没有连接客服系统。", "Hand-off to a person recorded. No WeChat was opened and no customer-service system was connected.")}
 
     def handoff_list(self, role):
         if role not in ("service", "platform"):
@@ -1041,7 +1259,7 @@ class Store:
         query = query.replace("%", "").replace("_", "")
         if len(query) > 40:
             raise Fault("调用编号过长")
-        sql = "SELECT id,created,channel,duty,operator_id,context_id,policy_id,agent_id,status,adopted,answer,excerpts,handoff,fictional,ms,text,rule_category,trace_json FROM channel_calls WHERE 1=1"
+        sql = "SELECT id,created,channel,duty,operator_id,context_id,policy_id,agent_id,status,adopted,answer,excerpts,handoff,fictional,ms,text,rule_category,trace_json FROM channel_calls WHERE 1=1" + intl.calls_filter()
         args = []
         if channel:
             sql += " AND channel=?"
@@ -1054,15 +1272,15 @@ class Store:
             rows = [dict(row) for row in c.execute(sql, args)]
             reviews = [dict(row) for row in c.execute("SELECT * FROM sample_reviews ORDER BY created")]
             metrics = {
-                "calls": c.execute("SELECT count(*) FROM channel_calls").fetchone()[0],
-                "blocked": c.execute("SELECT count(*) FROM channel_calls WHERE rule_category!='' OR status='rejected'").fetchone()[0],
-                "confirmed": c.execute("SELECT count(*) FROM sample_reviews WHERE action='confirm'").fetchone()[0],
+                "calls": c.execute("SELECT count(*) FROM channel_calls WHERE 1=1" + intl.calls_filter()).fetchone()[0],
+                "blocked": c.execute("SELECT count(*) FROM channel_calls WHERE (rule_category!='' OR status='rejected')" + intl.calls_filter()).fetchone()[0],
+                "confirmed": c.execute("SELECT count(*) FROM sample_reviews WHERE action='confirm'" + (" AND call_id IN (SELECT id FROM channel_calls WHERE 1=1" + intl.calls_filter() + ")" if intl.english() else "")).fetchone()[0],
             }
         grouped = {}
         for review in reviews:
             grouped.setdefault(review["call_id"], review)
         for row in rows:
-            row["channel_name"] = company_library.CHANNELS.get(row["channel"], row["channel"])
+            row["channel_name"] = intl.pick(company_library.CHANNELS.get(row["channel"], row["channel"]), intl.CHANNELS.get(row["channel"], row["channel"]))
             row["duty_name"] = "客户" if row["duty"] == "customer" else company_library.DUTY_NAMES.get(row["duty"], row["duty"])
             row["rule_category"] = row.get("rule_category") or ""
             row["review"] = grouped.get(row["id"])
@@ -1418,11 +1636,26 @@ class Handler(BaseHTTPRequestHandler):
         return record
 
     def do_GET(self):
+        intl.LANG.set("en" if self.headers.get("X-Baosu-Lang") == "en" else "zh")
         try:
             self.boundary()
             path = urlparse(self.path).path
-            if path in ("/opening.html", "/refinement.css", "/refinement.js", "/i18n.js", "/", "/showcase.html", "/index.html", "/app.js", "/motion.js", "/experience.css", "/experience.js", "/style.css", "/console-v03.css", "/portal.css", "/theme.css", "/workbench.css", "/workbench-motion.css", "/showcase-v2.css", "/showcase-v2.js", "/architecture.css", "/architecture.js", "/desk-polish.css", "/logo.svg", "/susu-agent.svg"):
-                pages = {"/": "opening.html", "/showcase.html": "showcase.html", "/index.html": "index.html"}
+            if path in ("/classic", "/classic/"):
+                path = "/classic/opening.html"
+            if path.startswith("/classic/"):
+                rel = path[len("/classic/"):]
+                parts = Path(rel).parts
+                if not rel or any(part in ("", ".", "..") for part in parts) or "\\" in rel:
+                    raise Fault("旧版展示路径无效", 404)
+                target = ROOT / "static" / "classic" / rel
+                types = {"html": "text/html", "js": "text/javascript", "css": "text/css", "svg": "image/svg+xml", "png": "image/png"}
+                ext = target.suffix.lower().lstrip(".")
+                if ext not in types or not target.is_file():
+                    raise Fault("旧版展示文件不存在", 404)
+                suffix = "; charset=utf-8" if ext in ("html", "js", "css", "svg") else ""
+                return self.send(target.read_bytes(), content_type=types[ext] + suffix)
+            if path in ("/home.html", "/home.css", "/home.js", "/opening.html", "/opening.css", "/opening.js", "/refinement.css", "/refinement.js", "/i18n.js", "/", "/showcase.html", "/index.html", "/app.js", "/motion.js", "/experience.css", "/experience.js", "/style.css", "/console-v03.css", "/portal.css", "/theme.css", "/workbench.css", "/workbench-motion.css", "/showcase-v2.css", "/showcase-v2.js", "/architecture.css", "/architecture.js", "/desk-polish.css", "/intl-theme.css", "/intl.css", "/logo.svg", "/susu-agent.svg"):
+                pages = {"/": "home.html", "/showcase.html": "showcase.html", "/index.html": "index.html"}
                 filename = pages.get(path, path[1:])
                 types = {"html": "text/html", "js": "text/javascript", "css": "text/css", "svg": "image/svg+xml"}
                 return self.send((ROOT / "static" / filename).read_bytes(), content_type=types[filename.rsplit(".", 1)[1]] + "; charset=utf-8")
@@ -1461,6 +1694,13 @@ class Handler(BaseHTTPRequestHandler):
                 doc = self.server.store.document(path.split("/")[-1])
                 if actor["role"] in company_library.LIMITED_ROLES and doc["status"] != "published": raise Fault("当前职责只能查看已发布演示资料", 403)
                 return self.send(doc)
+            if path == "/api/consultation/options":
+                self.session(("sales", "customer", "platform"))
+                return self.send(consultation.catalog())
+            if path == "/api/consultation/knowledge":
+                self.session(("platform",))
+                with self.server.store.db() as c:
+                    return self.send(consultation.board(c))
             if path == "/api/portal":
                 return self.send(self.server.store.portal(actor["role"]))
             if path == "/api/governance":
@@ -1476,6 +1716,14 @@ class Handler(BaseHTTPRequestHandler):
             if path == "/api/life":
                 self.session(("platform", "builder", "reviewer"))
                 return self.send(self.server.store.life_board())
+            if path == "/api/simulation":
+                self.session(("sales", "platform", "builder"))
+                qs = parse_qs(urlparse(self.path).query)
+                try:
+                    result = simulation.calculate(qs.get("age", [30])[0], qs.get("pay", [5])[0], qs.get("annual", [10000])[0])
+                except (ValueError, TypeError, OverflowError):
+                    raise Fault("请输入有效的年龄、投入年数和每年投入")
+                return self.send(result)
             if path == "/api/illustrations":
                 self.session(("sales", "platform", "builder"))
                 qs = parse_qs(urlparse(self.path).query)
@@ -1490,10 +1738,11 @@ class Handler(BaseHTTPRequestHandler):
                 self.session(("builder", "reviewer"))
                 return self.send(self.server.store.runs(path.split("/")[-1]))
             raise Fault("页面或接口不存在", 404)
-        except Fault as e: self.send({"error": str(e)}, e.status)
-        except Exception: self.send({"error": "服务异常，请查看本机测试与配置"}, 500)
+        except Fault as e: self.send({"error": intl.fault(str(e))}, e.status)
+        except Exception: self.send({"error": intl.fault("服务异常，请查看本机测试与配置")}, 500)
 
     def do_POST(self):
+        intl.LANG.set("en" if self.headers.get("X-Baosu-Lang") == "en" else "zh")
         try:
             self.boundary(True)
             try: length = int(self.headers.get("Content-Length", "0"))
@@ -1545,6 +1794,9 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(store.channel_handoff(data, actor["role"]), 201)
             if path == "/api/channel/sample":
                 return self.send(store.sample_review(data, actor["role"]), 201)
+            if path == "/api/dialog-agents/permissions":
+                self.session(("builder", "platform"))
+                return self.send(store.edit_agent_permissions(data, actor["role"]))
             if path == "/api/dialog-agents":
                 self.session(("builder", "platform"))
                 return self.send(store.create_dialog_agent(data, actor["role"]), 201)
@@ -1586,8 +1838,8 @@ class Handler(BaseHTTPRequestHandler):
                 self.session(("reviewer",))
                 return self.send(store.review_run(m[1], data.get("note"), actor["role"], data.get("disposition") or "", data.get("checks"), data.get("gap_actions")))
             raise Fault("接口不存在", 404)
-        except Fault as e: self.send({"error": str(e)}, e.status)
-        except Exception: self.send({"error": "操作失败，未生成有效结果。请检查输入或查看测试日志。"}, 500)
+        except Fault as e: self.send({"error": intl.fault(str(e))}, e.status)
+        except Exception: self.send({"error": intl.fault("操作失败，未生成有效结果。请检查输入或查看测试日志。")}, 500)
 
 
 def main():

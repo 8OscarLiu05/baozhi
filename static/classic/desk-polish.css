@@ -1,0 +1,75 @@
+/* REQ-049 四个业务端精修：统一玻璃顶栏与切换、按钮细节、席位可读性、空状态循环动画、平台流向示意。 */
+
+/* 顶栏：吸顶玻璃 + 四端分段切换 */
+.desk-app{padding-top:0!important}
+.desk-app>.desk-toolbar{margin:0 -22px!important}
+.desk-toolbar{position:sticky;top:0;z-index:50;max-width:none!important;margin:0!important;display:flex;align-items:center;gap:18px;padding:11px max(24px,4vw)!important;background:rgba(250,251,249,.78)!important;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(30,50,40,.08)!important}
+.desk-brand{display:inline-flex;align-items:center;gap:8px;border:0;border-right:1px solid #dfe5de;background:none;padding:4px 18px 4px 0;cursor:pointer;font:inherit;color:#14211d}
+.desk-brand img{width:26px;height:26px}
+.desk-brand b{font-size:15px;letter-spacing:.02em}
+.desk-brand:hover b{color:#285b47}
+.desk-title b{display:block;font-size:14px;color:#14211d}
+.desk-title small{display:block;font-size:13px;color:#6c7971;margin-top:2px}
+.desk-switch{margin-left:auto;display:inline-flex;padding:3px;border-radius:999px;background:rgba(20,33,29,.06);gap:2px}
+.desk-switch button{border:0;background:transparent;border-radius:999px;padding:7px 15px;min-height:34px;font:inherit;font-size:13px;color:#4b5a51;cursor:pointer;white-space:nowrap;transition:background-color .25s,color .25s,box-shadow .25s}
+.desk-switch button:hover{color:#14211d}
+.desk-switch button[aria-current=page]{background:#fff;color:#14211d;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.06),0 4px 12px rgba(20,33,29,.08);cursor:default}
+.desk-switch button:focus-visible,.desk-brand:focus-visible{outline:2px solid #285b47;outline-offset:2px}
+.topbar .desk-switch{margin-left:0}
+@media(max-width:1180px){.topbar .desk-switch{display:none}}
+@media(max-width:760px){.desk-toolbar{flex-wrap:wrap;gap:10px;padding:10px 14px!important}.desk-brand{padding-right:12px}.desk-title small{display:none}.desk-switch{margin-left:0;width:100%;overflow-x:auto}.desk-switch button{flex:1;padding:7px 6px}}
+
+/* 快捷问题：去掉浏览器默认 outset 边框 */
+.desk-app .prompt-chip,.prompt-chip{border:1px solid #d9e2d6;background:#f4f7f1;color:#2f4d3a;border-radius:999px;padding:7px 14px;min-height:38px;font-size:13px;font-weight:500;box-shadow:none}
+.desk-app .prompt-chip:hover,.prompt-chip:hover{background:#fff;border-color:#285b47;color:#285b47}
+.prompt-chip.empty-invite{border-color:#285b47;color:#285b47;background:#fff;font-weight:600}
+.prompt-chip.empty-invite:hover{background:#285b47;color:#fff}
+
+/* 展业端：输入栏加宽，避免对话框被挤压 */
+.desk-sales .sales-workspace{grid-template-columns:minmax(380px,430px) minmax(0,1fr)}
+@media(max-width:1100px){.desk-sales .sales-workspace{grid-template-columns:1fr}}
+
+/* 电话中心：席位按钮可读性（深色侧栏中不再使用浅色滑块） */
+.desk-phone .seat-switch .seat-ink{display:none}
+.desk-phone .seat-switch button{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);color:#d6e3d9;font-weight:500;transition:background-color .25s,border-color .25s,color .25s}
+.desk-phone .seat-switch button:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
+.desk-phone .seat-switch button[aria-pressed=true]{background:#dceacb;border-color:#dceacb;color:#1d352c;font-weight:700}
+.desk-phone .seat-switch button span{color:inherit}
+.desk-phone .zone-on input,.desk-phone .zone-on select,.desk-phone .zone-on textarea{width:100%;box-sizing:border-box}
+.desk-phone .zone-on .prompt-row{margin:10px 0 0}
+.desk-phone .zone-on .btn.primary{width:100%;min-height:44px;margin-top:14px}
+
+/* 空状态：一次调用的处理旅程，循环播放 */
+.journey{width:min(470px,100%);margin:4px auto 26px}
+.journey-track{position:relative;z-index:0;height:2px;margin:0 10%;background:#dfe7dc;border-radius:2px}
+.journey-light{position:absolute;top:-4px;left:0;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#285b47;box-shadow:0 0 0 5px rgba(40,91,71,.14);animation:journey-run 7.5s linear infinite}
+.journey ol{list-style:none;padding:0;margin:-14px 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.journey li{display:flex;flex-direction:column;align-items:center;gap:9px;min-width:0}
+.journey li span{position:relative;z-index:1;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid #d6dfd4;font-size:13px;color:#6c7971;animation:journey-step 7.5s ease-in-out infinite}
+.journey li b{font-size:13px;font-weight:500;color:#7a877f;white-space:nowrap;animation:journey-label 7.5s ease-in-out infinite}
+.journey .j1 span,.journey .j1 b{animation-delay:1.5s}
+.journey .j2 span,.journey .j2 b{animation-delay:3s}
+.journey .j3 span,.journey .j3 b{animation-delay:4.5s}
+.journey .j4 span,.journey .j4 b{animation-delay:6s}
+@keyframes journey-run{0%{left:0;opacity:1}80%{left:100%;opacity:1}92%,100%{left:100%;opacity:0}}
+@keyframes journey-step{0%,16%{background:#285b47;border-color:#285b47;color:#fff;transform:scale(1.08)}26%,100%{background:#fff;border-color:#d6dfd4;color:#6c7971;transform:scale(1)}}
+@keyframes journey-label{0%,16%{color:#1d352c}26%,100%{color:#7a877f}}
+.sheet-empty .journey+h2{margin-top:6px}
+@media(max-width:520px){.journey li b{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.journey-light{display:none}.journey li span,.journey li b{animation:none}}
+
+/* 平台首屏：三端汇入保溯的流向示意 */
+.platform-command{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(250px,340px) auto;align-items:center}
+.platform-flow{display:block;width:100%;height:auto}
+.platform-flow path{fill:none;stroke:rgba(217,239,188,.3);stroke-width:1.2;stroke-dasharray:3 4}
+.platform-flow .pf-node{fill:rgba(255,255,255,.06);stroke:rgba(217,239,188,.35)}
+.platform-flow text{font-size:13px;fill:#d3e2d6}
+.platform-flow .pf-hub{fill:#d9efbc}
+.platform-flow .pf-hub-text{fill:#14211d;font-weight:700;font-size:13px}
+.platform-flow .pf-note{font-size:13px;fill:#8fa597;letter-spacing:.08em}
+.platform-flow .pf-dot{fill:#eef8df}
+.platform-flow .pf-ring{fill:none;stroke:#d9efbc;stroke-width:1;transform-box:view-box;transform-origin:180px 90px;animation:pf-ring 2.4s ease-out infinite}
+@keyframes pf-ring{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(1.9)}}
+@media(prefers-reduced-motion:reduce){.platform-flow .pf-dot,.platform-flow .pf-ring{display:none}}
+@media(max-width:1100px){.platform-command{grid-template-columns:minmax(0,1fr) auto}.platform-flow{display:none}}
+@media(max-width:760px){.platform-command{display:block!important}}

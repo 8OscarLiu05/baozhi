@@ -66,6 +66,10 @@ SAMPLE_EXCERPT = "这是种子 20261011 生成的虚构调用，不是模型结�
 
 
 def agent_allowed(duty, item):
+    if item.get("layer") == "platform":
+        return duty == "platform"
+    if item.get("permission_override"):
+        return duty in item.get("duties", [])
     if item.get("id") in ALLOWED_AGENTS.get(duty, ()):
         return True
     return duty in (item.get("duties") or [])
@@ -79,16 +83,30 @@ def generate(seed=SEED):
             staff.append({"id": f"{duty['prefix']}-{number:02d}", "duty": duty["id"], "duty_name": duty["name"], "fictional": 1})
     customers = [{"id": f"客户-{number:02d}", "fictional": 1} for number in range(1, 41)]
     policies = []
-    for number in range(1, 41):
-        product = PRODUCTS[rng.randrange(len(PRODUCTS))]
-        policies.append({
-            "id": f"DEMO-{number:02d}",
-            "customer_id": f"客户-{number:02d}",
-            "product_id": product["id"],
-            "status": "演示保单",
-            "fictional": 1,
-            "catalog_id": {"DEMO-01": "life-zhongying-xinyue", "DEMO-02": "ci-zhonghong-shuangxing"}.get(f"DEMO-{number:02d}", ""),
-        })
+    catalog_ids = (
+        "life-zhongying-xinyue",
+        "annuity-haigang-jincai",
+        "ci-zhonghong-shuangxing",
+        "medical-picc-2024",
+    )
+    # 每位虚构客户提供三张不同资料方向的演示保单，便于展业端和客户自助切换核对。
+    # 保留 DEMO-01 / DEMO-02 的既有归属和条款映射，兼容历史调用与回归测试。
+    for slot in range(3):
+        for number in range(1, 41):
+            policy_number = number + slot * 40
+            policy_id = f"DEMO-{policy_number:02d}"
+            product = PRODUCTS[rng.randrange(len(PRODUCTS))]
+            catalog_id = catalog_ids[(number + slot - 1) % len(catalog_ids)]
+            if policy_id == "DEMO-02":
+                catalog_id = "ci-zhonghong-shuangxing"
+            policies.append({
+                "id": policy_id,
+                "customer_id": f"客户-{number:02d}",
+                "product_id": product["id"],
+                "status": "演示保单",
+                "fictional": 1,
+                "catalog_id": catalog_id,
+            })
     specials = [
         {"channel": "sales", "duty": "sales", "operator_id": "展业-01", "context_id": "客户-01", "policy_id": "DEMO-01",
          "text": "产品卡片-01有没有可以核对的句子？", "status": "error", "handoff": 0},

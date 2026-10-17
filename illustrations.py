@@ -32,6 +32,16 @@ def _cell(mapping, year):
     return "" if value in (None, "-") else str(value)
 
 
+def _number(value):
+    """Return a chart-safe number without changing the source value shown in tables."""
+    if value in (None, "", "-"):
+        return None
+    try:
+        return float(str(value).replace(",", "").replace("%", ""))
+    except ValueError:
+        return None
+
+
 def scan():
     if not DEMO_DIR.is_dir():
         return []
@@ -78,7 +88,17 @@ def table(name, gender, age, pay):
             "cash": _cell(row.get("现金价值"), year),
             "death": _cell(row.get("身故保险金"), year),
         })
-    points = [{"year": item["year"], "cash": item["cash"]} for item in years if item["cash"].isdigit()]
+    points = []
+    cumulative = row.get("累交保费") or {}
+    for item in years:
+        point = {
+            "year": item["year"],
+            "premium": _number(_cell(cumulative, str(item["year"]))),
+            "cash": _number(item["cash"]),
+            "death": _number(item["death"]),
+        }
+        if any(point[key] is not None for key in ("premium", "cash", "death")):
+            points.append(point)
     return {
         "name": name,
         "gender": gender,

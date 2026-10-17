@@ -1,0 +1,73 @@
+/* International console: the home.html palette, kept quiet and practical. Loaded after intl-theme.css. */
+:root{
+  --intl-bg:#04060b;--intl-surface:#0a0e15;--intl-card:#10151f;--intl-raised:#151b27;
+  --intl-ink:#eef1f6;--intl-ink-2:rgba(238,241,246,.68);--intl-ink-3:rgba(238,241,246,.46);
+  --intl-line:rgba(255,255,255,.09);--intl-line-2:rgba(255,255,255,.16);
+  --intl-cool:#9db9ff;--intl-warm:#f2b872;--intl-fill:#1f2d4e;
+  --navy:var(--intl-ink);--ink:var(--intl-ink);--muted:var(--intl-ink-2);--line:var(--intl-line);--bg:var(--intl-surface);
+  --teal:var(--intl-cool);--light:#141c2c;--orange:var(--intl-warm);--shadow:none;
+  --paper:var(--intl-surface);--paper-inset:#0d121b;--paper-raised:var(--intl-card);--ink-soft:var(--intl-ink-2);--ink-muted:var(--intl-ink-3);
+  --rule:var(--intl-line);--stamp:var(--intl-cool);--stamp-wash:#141c2c;--seal:#ff9b8f;--seal-wash:#2a1716;--field:#1d1a14;
+  --control-bg:#0d121b;--focus:var(--intl-cool);
+  --experience-ink:var(--intl-ink);--experience-accent:var(--intl-cool);--experience-line:var(--intl-line);
+  --read-font:"Segoe UI Variable Text","SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+html,body{background:var(--intl-bg);color:var(--intl-ink)}
+body,button,input,select,textarea{font-family:"Segoe UI Variable Text","SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif}
+h1,h2,h3,.display{font-family:"Segoe UI Variable Display","SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif;letter-spacing:-.01em}
+#app,.app,.shell,main,.main,.content{background-color:transparent}
+.loading{color:var(--intl-ink-2)}
+::selection{background:rgba(157,185,255,.32);color:#fff}
+a{color:var(--intl-cool)}
+input,select,textarea{background:#0d121b;color:var(--intl-ink);border-color:var(--intl-line-2)}
+input::placeholder,textarea::placeholder{color:var(--intl-ink-3)}
+select option{background:#10151f;color:var(--intl-ink)}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--intl-cool);outline-offset:2px}
+dialog{background:var(--intl-card);color:var(--intl-ink);border:1px solid var(--intl-line-2)}
+dialog::backdrop{background:rgba(2,3,6,.72)}
+#toast{background:var(--intl-raised);color:var(--intl-ink);border:1px solid var(--intl-line-2)}
+table,th,td{border-color:var(--intl-line)}
+hr{border-color:var(--intl-line)}
+/* Platform overview hero: same quiet card as the rest of the console */
+.platform-command{background:var(--intl-card);border:1px solid var(--intl-line);box-shadow:none}
+.platform-command .btn.primary{background:var(--intl-fill);color:var(--intl-ink);border-color:rgba(157,185,255,.55)}
+.platform-command .btn.primary:hover{background:#26375f}
+.agent-avatar{width:auto;min-width:48px;padding:0 9px;font-size:11px;letter-spacing:.04em}
+/* Knowledge structure map (fictional company library) */
+.kmap{display:grid;gap:22px;padding:26px}
+.kmap-head h2{margin:0 0 6px;font-size:20px}
+.kmap-head p{margin:0;max-width:760px;color:var(--intl-ink-2);line-height:1.6}
+.kmap-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.kmap-col{display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--intl-line);border-radius:14px;background:rgba(255,255,255,.015)}
+.kmap-col h3{display:flex;align-items:center;gap:8px;margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--intl-ink-3)}
+.kmap-col h3 i{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;border:1px solid var(--intl-line-2);font-style:normal;font-size:11px;color:var(--intl-ink)}
+.kmap-node{display:grid;gap:4px;padding:14px 14px 12px;border-radius:12px;border:1px solid var(--intl-line-2);background:var(--intl-raised);border-left:3px solid var(--kmap-accent,var(--intl-cool))}
+.kmap-node small{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--kmap-accent,var(--intl-cool))}
+.kmap-node b{font-size:15px;color:var(--intl-ink)}
+.kmap-node p{margin:0;font-size:13px;line-height:1.55;color:var(--intl-ink-2)}
+.kmap-meta{margin-top:4px;font:12px/1.4 "Cascadia Mono","JetBrains Mono",Consolas,monospace;color:var(--intl-ink-3)}
+.kmap-fact,.kmap-evidence{--kmap-accent:var(--intl-cool)}
+.kmap-context,.kmap-scenario{--kmap-accent:var(--intl-warm)}
+.kmap-record{--kmap-accent:#8fd3b6}
+.kmap-scenario{border-style:dashed;border-left-style:solid}
+.kmap-link{position:relative;align-self:center;padding:2px 10px 2px 22px;font-size:12px;color:var(--intl-ink-3)}
+.kmap-link::before{content:"";position:absolute;left:8px;top:-8px;bottom:-8px;border-left:1px dashed var(--intl-line-2)}
+.kmap-loop{padding:12px 14px;border-radius:12px;border:1px dashed var(--intl-line-2);font-size:13px;line-height:1.55;color:var(--intl-ink-2)}
+.kmap-trace{padding:16px;border-radius:14px;border:1px solid var(--intl-line)}
+.kmap-trace h3{margin:0 0 12px;font-size:14px}
+.kmap-trace ol{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none;counter-reset:kstep}
+.kmap-trace li{position:relative;display:grid;gap:3px;padding:10px 12px;border-radius:10px;background:var(--intl-raised);border:1px solid var(--intl-line);border-top:2px solid var(--intl-warm);counter-increment:kstep}
+.kmap-trace li.kmap-cut,.kmap-trace li.kmap-cut~li{border-top-color:var(--intl-cool)}
+.kmap-trace li:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--intl-ink-3);z-index:1}
+.kmap-trace li small{font-size:11px;color:var(--intl-ink-3)}
+.kmap-trace li small::before{content:counter(kstep) " · "}
+.kmap-trace li b{font-size:13px;line-height:1.4;color:var(--intl-ink);overflow-wrap:anywhere}
+.kmap-trace p{margin:12px 0 0;font-size:13px;color:var(--intl-ink-2)}
+.kmap-out{margin:0;padding:12px 14px;border-radius:12px;background:rgba(255,155,143,.06);border:1px solid rgba(255,155,143,.22);font-size:13px;color:var(--intl-ink-2)}
+.kmap-out b{color:#ffb4aa}
+@media(max-width:1100px){.kmap-trace ol{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:820px){.kmap-grid{grid-template-columns:1fr}.kmap-trace ol{grid-template-columns:repeat(2,minmax(0,1fr))}.kmap-trace li::after{display:none}}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--intl-bg)}
+::-webkit-scrollbar-thumb{background:#1c2331;border-radius:8px;border:2px solid var(--intl-bg)}

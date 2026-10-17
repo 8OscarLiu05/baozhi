@@ -1,0 +1,89 @@
+/* 保溯 · 开场页（REQ-060）
+   一枚保单硬币即是中台：正面印章代表保险，背面节点代表智能。
+   服务带 CSP（style-src/script-src 'self'），不写内联样式；动态只在 canvas 与类名上。 */
+:root{
+  --night:#060b09;
+  --ink:#eef3ec;
+  --muted:#93a39a;
+  --line:rgba(217,239,188,.16);
+  --gold:#e8d29a;
+  --jade:#d9efbc;
+  --sans:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --serif:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC","SimSun",serif;
+  --display:"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--night);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100svh;display:flex;flex-direction:column;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid rgba(217,239,188,.7);outline-offset:4px;border-radius:8px}
+
+.bg-grid,.bg-glow{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bg-grid{background-image:linear-gradient(rgba(217,239,188,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(217,239,188,.04) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 42%,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 42%,#000 10%,transparent 70%)}
+.bg-glow{background:radial-gradient(38% 34% at 50% 38%,rgba(76,124,96,.30),transparent 70%),radial-gradient(30% 26% at 50% 40%,rgba(232,210,154,.07),transparent 70%),radial-gradient(120% 90% at 50% 120%,rgba(0,0,0,.6),transparent 60%)}
+
+.top-bar{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:24px clamp(22px,4vw,52px)}
+.brand{display:flex;align-items:center;gap:11px}
+.brand img{width:28px;height:28px;filter:brightness(1.6) saturate(.6)}
+.brand-text b{display:block;font-size:15px;font-weight:700;letter-spacing:.04em;line-height:1.2}
+.brand-text small{display:block;font-family:var(--display);font-size:11px;letter-spacing:.32em;color:var(--muted)}
+.opening-language{display:flex;align-items:center;gap:8px;font-size:13px}
+.opening-language button{padding:7px 13px;border-radius:20px;color:var(--muted);transition:background .2s,color .2s}
+.opening-language button:hover{color:var(--ink)}
+.opening-language button[aria-pressed=true]{background:rgba(217,239,188,.14);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(217,239,188,.28)}
+.opening-language span{color:rgba(217,239,188,.25)}
+
+.stage{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 22px 88px;text-align:center}
+.coin-wrap{position:relative;width:min(560px,62vh,92vw);aspect-ratio:1;margin-top:-4vh}
+.coin-canvas{display:block;width:100%;height:100%}
+.intro{position:relative;margin-top:-5vh;display:flex;flex-direction:column;align-items:center}
+.kicker{font-family:var(--display);font-size:12px;letter-spacing:.42em;color:var(--gold);opacity:.85;margin-bottom:18px;padding-left:.42em}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,3.1vw,46px);line-height:1.38;letter-spacing:.04em;margin-bottom:34px}
+h1 .line{display:block}
+h1 .line--2{background:linear-gradient(100deg,#f4ead0 10%,var(--jade) 55%,#9fd8c4 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.opening-start{display:inline-flex;align-items:center;gap:18px;padding:10px 10px 10px 28px;border-radius:999px;background:var(--jade);color:#0f1d16;text-decoration:none;font-size:15px;font-weight:700;letter-spacing:.06em;transition:box-shadow .3s var(--ease),transform .3s var(--ease)}
+.opening-start:hover{box-shadow:0 14px 44px rgba(217,239,188,.24);transform:translateY(-2px)}
+.cta-arrow{width:34px;height:34px;border-radius:50%;background:#0f1d16;color:var(--jade);display:grid;place-items:center;font-size:15px;transition:transform .3s var(--ease)}
+.opening-start:hover .cta-arrow{transform:translateX(3px)}
+.footnote{margin-top:30px;font-size:13px;color:#6f7f76;letter-spacing:.04em}
+
+.dock{position:fixed;right:22px;bottom:22px;z-index:5}
+.dock-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(6,11,9,.6);color:var(--jade);font-size:13px;backdrop-filter:blur(6px);transition:border-color .2s}
+.dock-btn:hover{border-color:var(--jade)}
+
+/* 入场：有 JS 时先藏后演；无 JS 时直接是终态 */
+.js .kicker,.js h1 .line,.js .opening-start,.js .footnote,.js .coin-wrap{opacity:0}
+body.ready .coin-wrap{animation:coinIn 1.6s var(--ease) .05s forwards}
+body.ready .kicker{animation:fadeUp .8s var(--ease) .7s forwards}
+body.ready h1 .line--1{animation:fadeUp .9s var(--ease) .85s forwards}
+body.ready h1 .line--2{animation:fadeUp .9s var(--ease) 1s forwards}
+body.ready .opening-start{animation:fadeUp .8s var(--ease) 1.2s forwards}
+body.ready .footnote{animation:fade .8s ease 1.45s forwards}
+@keyframes coinIn{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+
+/* 离场：硬币放平落成平台层，文字退场 */
+body.leaving .intro,body.leaving .top-bar,body.leaving .dock{transition:opacity .45s ease,transform .6s var(--ease);opacity:0;transform:translateY(16px)}
+body.leaving .bg-glow{transition:opacity .9s ease;opacity:.4}
+
+/* 英文：苹果式无衬线大字 */
+html[lang=en] body{font-family:var(--display)}
+html[lang=en] h1{font-family:var(--display);font-weight:600;letter-spacing:-.025em;font-size:clamp(32px,3.6vw,56px);line-height:1.14}
+html[lang=en] .opening-start{letter-spacing:.01em}
+
+@media (max-width:700px){
+  .coin-wrap{width:min(92vw,420px);margin-top:0}
+  .intro{margin-top:-2vh}
+  h1{font-size:26px}
+  html[lang=en] h1{font-size:31px}
+  .kicker{font-size:11px;letter-spacing:.28em}
+  .footnote{max-width:300px}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .kicker,.js h1 .line,.js .opening-start,.js .footnote,.js .coin-wrap{opacity:1!important;animation:none!important;transform:none!important}
+  .dock{display:none}
+  .opening-start,.cta-arrow{transition:none}
+}

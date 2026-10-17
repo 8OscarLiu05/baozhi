@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 620" role="img" aria-labelledby="title desc">
+  <title id="title">数字核对员溯溯</title>
+  <desc id="desc">一个由盾牌、条款页和放大镜组成的保险智能数字形象</desc>
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6E93A8"/><stop offset="1" stop-color="#2F5F7A"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7FAFB"/><stop offset="1" stop-color="#C3D3DA"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#020712" flood-opacity=".42"/>
+    </filter>
+  </defs>
+  <g fill="none" stroke="#6E93A8" opacity=".22">
+    <circle cx="312" cy="296" r="246"/><circle cx="312" cy="296" r="210" stroke-dasharray="6 18"/>
+    <path d="M68 235h58M495 178h58M510 411h52M84 439h72"/>
+  </g>
+  <g filter="url(#shadow)">
+    <path d="M310 86 471 146v131c0 114-66 199-161 248-95-49-161-134-161-248V146Z" fill="url(#body)" stroke="#DCE7EC" stroke-width="8"/>
+    <path d="M310 118 437 165v110c0 91-49 159-127 204-78-45-127-113-127-204V165Z" fill="#16232E" stroke="#101A22" stroke-width="5"/>
+    <path d="M219 216c0-40 33-73 73-73h36c40 0 73 33 73 73v100c0 40-33 73-73 73h-36c-40 0-73-33-73-73Z" fill="#f3f0e9" stroke="#151f35" stroke-width="7"/>
+    <path d="M252 184h116" stroke="#2F5F7A" stroke-width="12" stroke-linecap="round"/>
+    <g class="eyes" fill="#16232E">
+      <rect x="257" y="230" width="34" height="42" rx="15"/><rect x="329" y="230" width="34" height="42" rx="15"/>
+      <circle cx="280" cy="244" r="6" fill="#DCE7EC"/><circle cx="352" cy="244" r="6" fill="#DCE7EC"/>
+    </g>
+    <path d="M278 304c20 18 44 18 64 0" stroke="#2F5F7A" stroke-width="8" stroke-linecap="round"/>
+    <path d="M230 334h160v102c0 17-14 31-31 31h-98c-17 0-31-14-31-31Z" fill="#ffffff" stroke="#151f35" stroke-width="7"/>
+    <path d="M260 369h99M260 395h75M260 421h89" stroke="#6E93A8" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="217" cy="424" r="46" fill="url(#glass)" stroke="#151f35" stroke-width="10"/>
+    <circle cx="217" cy="424" r="24" fill="#2F5F7A" opacity=".28"/>
+    <path d="m181 458-38 38" stroke="#DCE7EC" stroke-width="18" stroke-linecap="round"/>
+    <path d="M408 357c49 1 76 30 77 72" stroke="#6E93A8" stroke-width="18" stroke-linecap="round"/>
+    <circle cx="487" cy="438" r="20" fill="#2F5F7A" stroke="#DCE7EC" stroke-width="6"/>
+    <path d="m478 438 7 8 14-17" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g fill="#6E93A8">
+    <path d="m94 145 8 18 18 8-18 8-8 18-8-18-18-8 18-8Z"/>
+    <path d="m524 273 6 13 13 6-13 6-6 13-6-13-13-6 13-6Z"/>
+  </g>
+</svg>
