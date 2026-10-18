@@ -1,4 +1,4 @@
-"""把课程作业里的四份结构化条款读成产品、责任和免除。不改写公司名，也不编保费。"""
+"""把演示资料中的四份结构化条款读成产品、责任和免除。不改写公司名，也不编保费。"""
 from __future__ import annotations
 
 import json
@@ -6,8 +6,8 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-CLAUSE_DIR = ROOT / "参考资料" / "保险实践课程作业的资料" / "条款提取"
-SOURCE_NOTE = "课程作业整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。"
+CLAUSE_DIR = ROOT / "演示资料" / "条款提取"
+SOURCE_NOTE = "整理的公开条款结构化样例。保留真实公司名和产品名，不是示意保险的在售产品，也不能据此承保或赔付。"
 
 SPECS = (
     {"id": "life-zhongying-xinyue", "file": "增额寿险/样例_中英鑫悦未来5号至臻版.json", "category": "增额终身寿", "shelf": "主产品", "short": "中英鑫悦未来"},

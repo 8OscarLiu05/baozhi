@@ -90,7 +90,16 @@ def facts_for(product):
     if critical:
         gaps = [duty["payload"].get("间隔期天数") for duty in critical if duty["payload"].get("间隔期天数")]
         gap = f"，相邻两次间隔{gaps[0]}天" if gaps else ""
-        _add(facts, ("重疾", "几次", "次数", "重大疾病"), "重大疾病给付次数", f"重大疾病保险金给付{len(critical)}次{gap}", critical[0]["cite"])
+        groups = []
+        for duty in critical:
+            explain = str(duty["payload"].get("赔付说明") or "")
+            if "组别" not in explain:
+                continue
+            sentence = explain.split("。", 1)[0]
+            short = duty["name"].replace("重大疾病保险金", "")
+            groups.append(f"{short}：{sentence}")
+        group_text = ("。" + "。".join(groups)) if groups else ""
+        _add(facts, ("重疾", "几次", "次数", "重大疾病"), "重大疾病给付次数", f"重大疾病保险金给付{len(critical)}次{gap}{group_text}", critical[0]["cite"])
     for duty in product["duties"]:
         payload = duty["payload"]
         if "转换年金" in duty["name"] or "转换年金" in duty["kind"]:
@@ -102,13 +111,24 @@ def facts_for(product):
                 keys = ("年金", "领取", "养老", "女性", "女的", "女生")
             elif gender == "男":
                 keys = ("年金", "领取", "养老", "男性", "男的", "男生")
-            _add(facts, keys, f"{gender}性养老年金起领年龄" if gender in ("男", "女") else "养老年金起领年龄", f"{payload['领取起始年龄']}周岁", duty["cite"])
+            age = payload["领取起始年龄"]
+            note = str(payload.get("赔付说明") or "")
+            later = ""
+            if "较晚者" in note:
+                end = note.find("。", note.find("较晚者"))
+                end = note.find("。", end + 1) if end >= 0 else -1
+                later = note[: end + 1] if end >= 0 else ""
+            label = f"{gender}性养老年金起领年龄" if gender in ("男", "女") else "养老年金起领年龄"
+            _add(facts, keys, label, f"{age}周岁" + (f"。{later}" if later else ""), duty["cite"])
         if "身故" in duty["name"]:
             _add(facts, ("身故",), duty["name"], payload.get("赔付说明"), duty["cite"])
         if duty["name"].startswith("首次重大疾病"):
             _add(facts, ("首次", "重疾", "给付条件"), "首次重大疾病保险金", payload.get("赔付说明"), duty["cite"])
     for group in product["exclusions"]:
-        _add(facts, ("免除", "免责", "不赔"), f"责任免除（{group['scope']}）", group["body"][:180], group["cite"])
+        cite = group["cite"] or "条款原文"
+        body = str(group["body"] or "").rstrip()
+        caveat = f"以上为结构化摘录，具体情形以{cite}原文为准。"
+        _add(facts, ("免除", "免责", "不赔"), f"责任免除（{group['scope']}）", body + caveat, cite)
     return facts
 
 

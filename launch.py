@@ -113,7 +113,7 @@ def main(argv=None):
             start_service(ROOT, port)
         else:
             print(f"[2/3] 已找到当前版本服务（端口 {port}），直接复用。", flush=True)
-        url = f"http://127.0.0.1:{port}"
+        url = f"http://127.0.0.1:{port}/classic/"
         (ROOT / "data").mkdir(exist_ok=True)
         (ROOT / "data" / "server.url").write_text(url + "\n", encoding="ascii")
         print(f"保溯{'已在运行' if running else '已启动'}：{url}", flush=True)

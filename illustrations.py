@@ -1,11 +1,11 @@
-"""读取课程作业里的利益演示表。只给展业页查看，不进入对话检索，也不让模型报收益率。"""
+"""读取演示资料中的利益演示表。只给展业页查看，不进入对话检索，也不让模型报收益率。"""
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-DEMO_DIR = ROOT / "参考资料" / "保险实践课程作业的资料" / "利益演示数据"
+DEMO_DIR = ROOT / "演示资料" / "利益演示数据"
 NOTICE = "分红不保证，实际以公司公布为准。下表是公开利益演示，不是示意保险的报价，也不能当作保证利益。"
 AGES = {"0", "30", "45"}
 PAYS = {"1", "10"}

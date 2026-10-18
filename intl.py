@@ -141,7 +141,7 @@ def product_short(product):
     return PRODUCTS.get(product.get("id"), (product.get("name"), product.get("short") or product.get("name")))[1]
 
 
-SOURCE_NOTE = ("Structured sample of a public clause, prepared for coursework. The real insurer and product names are kept; "
+SOURCE_NOTE = ("Structured sample of a public clause, prepared for this demo. The real insurer and product names are kept; "
                "it is not a product of Example Insurance and cannot be used to underwrite or pay claims.")
 
 LABELS = {
@@ -297,6 +297,8 @@ PATTERNS = (
     (r"(\d+)天。意外伤害同样适用该等待期", lambda m: f"{m[1]} days. The waiting period also applies to accidental injury"),
     (r"(\d+)天", lambda m: f"{m[1]} days"),
     (r"(\d+)年", lambda m: f"{m[1]} year" + ("" if m[1] == "1" else "s")),
+    (r"(\d+)周岁。首个领取日为第一个保单周年日与被保险人年满\1周岁后的首个保单周年日的较晚者，因此\1周岁及以上投保时自第一个保单周年日起领。",
+     lambda m: f"Age {m[1]}. The first payment date is the later of the first policy anniversary and the first policy anniversary after age {m[1]}. A person who buys at or after that age starts on the first policy anniversary."),
     (r"(\d+)周岁", lambda m: f"Age {m[1]}"),
     (r"(\d+)种", lambda m: f"{m[1]} conditions"),
     (r"现金价值的([\d.]+%)", lambda m: f"{m[1]} of the cash value"),
@@ -304,6 +306,8 @@ PATTERNS = (
     (r"第(\d+)个保单年度起", lambda m: f"From policy year {m[1]}"),
     (r"第(\d+)个保单年度起可以减保（字段值为(\d+)）", lambda m: f"Partial surrender is available from policy year {m[1]} (field value {m[2]})"),
     (r"每个保单年度不超过([\d.]+%)", lambda m: f"No more than {m[1]} in any policy year"),
+    (r"重大疾病保险金给付(\d+)次，相邻两次间隔(\d+)天。.*组别.*",
+     lambda m: f"The critical illness benefit is payable up to {m[1]} times, with {m[2]} days between consecutive payments. The second and third payments require a disease from a different group than the earlier diagnoses, and at least {m[2]} days after the previous diagnosis."),
     (r"重大疾病保险金给付(\d+)次，相邻两次间隔(\d+)天", lambda m: f"The critical illness benefit is payable up to {m[1]} times, with {m[2]} days between consecutive payments"),
     (r"重大疾病保险金给付(\d+)次", lambda m: f"The critical illness benefit is payable up to {m[1]} times"),
 )

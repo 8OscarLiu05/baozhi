@@ -36,8 +36,8 @@ import portal_hub
 import product_design
 
 ROOT = Path(__file__).resolve().parent
-VERSION = "0.17.1"
-BUILD = "REQ071-20261018"
+VERSION = "0.17.2"
+BUILD = "REQ073-20261018"
 WORK_NAME = "保溯 · 条款可溯源寿险辅助平台"
 TOOLS = {"intake": ["collect"], "analysis": ["search", "rules"], "service": ["search", "materials"]}
 SCENARIOS = {"medical": "住院医疗费用", "living": "住院期间生活支出", "recovery": "出院后停工支出"}
@@ -851,6 +851,7 @@ class Store:
             evidence = [row for row in evidence if "%" not in (row.get("excerpt") or "") and "IRR" not in (row.get("excerpt") or "")]
             formal = [row for row in formal if "%" not in (row.get("excerpt") or "") and "IRR" not in (row.get("excerpt") or "")]
         template = field.get("grounded") or ""
+        asked_rules = list(rules)
         use_template = constrained and mode in ("facts", "compare") and bool(template)
         skip_model = bool(field.get("yield_question") or rules)
         if item.get("layer") == "platform":
@@ -899,6 +900,8 @@ class Store:
         if not constrained and mode == "clarify":
             template = ""
             field = {**field, "grounded": ""}
+        if asked_rules and not field.get("yield_question"):
+            evidence = self.rule_cards(asked_rules)
         if field.get("yield_question"):
             reply = template or clause_query.yield_reply()
             adopted = False
@@ -961,11 +964,25 @@ class Store:
         return "、".join(dict.fromkeys(labels))
 
     @staticmethod
+    def rule_cards(rules):
+        cards = []
+        for rule in rules:
+            if intl.english():
+                source = "Project compliance rule. It blocks a statement and is not a clause excerpt."
+                excerpt = f"{rule['id']}: contains “{rule['word']}”. {rule['note']}"
+            else:
+                source = "本项目话术合规规则。用来拦住不能出现的说法，不是保险条款摘录。"
+                excerpt = f"{rule['id']}：出现“{rule['word']}”。{rule['note']}"
+            cards.append({"id": f"rule-{rule['id']}", "title": rule["name"], "version": "", "kind": "rule", "position": rule["id"], "source": source, "product": "", "excerpt": excerpt})
+        return cards
+
+    @staticmethod
     def rule_reply(item, rules, evidence):
         if intl.english():
             lines = ["This text triggered a compliance block; model text is not used as the conclusion."]
             for rule in rules:
                 lines.append(f"{rule['name']}: contains “{rule['word']}”. {rule['note']}")
+            evidence = [row for row in evidence if row.get("kind") != "rule"]
             if evidence:
                 lines.append("Excerpts you can check (original language):")
                 for row in evidence[:2]:
@@ -976,6 +993,7 @@ class Store:
         lines = ["这段话触发了合规拦截，模型正文不作为结论。"]
         for rule in rules:
             lines.append(f"{rule['name']}：出现“{rule['word']}”。{rule['note']}")
+        evidence = [row for row in evidence if row.get("kind") != "rule"]
         if evidence:
             lines.append("可以核对的摘录如下：")
             for row in evidence[:3]:
