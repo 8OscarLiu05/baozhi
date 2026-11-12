@@ -22,6 +22,8 @@ from urllib.parse import urlparse, parse_qs
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 import consultation
+import knowledge_http
+from knowledge_store import KnowledgeError, KnowledgeStore
 import clause_query
 import company_library
 import compliance_rules
@@ -1208,12 +1210,23 @@ class Store:
                 extra.insert(0, {"id": focus_id, "title": linked["name"], "version": "", "kind": "imported", "position": "", "source": "公开条款演示", "excerpt": f"虚构保单{policy}引用公开产品{linked['name']}。不代表该公司承保。"})
         started = time.monotonic()
         mode = data.get("consult_mode", "legacy")
-        if mode not in ("legacy", "general", "professional"):
+        if mode not in ("legacy", "general", "professional", "knowledge"):
             raise Fault("咨询方式无效")
         if mode != "legacy" and duty not in ("sales", "customer"):
             raise Fault("此咨询入口只供展业和客户自助使用", 403)
         profile = data.get("profile") if mode == "professional" else None
-        if mode == "legacy":
+        if mode == "knowledge":
+            kb = getattr(self, "knowledge", None)
+            version = text(data.get("product_version_id"), "合同版本", 64)
+            field = text(data.get("fact_type"), "事实类型", 64)
+            if duty != "sales" or intl.english() or policy or kb is None or version not in self.knowledge_sales_versions:
+                raise Fault("此知识版本未授权给当前展业入口，或已有保单上下文", 403)
+            result = kb.lookup(version, field, "sales:" + operator)
+            evidence = [{**e, "id": e["fragment_id"], "excerpt": e["quote"], "position": e["page"],
+                         "version": version, "kind": "published_knowledge"} for e in result["evidence"]]
+            turn = consultation.turn(result["reply"], "local" if result["fact_id"] else "refused", evidence)
+            turn["trace"]["knowledge"] = result
+        elif mode == "legacy":
             turn = self.answer_turn(item, message, extra=extra, duty_mode=True, focus_id=focus_id, user_text=message)
         else:
             turn = self.consult_turn(item, message, mode, profile, role, focus_id)
@@ -1686,7 +1699,18 @@ class Handler(BaseHTTPRequestHandler):
                     raise Fault("插图不存在", 404)
                 return self.send(target.read_bytes(), content_type="image/png")
             if path == "/api/health": return self.send({"ok": True, "version": VERSION, "build": BUILD, "work_name": WORK_NAME, "local_only": True})
+            if path.startswith(knowledge_http.PREFIX):
+                result = knowledge_http.dispatch(self, path)
+                if isinstance(result, bytes):
+                    return self.send(result, content_type="application/pdf")
+                return self.send(result)
             actor = self.session()
+            if path == "/api/knowledge-sales-options":
+                self.session(("sales",))
+                store = self.server.store
+                if intl.english() or not hasattr(store, "knowledge"):
+                    return self.send([])
+                return self.send(store.knowledge.published_options(store.knowledge_sales_versions))
             if path == "/api/state":
                 state = self.server.store.snapshot()
                 with self.server.store.db() as c:
@@ -1756,7 +1780,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.session(("builder", "reviewer"))
                 return self.send(self.server.store.runs(path.split("/")[-1]))
             raise Fault("页面或接口不存在", 404)
-        except Fault as e: self.send({"error": intl.fault(str(e))}, e.status)
+        except (Fault, KnowledgeError) as e: self.send({"error": intl.fault(str(e))}, e.status)
         except Exception: self.send({"error": intl.fault("服务异常，请查看本机测试与配置")}, 500)
 
     def do_POST(self):
@@ -1771,6 +1795,8 @@ class Handler(BaseHTTPRequestHandler):
             if not isinstance(data, dict): raise Fault("请求应为JSON对象")
             path = urlparse(self.path).path
             store = self.server.store
+            if path.startswith(knowledge_http.PREFIX):
+                return self.send(knowledge_http.dispatch(self, path, data))
             if path == "/api/session":
                 role = choice(data.get("role"), company_library.ROLES, "演示角色")
                 token = secrets.token_urlsafe(32)
@@ -1856,7 +1882,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.session(("reviewer",))
                 return self.send(store.review_run(m[1], data.get("note"), actor["role"], data.get("disposition") or "", data.get("checks"), data.get("gap_actions")))
             raise Fault("接口不存在", 404)
-        except Fault as e: self.send({"error": intl.fault(str(e))}, e.status)
+        except (Fault, KnowledgeError) as e: self.send({"error": intl.fault(str(e))}, e.status)
         except Exception: self.send({"error": intl.fault("操作失败，未生成有效结果。请检查输入或查看测试日志。")}, 500)
 
 
@@ -1865,9 +1891,27 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description="保溯本机比赛原型")
     parser.add_argument("--port", type=int, default=int(os.environ.get("BAOZHI_PORT", "8765")))
-    port = parser.parse_args().port
-    store = Store(ROOT / "data" / "baozhi.sqlite3")
+    parser.add_argument("--knowledge-sandbox", type=Path, help="使用已有隔离数据库副本启用知识工作台")
+    args = parser.parse_args()
+    default_db = ROOT / "data" / "baozhi.sqlite3"
+    database = args.knowledge_sandbox.resolve() if args.knowledge_sandbox else default_db
+    if args.knowledge_sandbox:
+        protected = (default_db, Path("D:/baozhi/data/baozhi.sqlite3"))
+        if not database.is_file() or any(p.is_file() and p.samefile(database) for p in protected):
+            parser.error("知识工作台只能使用现有隔离副本")
+        try:
+            operator_credentials = knowledge_http.credentials()
+            knowledge = KnowledgeStore(database, migrate=True)
+        except KnowledgeError as exc:
+            parser.error(str(exc))
+    store = Store(database)
+    if args.knowledge_sandbox:
+        store.knowledge = knowledge
+        store.knowledge_sales_versions = set(os.getenv("BAOZHI_KG_SALES_VERSIONS", "").split(","))
+    port = args.port
     server = Server(("127.0.0.1", port), store)
+    if hasattr(store, "knowledge"):
+        server.knowledge_credentials = operator_credentials
     print(f"保溯已启动：http://127.0.0.1:{port}  本机演示 / Ctrl+C停止", flush=True)
     try: server.serve_forever()
     except KeyboardInterrupt: pass

@@ -1,0 +1,4 @@
+# Optional table parsing and PDF test fixtures. Install in an isolated environment.
+-r requirements.txt
+pdfplumber==0.11.9
+reportlab==4.4.9

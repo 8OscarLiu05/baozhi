@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>保溯 · 知识审核工作台</title><link rel="stylesheet" href="/classic/style.css">
+<link rel="stylesheet" href="/classic/knowledge.css"><script src="/classic/knowledge.js" defer></script></head>
+<body><main>
+<a href="/classic/index.html?desk=platform">返回保溯平台</a>
+<h1>知识审核工作台</h1><p>隔离库。真实合同须由授权人员核验来源和事实。合成样本单独标识。</p>
+<form id="connect"><label>当前岗位令牌 <input name="token" type="password" required autocomplete="off"></label>
+<button>连接或刷新</button></form><p id="status" role="status" aria-live="polite"></p>
+<section><h2>合同版本登记</h2><form id="version">
+<label>公司 <input name="insurer" required></label><label>产品 <input name="name" required></label>
+<label>备案号 <input name="filing" required></label><label>版次 <input name="edition" required></label><button>登记</button></form></section>
+<section><h2>原件与解析</h2><form id="upload">
+<label>合同版本 <select name="version_id" required></select></label>
+<label>类别 <select name="kind"><option value="terms">正式条款</option><option value="rider">附加险条款</option><option value="brochure">说明书</option><option value="application_notice">投保须知</option><option value="rates">费率表</option><option value="cash_value">现金价值表</option><option value="illustration">利益演示</option><option value="service_rules">官方业务规则</option><option value="conversion_table">领取转换表</option></select></label>
+<label>来源 URL <input type="url" name="source" required></label>
+<label>附件所属材料 ID <input name="attachment_of"></label>
+<label>PDF <input type="file" name="pdf" required accept="application/pdf,.pdf"></label><button>上传并解析</button>
+</form><div id="materials"></div><div id="table-view"></div><pre id="fragments"></pre><h3>任务状态</h3><div id="tasks"></div></section>
+<section><h2>候选事实与证据</h2><div id="candidates"></div></section>
+<section><h2>发布与回滚</h2><form id="publish"><label>合同版本 <select name="version_id" required></select></label>
+<label>批准的候选 ID（逗号分隔）<input name="candidate_ids" required></label><button>发布快照</button></form>
+<div id="releases"></div></section>
+</main></body></html>

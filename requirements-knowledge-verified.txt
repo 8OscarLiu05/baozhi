@@ -1,0 +1,5 @@
+# Versions used by the 2026-11-12 knowledge pilot and 84-test verification.
+# Standalone optional environment; does not inherit a different pypdf pin.
+pypdf==6.21.4
+pdfplumber==0.11.9
+reportlab==4.4.9

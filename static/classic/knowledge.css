@@ -1,0 +1,17 @@
+main { max-width: 74rem; margin: 2rem auto; padding: 1rem; }
+section { padding: 1rem; margin: 1rem 0; border: 1px solid #b8c7be; border-radius: .6rem; }
+form { display: flex; flex-wrap: wrap; align-items: end; gap: .65rem; margin: .75rem 0; }
+label { display: grid; gap: .2rem; }
+input, select, button { padding: .35rem; }
+article { padding: .75rem 0; border-bottom: 1px solid #c7d3cd; overflow-wrap: anywhere; }
+article button { margin-right: .5rem; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 34rem; overflow: auto; }
+#status { position: sticky; top: 0; background: #edf5ee; padding: .6rem; }
+dialog { max-width: min(46rem, 92vw); border: 1px solid #9eb5a6; border-radius: .6rem; padding: 1.2rem; }
+dialog::backdrop { background: #1236; }
+dialog form { display: grid; }
+dialog textarea { width: min(38rem, 76vw); min-height: 7rem; }
+.table-scroll { max-height: 32rem; overflow: auto; margin-top: .75rem; }
+.table-scroll th, .table-scroll td { border: 1px solid #b8c7be; padding: .3rem; white-space: nowrap; }
+.table-scroll caption { text-align: left; }
+.table-scroll table { width: max-content; min-width: 26rem; border-collapse: collapse; }

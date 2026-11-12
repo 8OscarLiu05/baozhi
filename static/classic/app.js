@@ -199,6 +199,14 @@ async function guard(fn){try{await fn();}catch(e){toast(e.message);}}
 async function navigate(p){if(p==='talk'&&!state.chatAgent)p=allowedPages().includes('overview')?'overview':allowedPages().includes('lobby')?'lobby':allowedPages().find(key=>key!=='talk');if(p!=='gate'&&!allowedPages().includes(p))p=allowedPages()[0];state.page=p;if(p==='channel'&&['sales','customer'].includes(state.role))state.consultOptions=await api('/consultation/options');if(p==='library'&&state.role==='platform')state.consultKnowledge=await api('/consultation/knowledge');if(p==='runs'){state.focusRun=null;state.runs=await api('/runs?q='+encodeURIComponent(state.runQuery||''));}if(p==='knowledge'){await refresh();state.life=await api('/life');state.clauseResearch=null;if(!state.knowledgeView)state.knowledgeView='structure';}if(['overview','process','verification'].includes(p))state.life=await api('/life');if(p==='governance')state.governance=await api('/governance');if(['channel','job','inbox','platform','library','knowledge','overview','sample'].includes(p))state.company=await api('/company');if(p==='channel'&&state.role==='sales'){state.illustrations=await api('/illustrations');if(!state.simulation)state.simulation=await api('/simulation');}if(p==='inbox')state.handoffs=await api('/handoffs');if(['platform','overview','sample','process','verification'].includes(p)){state.calls=await api('/channel/calls?channel='+encodeURIComponent(['process','verification'].includes(p)?'':state.callChannel||'')+'&q='+encodeURIComponent(['process','verification'].includes(p)?'':state.callQuery||''));state.callsLoadedAt=new Date().toISOString();}render();window.scrollTo(0,0);}
 
 function bind(){
+  const knowledgeTabs = document.querySelector("[data-knowledge]")?.parentElement;
+  if (knowledgeTabs) {
+    const link = document.createElement("a");
+    link.href = "/classic/knowledge.html";
+    link.textContent = "知识审核工作台";
+    link.className = "btn";
+    knowledgeTabs.append(link);
+  }
 
 $$('[data-route]').forEach(b=>b.onclick=()=>{state.processRoute=b.dataset.route;render();});
 
@@ -416,7 +424,14 @@ function runTrail(item){
 
 }
 
+function knowledgeResult(item){
+  const knowledge=item.trace.knowledge, evidence=item.excerpts||[];
+  const sources=evidence.map(e=>`<details class="evidence-note" open><summary>${esc(e.filename||'原件')} · PDF 第 ${esc(e.page)} 页 · ${esc(e.clause||'页片段')}</summary><div class="evidence-content"><p class="evidence-body">${esc(e.quote||e.excerpt)}</p><p>证据编号 ${esc(e.evidence_id)}</p><p class="evidence-source">${esc(e.source)}<br>SHA-256 ${esc(e.sha256)}</p></div></details>`).join('');
+  return `<article class="clause-sheet" aria-label="已发布知识回答"><header class="sheet-head"><span class="result-badge">${knowledge.synthetic?'合成测试知识':'已发布知识'}</span><h2 id="answer-heading" tabindex="-1">${esc(item.text||'合同字段查询')}</h2></header><div class="sheet-answer"><p class="answer-copy">${esc(item.answer)}</p></div><section class="sheet-evidence" aria-label="发布事实证据"><h3>原文证据</h3>${sources||'<p>该版次尚无对应的已发布事实。</p>'}</section><footer class="sheet-meta"><span>合同版本 ${esc(knowledge.product_version_id)}</span><span>发布批次 ${esc(knowledge.release_id||'无')}</span><span>事实编号 ${esc(knowledge.fact_id||'无')}</span><span>调用编号 ${esc(item.call_id||'')}</span></footer></article>`;
+}
+
 function evidenceSheet(item){
+  if(item?.trace?.knowledge)return knowledgeResult(item);
 
   if(item?.trace?.consultation&&!(item.trace.matched_fact||[]).length)return consultationResult(item);
 
@@ -706,6 +721,45 @@ function samplePage(){
 }
 
 function bindChannel(){
+  const salesForm = state.role === "sales" && document.querySelector("#channel-form");
+  if (salesForm && !state.channelPending) {
+    api("/knowledge-sales-options").then(options => {
+      if (!salesForm.isConnected || !options.length) return;
+      const box = document.createElement("fieldset");
+      const legend = document.createElement("legend");
+      legend.textContent = "查询已发布合同知识（独立于演示保单）";
+      const select = document.createElement("select");
+      select.setAttribute("aria-label", "合同版次与事实字段");
+      for (const [index, item] of options.entries()) {
+        const opt = document.createElement("option");
+        opt.value = index;
+        opt.textContent = (item.synthetic ? "[合成] " : "") + item.name + " · " + item.edition + " · " + item.fact_type;
+        select.append(opt);
+      }
+      const submit = document.createElement("button");
+      submit.type = "button";
+      submit.textContent = "查询此字段";
+      submit.onclick = () => guard(async () => {
+        const currentToken = state.token;
+        const currentDesk = state.desk;
+        const option = options[Number(select.value)];
+        submit.disabled = true;
+        try {
+          const result = await api("/channel", {channel:"sales", duty:"sales", operator:$("#channel-operator").value,
+            context:$("#channel-context").value, policy:"", text:"查询合同字段 " + option.fact_type,
+            consult_mode:"knowledge", product_version_id:option.id, fact_type:option.fact_type});
+          if (currentToken !== state.token || currentDesk !== state.desk) return;
+          state.channelResult = result;
+          state.lastCall = result.call_id;
+          render();
+        } finally {
+          submit.disabled = false;
+        }
+      });
+      box.append(legend, select, submit);
+      salesForm.append(box);
+    }).catch(() => {});
+  }
 
   $$('[data-consult-mode]').forEach(b=>b.onclick=()=>{if(state.channelPending)return;state.consultMode=b.dataset.consultMode;state.channelResult=null;state.channelDraft=null;render();});
 
